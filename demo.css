@@ -1,0 +1,90 @@
+.subject {
+  max-width: 1100px;
+  margin: 40px auto;
+}
+
+.subject h2 {
+  cursor: pointer;
+}
+
+.subject-content {
+  display: none;
+  margin-top: 20px;
+}
+
+.price-text {
+  margin-bottom: 15px;
+  font-size: 15px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  min-width: 650px;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.pdf-thumb {
+  width: 120px;
+}
+
+.locked {
+  position: relative;
+}
+
+.lock-icon {
+  position: absolute;
+  width: 32px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.best {
+  background: #eef2ff;
+  font-weight: bold;
+}
+
+.wa-btn {
+  text-decoration: none;
+  color: #0a58ca;
+  font-weight: 600;
+}
+
+/* View Button ki styling */
+.subject table td a {
+  text-decoration: none; /* Link ki underline hatane ke liye */
+}
+
+.subject table button {
+  background-color: #0a58ca; /* Blue color jo aapke WA button se match karega */
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
+  font-size: 14px;
+}
+
+/* Hover effect: Jab mouse button par jaye */
+.subject table button:hover {
+  background-color: #084298; /* Thoda dark blue */
+  transform: translateY(-2px); /* Halka sa upar uthega */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Active effect: Jab click karein */
+.subject table button:active {
+  transform: translateY(0);
+}
