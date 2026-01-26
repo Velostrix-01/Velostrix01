@@ -104,4 +104,10 @@ th, td {
 .best {
   background: #eef2ff;
   font-weight: 700;
+
+}
+
+.subject-content {
+  display: none;
+  margin-top: 15px;
 }
