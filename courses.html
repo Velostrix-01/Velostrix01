@@ -30,8 +30,15 @@
 <!-- =================== PHYSICS ===================== -->
 <!-- ================================================= -->
 <section class="subject">
-  <h2 onclick="toggleSubject('physics')">Physics ▼</h2>
+  function toggleSubject(id) {
+  const section = document.getElementById(id);
 
+  if (section.style.display === "block") {
+    section.style.display = "none";
+  } else {
+    section.style.display = "block";
+  }
+}
   <div class="subject-content" id="physics">
     <p class="price-text">
       Choose what fits your preparation best. Start with a free sample and unlock full content via WhatsApp.
@@ -149,8 +156,15 @@
 <!-- ================= CHEMISTRY ===================== -->
 <!-- ================================================= -->
 <section class="subject">
-  <h2 onclick="toggleSubject('chemistry')">Chemistry ▼</h2>
+  function toggleSubject(id) {
+  const section = document.getElementById(id);
 
+  if (section.style.display === "block") {
+    section.style.display = "none";
+  } else {
+    section.style.display = "block";
+  }
+}
   <div class="subject-content" id="chemistry">
     <p class="price-text">
       High-quality Chemistry notes and questions designed for Class 12 exams.
@@ -212,8 +226,15 @@
 <!-- ================= BIOLOGY ======================= -->
 <!-- ================================================= -->
 <section class="subject">
-  <h2 onclick="toggleSubject('biology')">Biology ▼</h2>
+  function toggleSubject(id) {
+  const section = document.getElementById(id);
 
+  if (section.style.display === "block") {
+    section.style.display = "none";
+  } else {
+    section.style.display = "block";
+  }
+}
   <div class="subject-content" id="biology">
     <p class="price-text">
       Perfect Biology material for boards and competitive exams.
@@ -278,5 +299,6 @@
 <script src="js/script.js"></script>
 </body>
 </html>
+
 
 
