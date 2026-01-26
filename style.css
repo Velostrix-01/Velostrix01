@@ -333,3 +333,44 @@ button:active {
   }
 }
 
+/* ===== MOBILE NAVBAR FIX ===== */
+
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+  color: #fff;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+
+  header {
+    position: relative;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  nav {
+    display: none;
+    flex-direction: column;
+    background: #0a2540;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  nav a {
+    padding: 15px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  nav.show {
+    display: flex;
+  }
+}
+
