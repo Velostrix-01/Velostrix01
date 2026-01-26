@@ -31,7 +31,11 @@
 <!-- =================== PHYSICS ===================== -->
 <!-- ================================================= -->
 <section class="subject">
- <h2 onclick="toggleSubject('physics')">Physics ▼</h2>
+ <div class="subject-header" onclick="toggleSubject('physics', this)">
+  <h2>Physics</h2>
+  <span class="arrow">▼</span>
+</div>
+
 
   <div class="subject-content" id="physics">
     <p class="price-text">
@@ -150,7 +154,11 @@
 <!-- ================= CHEMISTRY ===================== -->
 <!-- ================================================= -->
 <section class="subject">
- <h2 onclick="toggleSubject('chemistry')">Chemistry ▼</h2>
+ <div class="subject-header" onclick="toggleSubject('chemistry', this)">
+  <h2>Chemistry</h2>
+  <span class="arrow">▼</span>
+</div>
+
   
   <div class="subject-content" id="chemistry">
     <p class="price-text">
@@ -220,7 +228,11 @@
 <!-- ================= BIOLOGY ======================= -->
 <!-- ================================================= -->
 <section class="subject">
- <h2 onclick="toggleSubject('biology')">Biology ▼</h2>
+ <div class="subject-header" onclick="toggleSubject('biology', this)">
+  <h2>Biology</h2>
+  <span class="arrow">▼</span>
+</div>
+
   
   <div class="subject-content" id="biology">
     <p class="price-text">
@@ -293,6 +305,7 @@
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
