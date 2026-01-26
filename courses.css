@@ -111,3 +111,66 @@ th, td {
   display: none;
   margin-top: 15px;
 }
+/* ===== SUBJECT BUTTON CARDS ===== */
+
+.subject {
+  max-width: 900px;
+  margin: 25px auto;   /* gap kam kiya */
+}
+
+.subject-header {
+  background: linear-gradient(135deg, #0a2540, #103a5c);
+  color: #fff;
+  padding: 22px 28px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.subject-header h2 {
+  margin: 0;
+  font-size: 22px;
+  letter-spacing: 0.5px;
+}
+
+.subject-header .arrow {
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
+
+/* Hover effect */
+.subject-header:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+/* Active (opened) state */
+.subject.active .subject-header {
+  background: linear-gradient(135deg, #0d6efd, #0a58ca);
+}
+
+/* Arrow rotate when open */
+.subject.active .arrow {
+  transform: rotate(180deg);
+}
+
+/* Content animation */
+.subject-content {
+  display: none;
+  margin-top: 15px;
+  animation: fadeSlide 0.4s ease;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
