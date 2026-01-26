@@ -143,6 +143,7 @@ html {
 
 .footer-container {
   max-width: 1200px;
+  width: 100%;
   margin: auto;
   padding: 0 20px;
   display: grid;
@@ -281,3 +282,54 @@ button:active {
     box-shadow: 0 0 0 0 rgba(10, 88, 202, 0);
   }
 }
+
+/* =========================
+   MOBILE RESPONSIVE FIX
+========================= */
+@media (max-width: 768px) {
+
+  header {
+    flex-direction: column;
+    text-align: center;
+    padding: 15px;
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+  }
+
+  .features,
+  .courses {
+    padding: 20px;
+  }
+
+  .course-card {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 25px;
+  }
+}
+
