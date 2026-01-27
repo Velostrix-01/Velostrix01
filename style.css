@@ -435,3 +435,27 @@ button:active {
   }
 }
 
+/* ===== FADE IN EFFECT ===== */
+
+/* default hidden state */
+section,
+.review-card,
+.feature-box,
+.course-card {
+  opacity: 0;
+  transform: translateY(25px);
+  animation: fadeUp 0.8s ease forwards;
+}
+
+/* delay for better flow */
+section:nth-of-type(2) { animation-delay: 0.1s; }
+section:nth-of-type(3) { animation-delay: 0.2s; }
+section:nth-of-type(4) { animation-delay: 0.3s; }
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
