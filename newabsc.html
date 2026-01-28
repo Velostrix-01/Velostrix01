@@ -1,0 +1,2635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Velostrix | Assignments Done. Stress Gone.</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    .div:not(#main){ 
+    display:none;
+}
+#maths:target, #biology:target, #physics:target, #chemistry:target { 
+    display:block;
+}
+:target~#main{ 
+    display:none; 
+}
+.div{
+    margin:0px;
+}
+
+.bottom-bar5{
+    position:fixed;
+    bottom:10px;
+}
+.btm-br{
+    padding:20px;
+}
+
+
+</style>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+body {
+    font-family: 'Poppins', sans-serif;
+    color :#fff;
+    background-color:#000;
+}
+</style>
+</head>
+
+<body>
+<div style="margin:30px;" class="div" id="maths">
+    <style>
+    html {
+  scroll-behavior: smooth;
+}
+*{box-sizing:border-box;font-family:Inter,Arial,sans-serif}
+
+
+.wrapper{max-width:1000px;margin:auto}
+.heading{font-size:38px;font-weight:700;margin-bottom:22px;color:#38bdf8}
+
+.subject{
+    background:#121212;
+    border-radius:16px;
+    margin-bottom:18px;
+    border:0.5px solid #1f1f1f;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.subject.active{
+    border-color:#0ea5e9;
+    box-shadow:0 0 0 1px #0ea5e9 inset;
+}
+
+.subject.active .subject-header{
+    background:rgba(14,165,233,0.08);
+}
+
+.subject.active .subject-header i{
+    color:#38bdf8;
+}
+
+.subject-header{
+    padding:20px 22px;
+    font-size:20px;
+    font-weight:600;
+    display:flex;
+    justify-content:space-between;
+    cursor:pointer;
+}
+
+.subject-header i{transition:.3s;color:#38bdf8}
+.subject.active .subject-header i{transform:rotate(180deg)}
+
+.subject-content{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .4s ease;
+    background:#0f0f0f;
+}
+
+.table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+}
+.table-wrap::-webkit-scrollbar{height:6px}
+.table-wrap::-webkit-scrollbar-thumb{
+    background:#0ea5e9;border-radius:10px
+}
+.table-wrap::-webkit-scrollbar-track{background:#111}
+
+table{
+    min-width:680px;
+    width:100%;
+    border-collapse:collapse;
+}
+th,td{
+    padding:16px;
+    text-align:center;
+    border-bottom:1px solid #1e1e1e;
+    white-space:nowrap;
+}
+th{background:#000}
+.free{color:#00ff99;font-weight:600}
+
+
+.preview,.fpreview{
+    width:110px;
+    height:60px;
+    margin:auto;
+    border-radius:8px;
+    background-size:cover;
+    background-position:center;
+    position:relative;
+}
+.preview::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.45);
+    border-radius:8px;
+    z-index:1;
+}
+
+.preview i{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    z-index:2;
+    color:#fff;
+    font-size:18px;
+}
+
+ 
+.pdf-preview{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#1a1a1a;
+    font-size:28px;
+    color:#38bdf8;
+}
+
+ 
+.unlock,.view-btn{
+    padding:9px 16px;
+    border-radius:10px;
+    border:none;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+}
+.unlock{
+    background:#0ea5e9;
+    color:#fff;
+}
+.unlock:hover{background:#0284c7}
+
+.view-btn{
+    background:#1f1f1f;
+    color:#38bdf8;
+    border:1px solid #1f1f1f;
+}
+.view-btn:hover{border-color:#38bdf8}
+
+.swipe-hint{
+    font-size:13px;
+    opacity:.6;
+    text-align:right;
+    margin:8px 20px;
+    animation:swipe 1.4s infinite;
+}
+@keyframes swipe{
+    0%{transform:translateX(0)}
+    50%{transform:translateX(6px)}
+    100%{transform:translateX(0)}
+}
+
+
+::-webkit-scrollbar{
+    width:8px;
+    height:5px;
+}
+
+ 
+::-webkit-scrollbar-track{
+    background:#0f0f0f;
+    border-radius:10px;
+}
+
+ 
+::-webkit-scrollbar-thumb{
+    background:linear-gradient(180deg,#38bdf8,#0ea5e9);
+    border-radius:10px;
+    border:2px solid #0f0f0f;
+}
+
+ 
+::-webkit-scrollbar-thumb:hover{
+    background:linear-gradient(180deg,#0ea5e9,#0284c7);
+}
+
+
+*{
+    scrollbar-width:thin;
+    scrollbar-color:#0ea5e9 #0f0f0f;
+}
+
+ 
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.85);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:999;
+}
+.modal img{
+    max-width:90%;
+    max-height:85%;
+    border-radius:12px;
+}
+.modal span{
+    position:absolute;
+    top:20px;
+    right:30px;
+    font-size:26px;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+<div class="heading">Mathematics</div>
+
+ 
+<div class="subject" data-subject="Free Sample">
+<div class="subject-header" onclick="toggle(this)">
+Free sample (MYQs) <i class="fa-solid fa-chevron-down"></i>
+</div>
+<div class="subject-content">
+<div class="table-wrap">
+<table>
+<tr><th>Content</th><th>Preview</th><th>Price</th><th>Access</th></tr>
+
+<tr>
+<td>Free MYQs Sample</td>
+<td>
+<div class="fpreview pdf-preview">
+<i class="fa-solid fa-file-pdf"></i>
+</div>
+</td>
+<td class="free">FREE</td>
+<td>
+<button class="view-btn" onclick="viewPDF(event)">View</button>
+</td>
+</tr>
+
+</table>
+</div>
+<div class="swipe-hint">← Swipe to view</div>
+</div>
+</div>
+
+
+<div class="subject" data-subject="MIQs of Mathematics">
+<div class="subject-header" onclick="toggle(this)">
+Most Important Questions (MIQs)<i class="fa-solid fa-chevron-down"></i>
+</div>
+<div class="subject-content">
+<div class="table-wrap">
+<table>
+<tr><th>Content</th><th>Preview</th><th>Price</th><th>Access</th></tr>
+
+<tr>
+<td>Complete Notes</td>
+<td>
+<div class="preview"
+     style="background-image:url('https://i.ibb.co/rKwzZzmr/IMG-20260128-101334.jpg')">
+<i class="fa-solid fa-lock"></i>
+</div>
+</td>
+<td>₹99</td>
+<td>
+<button class="unlock" onclick="whatsapp(event,this)">Unlock via WhatsApp</button>
+</td>
+</tr>
+
+</table>
+</div>
+<div class="swipe-hint">← Swipe to view</div>
+</div>
+</div>
+
+<div class="subject" data-subject="PYQs of Mathematics">
+<div class="subject-header" onclick="toggle(this)">
+Previous Year Questions (PYQs) <i class="fa-solid fa-chevron-down"></i>
+</div>
+<div class="subject-content">
+<div class="table-wrap">
+<table>
+<tr><th>Content</th><th>Preview</th><th>Price</th><th>Access</th></tr>
+
+<tr>
+<td>Complete Notes</td>
+<td>
+<div class="preview"
+     style="background-image:url('https://i.ibb.co/rKwzZzmr/IMG-20260128-101334.jpg')">
+<i class="fa-solid fa-lock"></i>
+</div>
+</td>
+<td>₹99</td>
+<td>
+<button class="unlock" onclick="whatsapp(event,this)">Unlock via WhatsApp</button>
+</td>
+</tr>
+
+</table>
+</div>
+<div class="swipe-hint">← Swipe to view</div>
+</div>
+</div>
+
+<div class="subject" data-subject="Quick Revision Notes of Mathematics">
+<div class="subject-header" onclick="toggle(this)">
+Quick Revision Notes <i class="fa-solid fa-chevron-down"></i>
+</div>
+<div class="subject-content">
+<div class="table-wrap">
+<table>
+<tr><th>Content</th><th>Preview</th><th>Price</th><th>Access</th></tr>
+
+<tr>
+<td>Complete Notes</td>
+<td>
+<div class="preview"
+     style="background-image:url('https://i.ibb.co/rKwzZzmr/IMG-20260128-101334.jpg')">
+<i class="fa-solid fa-lock"></i>
+</div>
+</td>
+<td>₹99</td>
+<td>
+<button class="unlock" onclick="whatsapp(event,this)">Unlock via WhatsApp</button>
+</td>
+</tr>
+
+</table>
+</div>
+<div class="swipe-hint">← Swipe to view</div>
+</div>
+</div>
+
+
+<div class="subject" data-subject="One-Page Chapter Summary of Mathematics">
+<div class="subject-header" onclick="toggle(this)">
+One-Page Chapter Summary <i class="fa-solid fa-chevron-down"></i>
+</div>
+<div class="subject-content">
+<div class="table-wrap">
+<table>
+<tr><th>Content</th><th>Preview</th><th>Price</th><th>Access</th></tr>
+
+<tr>
+<td>Premium Pack</td>
+<td>
+<div class="preview"
+     style="background-image:url('https://i.ibb.co/rKwzZzmr/IMG-20260128-101334.jpg')">
+<i class="fa-solid fa-lock"></i>
+</div>
+</td>
+<td>₹149</td>
+<td>
+<button class="unlock" onclick="whatsapp(event,this)">Unlock via WhatsApp</button>
+</td>
+</tr>
+
+</table>
+</div>
+<div class="swipe-hint">← Swipe to view</div>
+</div>
+</div>
+
+
+<div class="subject" data-subject="12th Exam Survival Pack of Mathematics">
+<div class="subject-header" onclick="toggle(this)">
+12th Exam Survival Pack <i class="fa-solid fa-chevron-down"></i>
+</div>
+<div class="subject-content">
+<div class="table-wrap">
+<table>
+<tr><th>Content</th><th>Preview</th><th>Price</th><th>Access</th></tr>
+
+<tr>
+<td>Full Premium Bundle</td>
+<td>
+<div class="preview"
+     style="background-image:url('https://i.ibb.co/rKwzZzmr/IMG-20260128-101334.jpg')">
+<i class="fa-solid fa-lock"></i>
+</div>
+</td>
+<td>₹299</td>
+<td>
+<button class="unlock" onclick="whatsapp(event,this)">Unlock via WhatsApp</button>
+</td>
+</tr>
+
+</table>
+</div>
+<div class="swipe-hint">← Swipe to view</div>
+</div>
+</div>
+
+</div>
+
+<script>
+function toggle(header){
+    const subject=header.parentElement;
+    const content=subject.querySelector(".subject-content");
+    document.querySelectorAll(".subject").forEach(s=>{
+        if(s!==subject){
+            s.classList.remove("active");
+            s.querySelector(".subject-content").style.maxHeight=null;
+        }
+    });
+    subject.classList.toggle("active");
+    content.style.maxHeight=subject.classList.contains("active")
+        ? content.scrollHeight+"px":null;
+}
+
+function whatsapp(e,btn){
+    e.stopPropagation();
+    const subject=btn.closest(".subject").dataset.subject;
+    const phone="9370515750";
+    const msg=`Hello, I want to unlock the premium content for ${subject}`;
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`,"_blank");
+}
+
+/* PDF FILE */
+function viewPDF(e){
+    e.stopPropagation();
+    window.open("sample.pdf","_blank"); // PDF file same folder me upload kar
+}
+</script>
+
+</div>
+<div style="margin:30px;" class="div" id="biology"><style>
+*{box-sizing:border-box;font-family:Inter,Arial,sans-serif}
+
+
+.wrapper{max-width:1000px;margin:auto}
+.heading{font-size:28px;font-weight:700;margin-bottom:22px;color:#38bdf8}
+
+.subject{
+    background:#121212;
+    border-radius:16px;
+    margin-bottom:18px;
+    border:0.5px solid #1f1f1f;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.subject.active{
+    border-color:#0ea5e9;
+    box-shadow:0 0 0 1px #0ea5e9 inset;
+}
+
+.subject.active .subject-header{
+    background:rgba(14,165,233,0.08);
+}
+
+.subject.active .subject-header i{
+    color:#38bdf8;
+}
+
+.subject-header{
+    padding:20px 22px;
+    font-size:20px;
+    font-weight:600;
+    display:flex;
+    justify-content:space-between;
+    cursor:pointer;
+}
+
+.subject-header i{transition:.3s;color:#38bdf8}
+.subject.active .subject-header i{transform:rotate(180deg)}
+
+.subject-content{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .4s ease;
+    background:#0f0f0f;
+}
+
+.table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+}
+.table-wrap::-webkit-scrollbar{height:6px}
+.table-wrap::-webkit-scrollbar-thumb{
+    background:#0ea5e9;border-radius:10px
+}
+.table-wrap::-webkit-scrollbar-track{background:#111}
+
+table{
+    min-width:680px;
+    width:100%;
+    border-collapse:collapse;
+}
+th,td{
+    padding:16px;
+    text-align:center;
+    border-bottom:1px solid #1e1e1e;
+    white-space:nowrap;
+}
+th{background:#000}
+.free{color:#00ff99;font-weight:600}
+
+
+.preview,.fpreview{
+    width:110px;
+    height:60px;
+    margin:auto;
+    border-radius:8px;
+    background-size:cover;
+    background-position:center;
+    position:relative;
+}
+.preview::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.45);
+    border-radius:8px;
+    z-index:1;
+}
+
+.preview i{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    z-index:2;
+    color:#fff;
+    font-size:18px;
+}
+
+ 
+.pdf-preview{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#1a1a1a;
+    font-size:28px;
+    color:#38bdf8;
+}
+
+ 
+.unlock,.view-btn{
+    padding:9px 16px;
+    border-radius:10px;
+    border:none;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+}
+.unlock{
+    background:#0ea5e9;
+    color:#fff;
+}
+.unlock:hover{background:#0284c7}
+
+.view-btn{
+    background:#1f1f1f;
+    color:#38bdf8;
+    border:1px solid #1f1f1f;
+}
+.view-btn:hover{border-color:#38bdf8}
+
+.swipe-hint{
+    font-size:13px;
+    opacity:.6;
+    text-align:right;
+    margin:8px 20px;
+    animation:swipe 1.4s infinite;
+}
+@keyframes swipe{
+    0%{transform:translateX(0)}
+    50%{transform:translateX(6px)}
+    100%{transform:translateX(0)}
+}
+
+
+::-webkit-scrollbar{
+    width:8px;
+    height:5px;
+}
+
+ 
+::-webkit-scrollbar-track{
+    background:#0f0f0f;
+    border-radius:10px;
+}
+
+ 
+::-webkit-scrollbar-thumb{
+    background:linear-gradient(180deg,#38bdf8,#0ea5e9);
+    border-radius:10px;
+    border:2px solid #0f0f0f;
+}
+
+ 
+::-webkit-scrollbar-thumb:hover{
+    background:linear-gradient(180deg,#0ea5e9,#0284c7);
+}
+
+
+*{
+    scrollbar-width:thin;
+    scrollbar-color:#0ea5e9 #0f0f0f;
+}
+
+ 
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.85);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:999;
+}
+.modal img{
+    max-width:90%;
+    max-height:85%;
+    border-radius:12px;
+}
+.modal span{
+    position:absolute;
+    top:20px;
+    right:30px;
+    font-size:26px;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+<div class="heading">Biology</div>
+
+ 
+<div class="subject" data-subject="Free Sample">
+<div class="subject-header" onclick="toggle(this)">
+Free sample (MYQs) <i class="fa-solid fa-chevron-down"></i>
+</div>
+<div class="subject-content">
+<div class="table-wrap">
+<table>
+<tr><th>Content</th><th>Preview</th><th>Price</th><th>Access</th></tr>
+
+<tr>
+<td>Free MYQs Sample</td>
+<td>
+<div class="fpreview pdf-preview">
+<i class="fa-solid fa-file-pdf"></i>
+</div>
+</td>
+<td class="free">FREE</td>
+<td>
+<button class="view-btn" onclick="viewPDF(event)">View</button>
+</td>
+</tr>
+
+</table>
+</div>
+<div class="swipe-hint">← Swipe to view</div>
+</div>
+</div>
+
+
+<div class="subject" data-subject="MIQs of Biology">
+<div class="subject-header" onclick="toggle(this)">
+Most Important Questions (MIQs)<i class="fa-solid fa-chevron-down"></i>
+</div>
+<div class="subject-content">
+<div class="table-wrap">
+<table>
+<tr><th>Content</th><th>Preview</th><th>Price</th><th>Access</th></tr>
+
+<tr>
+<td>Complete Notes</td>
+<td>
+<div class="preview"
+     style="background-image:url('https://i.ibb.co/rKwzZzmr/IMG-20260128-101334.jpg')">
+<i class="fa-solid fa-lock"></i>
+</div>
+</td>
+<td>₹99</td>
+<td>
+<button class="unlock" onclick="whatsapp(event,this)">Unlock via WhatsApp</button>
+</td>
+</tr>
+
+</table>
+</div>
+<div class="swipe-hint">← Swipe to view</div>
+</div>
+</div>
+
+<div class="subject" data-subject="PYQs of Biology">
+<div class="subject-header" onclick="toggle(this)">
+Previous Year Questions (PYQs) <i class="fa-solid fa-chevron-down"></i>
+</div>
+<div class="subject-content">
+<div class="table-wrap">
+<table>
+<tr><th>Content</th><th>Preview</th><th>Price</th><th>Access</th></tr>
+
+<tr>
+<td>Complete Notes</td>
+<td>
+<div class="preview"
+     style="background-image:url('https://i.ibb.co/rKwzZzmr/IMG-20260128-101334.jpg')">
+<i class="fa-solid fa-lock"></i>
+</div>
+</td>
+<td>₹99</td>
+<td>
+<button class="unlock" onclick="whatsapp(event,this)">Unlock via WhatsApp</button>
+</td>
+</tr>
+
+</table>
+</div>
+<div class="swipe-hint">← Swipe to view</div>
+</div>
+</div>
+
+<div class="subject" data-subject="Quick Revision Notes of Biology">
+<div class="subject-header" onclick="toggle(this)">
+Quick Revision Notes <i class="fa-solid fa-chevron-down"></i>
+</div>
+<div class="subject-content">
+<div class="table-wrap">
+<table>
+<tr><th>Content</th><th>Preview</th><th>Price</th><th>Access</th></tr>
+
+<tr>
+<td>Complete Notes</td>
+<td>
+<div class="preview"
+     style="background-image:url('https://i.ibb.co/rKwzZzmr/IMG-20260128-101334.jpg')">
+<i class="fa-solid fa-lock"></i>
+</div>
+</td>
+<td>₹99</td>
+<td>
+<button class="unlock" onclick="whatsapp(event,this)">Unlock via WhatsApp</button>
+</td>
+</tr>
+
+</table>
+</div>
+<div class="swipe-hint">← Swipe to view</div>
+</div>
+</div>
+
+
+<div class="subject" data-subject="One-Page Chapter Summary of Biology">
+<div class="subject-header" onclick="toggle(this)">
+One-Page Chapter Summary <i class="fa-solid fa-chevron-down"></i>
+</div>
+<div class="subject-content">
+<div class="table-wrap">
+<table>
+<tr><th>Content</th><th>Preview</th><th>Price</th><th>Access</th></tr>
+
+<tr>
+<td>Premium Pack</td>
+<td>
+<div class="preview"
+     style="background-image:url('https://i.ibb.co/rKwzZzmr/IMG-20260128-101334.jpg')">
+<i class="fa-solid fa-lock"></i>
+</div>
+</td>
+<td>₹149</td>
+<td>
+<button class="unlock" onclick="whatsapp(event,this)">Unlock via WhatsApp</button>
+</td>
+</tr>
+
+</table>
+</div>
+<div class="swipe-hint">← Swipe to view</div>
+</div>
+</div>
+
+
+<div class="subject" data-subject="12th Exam Survival Pack of Biology">
+<div class="subject-header" onclick="toggle(this)">
+12th Exam Survival Pack <i class="fa-solid fa-chevron-down"></i>
+</div>
+<div class="subject-content">
+<div class="table-wrap">
+<table>
+<tr><th>Content</th><th>Preview</th><th>Price</th><th>Access</th></tr>
+
+<tr>
+<td>Full Premium Bundle</td>
+<td>
+<div class="preview"
+     style="background-image:url('https://i.ibb.co/rKwzZzmr/IMG-20260128-101334.jpg')">
+<i class="fa-solid fa-lock"></i>
+</div>
+</td>
+<td>₹299</td>
+<td>
+<button class="unlock" onclick="whatsapp(event,this)">Unlock via WhatsApp</button>
+</td>
+</tr>
+
+</table>
+</div>
+<div class="swipe-hint">← Swipe to view</div>
+</div>
+</div>
+
+</div>
+
+<script>
+function toggle(header){
+    const subject=header.parentElement;
+    const content=subject.querySelector(".subject-content");
+    document.querySelectorAll(".subject").forEach(s=>{
+        if(s!==subject){
+            s.classList.remove("active");
+            s.querySelector(".subject-content").style.maxHeight=null;
+        }
+    });
+    subject.classList.toggle("active");
+    content.style.maxHeight=subject.classList.contains("active")
+        ? content.scrollHeight+"px":null;
+}
+
+function whatsapp(e,btn){
+    e.stopPropagation();
+    const subject=btn.closest(".subject").dataset.subject;
+    const phone="9370515750";
+    const msg=`Hello, I want to unlock the premium content for ${subject}`;
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`,"_blank");
+}
+
+/* PDF FILE */
+function viewPDF(e){
+    e.stopPropagation();
+    window.open("sample.pdf","_blank"); // PDF file same folder me upload kar
+}
+</script>
+</div>
+<div style="margin:30px;" class="div" id="physics">
+<style>
+*{box-sizing:border-box;font-family:Inter,Arial,sans-serif}
+
+
+
+.wrapper{max-width:1000px;margin:auto}
+.heading{font-size:28px;font-weight:700;margin-bottom:22px;color:#38bdf8}
+
+.subject{
+    background:#121212;
+    border-radius:16px;
+    margin-bottom:18px;
+    border:0.5px solid #1f1f1f;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.subject.active{
+    border-color:#0ea5e9;
+    box-shadow:0 0 0 1px #0ea5e9 inset;
+}
+
+.subject.active .subject-header{
+    background:rgba(14,165,233,0.08);
+}
+
+.subject.active .subject-header i{
+    color:#38bdf8;
+}
+
+.subject-header{
+    padding:20px 22px;
+    font-size:20px;
+    font-weight:600;
+    display:flex;
+    justify-content:space-between;
+    cursor:pointer;
+}
+
+.subject-header i{transition:.3s;color:#38bdf8}
+.subject.active .subject-header i{transform:rotate(180deg)}
+
+.subject-content{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .4s ease;
+    background:#0f0f0f;
+}
+
+.table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+}
+.table-wrap::-webkit-scrollbar{height:6px}
+.table-wrap::-webkit-scrollbar-thumb{
+    background:#0ea5e9;border-radius:10px
+}
+.table-wrap::-webkit-scrollbar-track{background:#111}
+
+table{
+    min-width:680px;
+    width:100%;
+    border-collapse:collapse;
+}
+th,td{
+    padding:16px;
+    text-align:center;
+    border-bottom:1px solid #1e1e1e;
+    white-space:nowrap;
+}
+th{background:#000}
+.free{color:#00ff99;font-weight:600}
+
+
+.preview,.fpreview{
+    width:110px;
+    height:60px;
+    margin:auto;
+    border-radius:8px;
+    background-size:cover;
+    background-position:center;
+    position:relative;
+}
+.preview::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.45);
+    border-radius:8px;
+    z-index:1;
+}
+
+.preview i{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    z-index:2;
+    color:#fff;
+    font-size:18px;
+}
+
+ 
+.pdf-preview{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#1a1a1a;
+    font-size:28px;
+    color:#38bdf8;
+}
+
+ 
+.unlock,.view-btn{
+    padding:9px 16px;
+    border-radius:10px;
+    border:none;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+}
+.unlock{
+    background:#0ea5e9;
+    color:#fff;
+}
+.unlock:hover{background:#0284c7}
+
+.view-btn{
+    background:#1f1f1f;
+    color:#38bdf8;
+    border:1px solid #1f1f1f;
+}
+.view-btn:hover{border-color:#38bdf8}
+
+.swipe-hint{
+    font-size:13px;
+    opacity:.6;
+    text-align:right;
+    margin:8px 20px;
+    animation:swipe 1.4s infinite;
+}
+@keyframes swipe{
+    0%{transform:translateX(0)}
+    50%{transform:translateX(6px)}
+    100%{transform:translateX(0)}
+}
+
+
+::-webkit-scrollbar{
+    width:8px;
+    height:5px;
+}
+
+ 
+::-webkit-scrollbar-track{
+    background:#0f0f0f;
+    border-radius:10px;
+}
+
+ 
+::-webkit-scrollbar-thumb{
+    background:linear-gradient(180deg,#38bdf8,#0ea5e9);
+    border-radius:10px;
+    border:2px solid #0f0f0f;
+}
+
+ 
+::-webkit-scrollbar-thumb:hover{
+    background:linear-gradient(180deg,#0ea5e9,#0284c7);
+}
+
+
+*{
+    scrollbar-width:thin;
+    scrollbar-color:#0ea5e9 #0f0f0f;
+}
+
+ 
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.85);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:999;
+}
+.modal img{
+    max-width:90%;
+    max-height:85%;
+    border-radius:12px;
+}
+.modal span{
+    position:absolute;
+    top:20px;
+    right:30px;
+    font-size:26px;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+<div class="heading">Physics</div>
+
+ 
+<div class="subject" data-subject="Free Sample">
+<div class="subject-header" onclick="toggle(this)">
+Free sample (MYQs) <i class="fa-solid fa-chevron-down"></i>
+</div>
+<div class="subject-content">
+<div class="table-wrap">
+<table>
+<tr><th>Content</th><th>Preview</th><th>Price</th><th>Access</th></tr>
+
+<tr>
+<td>Free MYQs Sample</td>
+<td>
+<div class="fpreview pdf-preview">
+<i class="fa-solid fa-file-pdf"></i>
+</div>
+</td>
+<td class="free">FREE</td>
+<td>
+<button class="view-btn" onclick="viewPDF(event)">View</button>
+</td>
+</tr>
+
+</table>
+</div>
+<div class="swipe-hint">← Swipe to view</div>
+</div>
+</div>
+
+
+<div class="subject" data-subject="MIQs of Physics">
+<div class="subject-header" onclick="toggle(this)">
+Most Important Questions (MIQs)<i class="fa-solid fa-chevron-down"></i>
+</div>
+<div class="subject-content">
+<div class="table-wrap">
+<table>
+<tr><th>Content</th><th>Preview</th><th>Price</th><th>Access</th></tr>
+
+<tr>
+<td>Complete Notes</td>
+<td>
+<div class="preview"
+     style="background-image:url('https://i.ibb.co/rKwzZzmr/IMG-20260128-101334.jpg')">
+<i class="fa-solid fa-lock"></i>
+</div>
+</td>
+<td>₹99</td>
+<td>
+<button class="unlock" onclick="whatsapp(event,this)">Unlock via WhatsApp</button>
+</td>
+</tr>
+
+</table>
+</div>
+<div class="swipe-hint">← Swipe to view</div>
+</div>
+</div>
+
+<div class="subject" data-subject="PYQs of Physics">
+<div class="subject-header" onclick="toggle(this)">
+Previous Year Questions (PYQs) <i class="fa-solid fa-chevron-down"></i>
+</div>
+<div class="subject-content">
+<div class="table-wrap">
+<table>
+<tr><th>Content</th><th>Preview</th><th>Price</th><th>Access</th></tr>
+
+<tr>
+<td>Complete Notes</td>
+<td>
+<div class="preview"
+     style="background-image:url('https://i.ibb.co/rKwzZzmr/IMG-20260128-101334.jpg')">
+<i class="fa-solid fa-lock"></i>
+</div>
+</td>
+<td>₹99</td>
+<td>
+<button class="unlock" onclick="whatsapp(event,this)">Unlock via WhatsApp</button>
+</td>
+</tr>
+
+</table>
+</div>
+<div class="swipe-hint">← Swipe to view</div>
+</div>
+</div>
+
+<div class="subject" data-subject="Quick Revision Notes of Physics">
+<div class="subject-header" onclick="toggle(this)">
+Quick Revision Notes <i class="fa-solid fa-chevron-down"></i>
+</div>
+<div class="subject-content">
+<div class="table-wrap">
+<table>
+<tr><th>Content</th><th>Preview</th><th>Price</th><th>Access</th></tr>
+
+<tr>
+<td>Complete Notes</td>
+<td>
+<div class="preview"
+     style="background-image:url('https://i.ibb.co/rKwzZzmr/IMG-20260128-101334.jpg')">
+<i class="fa-solid fa-lock"></i>
+</div>
+</td>
+<td>₹99</td>
+<td>
+<button class="unlock" onclick="whatsapp(event,this)">Unlock via WhatsApp</button>
+</td>
+</tr>
+
+</table>
+</div>
+<div class="swipe-hint">← Swipe to view</div>
+</div>
+</div>
+
+
+<div class="subject" data-subject="One-Page Chapter Summary of Physics">
+<div class="subject-header" onclick="toggle(this)">
+One-Page Chapter Summary <i class="fa-solid fa-chevron-down"></i>
+</div>
+<div class="subject-content">
+<div class="table-wrap">
+<table>
+<tr><th>Content</th><th>Preview</th><th>Price</th><th>Access</th></tr>
+
+<tr>
+<td>Premium Pack</td>
+<td>
+<div class="preview"
+     style="background-image:url('https://i.ibb.co/rKwzZzmr/IMG-20260128-101334.jpg')">
+<i class="fa-solid fa-lock"></i>
+</div>
+</td>
+<td>₹149</td>
+<td>
+<button class="unlock" onclick="whatsapp(event,this)">Unlock via WhatsApp</button>
+</td>
+</tr>
+
+</table>
+</div>
+<div class="swipe-hint">← Swipe to view</div>
+</div>
+</div>
+
+
+<div class="subject" data-subject="12th Exam Survival Pack of Physics">
+<div class="subject-header" onclick="toggle(this)">
+12th Exam Survival Pack <i class="fa-solid fa-chevron-down"></i>
+</div>
+<div class="subject-content">
+<div class="table-wrap">
+<table>
+<tr><th>Content</th><th>Preview</th><th>Price</th><th>Access</th></tr>
+
+<tr>
+<td>Full Premium Bundle</td>
+<td>
+<div class="preview"
+     style="background-image:url('https://i.ibb.co/rKwzZzmr/IMG-20260128-101334.jpg')">
+<i class="fa-solid fa-lock"></i>
+</div>
+</td>
+<td>₹299</td>
+<td>
+<button class="unlock" onclick="whatsapp(event,this)">Unlock via WhatsApp</button>
+</td>
+</tr>
+
+</table>
+</div>
+<div class="swipe-hint">← Swipe to view</div>
+</div>
+</div>
+
+</div>
+
+<script>
+function toggle(header){
+    const subject=header.parentElement;
+    const content=subject.querySelector(".subject-content");
+    document.querySelectorAll(".subject").forEach(s=>{
+        if(s!==subject){
+            s.classList.remove("active");
+            s.querySelector(".subject-content").style.maxHeight=null;
+        }
+    });
+    subject.classList.toggle("active");
+    content.style.maxHeight=subject.classList.contains("active")
+        ? content.scrollHeight+"px":null;
+}
+
+function whatsapp(e,btn){
+    e.stopPropagation();
+    const subject=btn.closest(".subject").dataset.subject;
+    const phone="9370515750";
+    const msg=`Hello, I want to unlock the premium content for ${subject}`;
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`,"_blank");
+}
+
+/* PDF FILE */
+function viewPDF(e){
+    e.stopPropagation();
+    window.open("sample.pdf","_blank"); // PDF file same folder me upload kar
+}
+</script>
+</div>
+<div style="margin:30px;" class="div" id="chemistry"><style>
+*{box-sizing:border-box;font-family:Inter,Arial,sans-serif}
+
+
+.wrapper{max-width:1000px;margin:auto}
+.heading{font-size:28px;font-weight:700;margin-bottom:22px;color:#38bdf8}
+
+.subject{
+    background:#121212;
+    border-radius:16px;
+    margin-bottom:18px;
+    border:0.5px solid #1f1f1f;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.subject.active{
+    border-color:#0ea5e9;
+    box-shadow:0 0 0 1px #0ea5e9 inset;
+}
+
+.subject.active .subject-header{
+    background:rgba(14,165,233,0.08);
+}
+
+.subject.active .subject-header i{
+    color:#38bdf8;
+}
+
+.subject-header{
+    padding:20px 22px;
+    font-size:20px;
+    font-weight:600;
+    display:flex;
+    justify-content:space-between;
+    cursor:pointer;
+}
+
+.subject-header i{transition:.3s;color:#38bdf8}
+.subject.active .subject-header i{transform:rotate(180deg)}
+
+.subject-content{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .4s ease;
+    background:#0f0f0f;
+}
+
+.table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+}
+.table-wrap::-webkit-scrollbar{height:6px}
+.table-wrap::-webkit-scrollbar-thumb{
+    background:#0ea5e9;border-radius:10px
+}
+.table-wrap::-webkit-scrollbar-track{background:#111}
+
+table{
+    min-width:680px;
+    width:100%;
+    border-collapse:collapse;
+}
+th,td{
+    padding:16px;
+    text-align:center;
+    border-bottom:1px solid #1e1e1e;
+    white-space:nowrap;
+}
+th{background:#000}
+.free{color:#00ff99;font-weight:600}
+
+
+.preview,.fpreview{
+    width:110px;
+    height:60px;
+    margin:auto;
+    border-radius:8px;
+    background-size:cover;
+    background-position:center;
+    position:relative;
+}
+.preview::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.45);
+    border-radius:8px;
+    z-index:1;
+}
+
+.preview i{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    z-index:2;
+    color:#fff;
+    font-size:18px;
+}
+
+ 
+.pdf-preview{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#1a1a1a;
+    font-size:28px;
+    color:#38bdf8;
+}
+
+ 
+.unlock,.view-btn{
+    padding:9px 16px;
+    border-radius:10px;
+    border:none;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+}
+.unlock{
+    background:#0ea5e9;
+    color:#fff;
+}
+.unlock:hover{background:#0284c7}
+
+.view-btn{
+    background:#1f1f1f;
+    color:#38bdf8;
+    border:1px solid #1f1f1f;
+}
+.view-btn:hover{border-color:#38bdf8}
+
+.swipe-hint{
+    font-size:13px;
+    opacity:.6;
+    text-align:right;
+    margin:8px 20px;
+    animation:swipe 1.4s infinite;
+}
+@keyframes swipe{
+    0%{transform:translateX(0)}
+    50%{transform:translateX(6px)}
+    100%{transform:translateX(0)}
+}
+
+
+::-webkit-scrollbar{
+    width:8px;
+    height:5px;
+}
+
+ 
+::-webkit-scrollbar-track{
+    background:#0f0f0f;
+    border-radius:10px;
+}
+
+ 
+::-webkit-scrollbar-thumb{
+    background:linear-gradient(180deg,#38bdf8,#0ea5e9);
+    border-radius:10px;
+    border:2px solid #0f0f0f;
+}
+
+ 
+::-webkit-scrollbar-thumb:hover{
+    background:linear-gradient(180deg,#0ea5e9,#0284c7);
+}
+
+
+*{
+    scrollbar-width:thin;
+    scrollbar-color:#0ea5e9 #0f0f0f;
+}
+
+ 
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.85);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:999;
+}
+.modal img{
+    max-width:90%;
+    max-height:85%;
+    border-radius:12px;
+}
+.modal span{
+    position:absolute;
+    top:20px;
+    right:30px;
+    font-size:26px;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+<div class="heading">Chemistry</div>
+
+ 
+<div class="subject" data-subject="Free Sample">
+<div class="subject-header" onclick="toggle(this)">
+Free sample (MYQs) <i class="fa-solid fa-chevron-down"></i>
+</div>
+<div class="subject-content">
+<div class="table-wrap">
+<table>
+<tr><th>Content</th><th>Preview</th><th>Price</th><th>Access</th></tr>
+
+<tr>
+<td>Free MYQs Sample</td>
+<td>
+<div class="fpreview pdf-preview">
+<i class="fa-solid fa-file-pdf"></i>
+</div>
+</td>
+<td class="free">FREE</td>
+<td>
+<button class="view-btn" onclick="viewPDF(event)">View</button>
+</td>
+</tr>
+
+</table>
+</div>
+<div class="swipe-hint">← Swipe to view</div>
+</div>
+</div>
+
+
+<div class="subject" data-subject="MIQs of Chemistry">
+<div class="subject-header" onclick="toggle(this)">
+Most Important Questions (MIQs)<i class="fa-solid fa-chevron-down"></i>
+</div>
+<div class="subject-content">
+<div class="table-wrap">
+<table>
+<tr><th>Content</th><th>Preview</th><th>Price</th><th>Access</th></tr>
+
+<tr>
+<td>Complete Notes</td>
+<td>
+<div class="preview"
+     style="background-image:url('https://i.ibb.co/rKwzZzmr/IMG-20260128-101334.jpg')">
+<i class="fa-solid fa-lock"></i>
+</div>
+</td>
+<td>₹99</td>
+<td>
+<button class="unlock" onclick="whatsapp(event,this)">Unlock via WhatsApp</button>
+</td>
+</tr>
+
+</table>
+</div>
+<div class="swipe-hint">← Swipe to view</div>
+</div>
+</div>
+
+<div class="subject" data-subject="PYQs of Chemistry">
+<div class="subject-header" onclick="toggle(this)">
+Previous Year Questions (PYQs) <i class="fa-solid fa-chevron-down"></i>
+</div>
+<div class="subject-content">
+<div class="table-wrap">
+<table>
+<tr><th>Content</th><th>Preview</th><th>Price</th><th>Access</th></tr>
+
+<tr>
+<td>Complete Notes</td>
+<td>
+<div class="preview"
+     style="background-image:url('https://i.ibb.co/rKwzZzmr/IMG-20260128-101334.jpg')">
+<i class="fa-solid fa-lock"></i>
+</div>
+</td>
+<td>₹99</td>
+<td>
+<button class="unlock" onclick="whatsapp(event,this)">Unlock via WhatsApp</button>
+</td>
+</tr>
+
+</table>
+</div>
+<div class="swipe-hint">← Swipe to view</div>
+</div>
+</div>
+
+<div class="subject" data-subject="Quick Revision Notes of Chemistry">
+<div class="subject-header" onclick="toggle(this)">
+Quick Revision Notes <i class="fa-solid fa-chevron-down"></i>
+</div>
+<div class="subject-content">
+<div class="table-wrap">
+<table>
+<tr><th>Content</th><th>Preview</th><th>Price</th><th>Access</th></tr>
+
+<tr>
+<td>Complete Notes</td>
+<td>
+<div class="preview"
+     style="background-image:url('https://i.ibb.co/rKwzZzmr/IMG-20260128-101334.jpg')">
+<i class="fa-solid fa-lock"></i>
+</div>
+</td>
+<td>₹99</td>
+<td>
+<button class="unlock" onclick="whatsapp(event,this)">Unlock via WhatsApp</button>
+</td>
+</tr>
+
+</table>
+</div>
+<div class="swipe-hint">← Swipe to view</div>
+</div>
+</div>
+
+
+<div class="subject" data-subject="One-Page Chapter Summary of Chemistry">
+<div class="subject-header" onclick="toggle(this)">
+One-Page Chapter Summary <i class="fa-solid fa-chevron-down"></i>
+</div>
+<div class="subject-content">
+<div class="table-wrap">
+<table>
+<tr><th>Content</th><th>Preview</th><th>Price</th><th>Access</th></tr>
+
+<tr>
+<td>Premium Pack</td>
+<td>
+<div class="preview"
+     style="background-image:url('https://i.ibb.co/rKwzZzmr/IMG-20260128-101334.jpg')">
+<i class="fa-solid fa-lock"></i>
+</div>
+</td>
+<td>₹149</td>
+<td>
+<button class="unlock" onclick="whatsapp(event,this)">Unlock via WhatsApp</button>
+</td>
+</tr>
+
+</table>
+</div>
+<div class="swipe-hint">← Swipe to view</div>
+</div>
+</div>
+
+
+<div class="subject" data-subject="12th Exam Survival Pack of Chemistry">
+<div class="subject-header" onclick="toggle(this)">
+12th Exam Survival Pack <i class="fa-solid fa-chevron-down"></i>
+</div>
+<div class="subject-content">
+<div class="table-wrap">
+<table>
+<tr><th>Content</th><th>Preview</th><th>Price</th><th>Access</th></tr>
+
+<tr>
+<td>Full Premium Bundle</td>
+<td>
+<div class="preview"
+     style="background-image:url('https://i.ibb.co/rKwzZzmr/IMG-20260128-101334.jpg')">
+<i class="fa-solid fa-lock"></i>
+</div>
+</td>
+<td>₹299</td>
+<td>
+<button class="unlock" onclick="whatsapp(event,this)">Unlock via WhatsApp</button>
+</td>
+</tr>
+
+</table>
+</div>
+<div class="swipe-hint">← Swipe to view</div>
+</div>
+</div>
+
+</div>
+
+<script>
+function toggle(header){
+    const subject=header.parentElement;
+    const content=subject.querySelector(".subject-content");
+    document.querySelectorAll(".subject").forEach(s=>{
+        if(s!==subject){
+            s.classList.remove("active");
+            s.querySelector(".subject-content").style.maxHeight=null;
+        }
+    });
+    subject.classList.toggle("active");
+    content.style.maxHeight=subject.classList.contains("active")
+        ? content.scrollHeight+"px":null;
+}
+
+function whatsapp(e,btn){
+    e.stopPropagation();
+    const subject=btn.closest(".subject").dataset.subject;
+    const phone="9370515750";
+    const msg=`Hello, I want to unlock the premium content for ${subject}`;
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`,"_blank");
+}
+
+/* PDF FILE */
+function viewPDF(e){
+    e.stopPropagation();
+    window.open("sample.pdf","_blank"); // PDF file same folder me upload kar
+}
+</script>
+</div>
+<div class="div" id="main">
+<style>
+
+
+.gradient-text {
+    background: linear-gradient(90deg,#38bdf8,#0ea5e9,#0284c7);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+   
+.button {
+  
+  --main-color: rgb(46, 213, 115);
+  --main-bg-color: rgba(46, 213, 116, 0.36);
+  --pattern-color: rgba(46, 213, 116, 0.073);
+
+  
+  filter: hue-rotate(0deg);
+
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+  background: radial-gradient(
+      circle,
+      var(--main-bg-color) 0%,
+      rgba(0, 0, 0, 0) 95%
+    ),
+    linear-gradient(var(--pattern-color) 1px, transparent 1px),
+    linear-gradient(to right, var(--pattern-color) 1px, transparent 1px);
+  background-size:
+    cover,
+    10px 10px,
+    10px 10px;
+  background-position:
+    center center,
+    center center,
+    center center;
+  border-image: radial-gradient(
+      circle,
+      var(--main-color) 0%,
+      rgba(0, 0, 0, 0) 100%
+    )
+    1;
+  border-width: 1px 0 1px 0;
+  color: var(--main-color);
+  padding: 1rem 3rem;
+  font-weight: 700;
+  font-size: 1.0rem;
+  transition: background-size 0.2s ease-in-out;
+}
+
+.button:hover {
+  background-size:
+    cover,
+    10px 10px,
+    10px 10px;
+}
+.button:active {
+  filter: hue-rotate(250deg);
+}
+  
+  .terms-wrap {
+  margin-bottom: 18px;
+  font-size: 10.5px;
+  color: #e5e7eb;
+  text-align:left;
+}
+
+ 
+.fancy-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+ 
+.fancy-checkbox input {
+  display: none;
+}
+
+ 
+.checkmark {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: #0f172a;
+  border: 1.5px solid #334155;
+  position: relative;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+  .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        #mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            
+        }
+        
+        #mobile-menu.open {
+            transform: translateX(150px);
+        }
+    
+.checkmark::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) scale(0);
+  transition: transform 0.25s ease;
+}
+
+ 
+.fancy-checkbox input:checked + .checkmark {
+  background: green;
+  border-color: green;
+  box-shadow: 0 0 0 4px rgba(57,255,20,0.1);
+}
+
+.fancy-checkbox input:checked + .checkmark::after {
+  transform: rotate(45deg) scale(1);
+}
+
+ 
+.terms-text {
+  line-height: 1.5;
+}
+
+ 
+.terms-text a {
+  color: skyblue;
+  text-decoration: underline;
+}
+
+.terms-text a:hover {
+  opacity: 0.85;
+}
+  
+@font-face {
+  font-family: 'RozelFont';
+  src: url('https://res.cloudinary.com/dnz1c589m/raw/upload/v1768459308/Azonix_aflyns.otf') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+#mn {
+  font-family: 'RozelFont', sans-serif;
+}
+  
+#popupOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s ease;
+}
+
+#popupOverlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+ 
+.loader {
+  width: 45px;
+  height: 45px;
+  border: 4px solid #333;
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+ 
+#popupBox {
+  display: none;
+  background: #111;
+  color: #fff;
+  padding: 25px;
+  width: 300px;
+  border-radius: 12px;
+  transform: scale(0.85);
+  transition: 0.3s ease;
+  position: relative;
+}
+
+#popupOverlay.showPopup .loader {
+  display: none;
+}
+
+#popupOverlay.showPopup #popupBox {
+  display: block;
+  transform: scale(1);
+}
+
+#closePopup {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+ .energy-wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+        
+        .energy-wave svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.0px);
+            height: 30px;
+        }
+        
+        .energy-wave .shape-fill {
+            fill: rgba(30, 64, 175, 0.5);
+            
+        }
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+</style>
+
+
+
+
+
+ <nav class="fixed w-full bg-black/70 backdrop-blur-md z-50 py-4 px-6 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="flex items-center">
+                <i class="fas fa-graduation-cap text-2xl text-blue-500 mr-2"></i>
+                <span class="text-2xl font-bold gradient-text">Velostrix</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link text-white hover:text-blue-400">Home</a>
+                <a href="#services" class="nav-link text-white hover:text-blue-400">What We Handle</a>
+                <a href="#Pricing" class="nav-link text-white hover:text-blue-400">Pricing</a>
+                <a href="#study-materials" class="nav-link text-white hover:text-blue-400">Study Materials</a>
+                <a href="#contact" class="nav-link text-white hover:text-blue-400">Contact</a>
+            </div>
+            
+            <button id="mobile-menu-button" class="md:hidden text-white">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    
+    <div id="mobile-menu" class="fixed inset-0 bg-black/90 z-40 pt-32 px-6 backdrop-blur-md md:hidden">
+        <div style="text-align:left;" class="flex flex-col space-y-6 text-center">
+            <a href="#home" class="text-white text-2xl py-2">Home</a>
+            <a href="#services" class="text-white text-2xl py-2">What We Handle</a>
+            <a href="#Pricing" class="text-white text-2xl py-2">Pricing</a>
+            <a href="#study-materials" class="text-white text-2xl py-2">Study Materials</a>
+            <a href="#contact" class="text-white text-2xl py-2">Contact</a>
+        </div>
+    </div>
+
+
+
+
+
+
+
+<section id="home" class="min-h-screen flex items-center pt-24">
+<div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12">
+<div>
+<h1 class="text-4xl font-bold mb-6">
+Academic Support for <span class="gradient-text">Every Major Subject
+</h1>
+<p style="size:20px;" class="text-slate-300 mb-8 text-lg">
+
+MIQs • PYQs • Notes • Summaries • Assignments • More Coming Soon
+    
+</p>
+<button onclick="window.location.href='#services'" class="button">
+Explore
+</button>
+</div>
+
+
+<div>
+<img src="https://i.postimg.cc/h41r79NY/file-0000000010b87207a94c9f164c13752d.png" class="rounded-xl shadow-xl">
+</div>
+</div>
+</section>
+ <div class="energy-wave">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+
+
+<section id="services" class="py-20 bg-slate-900 reveal">
+<div class="max-w-7xl mx-auto px-6">
+<h2 class="text-4xl font-bold text-center mb-12">
+What <span class="gradient-text">We Handle</span>
+</h2>
+
+
+<div class="grid md:grid-cols-3 gap-8">
+<div class="p-6 border border-slate-800 rounded-xl card-hover">
+  <h3 class="text-xl font-bold mb-3">Exam Study Resources</h3>
+  <p class="text-slate-300">
+    MIQs, PYQs, quick revision notes, One-Page Chapter Summary, and 12th Exam Survival Pack.
+  </p>
+</div>
+
+
+<div class="p-6 border border-slate-800 rounded-xl card-hover">
+<h3 class="text-xl font-bold mb-3">Written Assignments</h3>
+<p class="text-slate-300">Handwritten or typed assignments prepared in proper university format, ready for submission.</p>
+</div>
+
+<div class="p-6 border border-slate-800 rounded-xl card-hover">
+<h3 class="text-xl font-bold mb-3">Practical Files</h3>
+<p class="text-slate-300">Complete practical and lab files prepared with records, diagrams, and proper indexing, ready to submit.</p>
+</div>
+
+<div class="p-6 border border-slate-800 rounded-xl card-hover">
+<h3 class="text-xl font-bold mb-3">Projects / Reports</h3>
+<p class="text-slate-300">Mini and major projects, final year reports, and presentations fully prepared as per requirements.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="pricing" class="py-20 bg-slate-900 reveal">
+<div id="Pricing" class="max-w-7xl mx-auto px-6">
+
+<h2 class="text-4xl font-bold text-center mb-4">
+Transparent <span class="gradient-text">Pricing</span>
+</h2>
+<p class="text-center text-slate-400 mb-12">
+(Pricing for Written Assignments)<br>
+Marks free me milte to hum bhi free me kar dete
+</p>
+
+<div class="overflow-x-auto">
+<table class="w-full border border-slate-800 rounded-xl overflow-hidden text-center">
+<thead class="bg-slate-800">
+<tr>
+<th class="p-4 border border-slate-700">Deadline</th>
+<th class="p-4 border border-slate-700">100–150 Pages</th>
+<th class="p-4 border border-slate-700">150–200 Pages</th>
+<th class="p-4 border border-slate-700">200–300 Pages</th>
+</tr>
+</thead>
+
+<tbody class="bg-slate-900 text-slate-300">
+<tr>
+<td class="p-4 border border-slate-800 font-semibold">Same Day</td>
+<td class="p-4 border border-slate-800">₹500</td>
+<td class="p-4 border border-slate-800">₹700</td>
+<td class="p-4 border border-slate-800">₹900</td>
+</tr>
+
+<tr class="bg-slate-950">
+<td class="p-4 border border-slate-800 font-semibold">2–3 Days</td>
+<td class="p-4 border border-slate-800">₹400</td>
+<td class="p-4 border border-slate-800">₹600</td>
+<td class="p-4 border border-slate-800">₹800</td>
+</tr>
+
+<tr>
+<td class="p-4 border border-slate-800 font-semibold">4–5 Days</td>
+<td class="p-4 border border-slate-800">₹350</td>
+<td class="p-4 border border-slate-800">₹550</td>
+<td class="p-4 border border-slate-800">₹750</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div style="margin-top:70px;" class="px-6">
+
+<h2 class="text-2xl font-bold mb-6">
+Pricing Overview
+</h2>
+
+<div class="flex gap-6 overflow-x-auto no-scrollbar pb-4">
+
+ 
+<div class="min-w-[280px] bg-slate-800 rounded-2xl p-6 border border-slate-700">
+<h3 class="text-lg font-semibold mb-4">✍️ Handwritten Assignment</h3>
+<p class="text-sm text-slate-400 mb-4">Typed price + ₹5 per page</p>
+
+<ul class="space-y-2 text-sm">
+<li style="background:#020617;padding:10px;border-radius:10px 10px 0px 0px;">10–50 pages <span class="float-right">+₹250</span></li>
+<li style="background:#020617;padding:10px;border-radius:0px;">51–100 pages <span class="float-right">+₹500</span></li>
+<li style="background:#020617;padding:10px;border-radius:0px;">101–150 pages <span class="float-right">+₹750</span></li>
+<li style="background:#020617;padding:10px;border-radius:0px 0px 10px 10px;">151–200 pages <span class="float-right">+₹1000</span></li>
+</ul>
+</div>
+
+ 
+<div class="min-w-[280px] bg-slate-800 rounded-2xl p-6 border border-slate-700">
+<h3 class="text-lg font-semibold mb-4">📘 Practical Files</h3>
+
+<ul class="space-y-2 text-sm">
+<li style="background:#020617;padding:10px;border-radius:10px 10px 0px 0px;">Normal Practical <span class="float-right">₹500–₹700</span></li>
+<li style="background:#020617;padding:10px;border-radius:0px 0px 0px 0px;">Engineering Practical <span class="float-right">₹700–₹1000</span></li>
+<li style="background:#020617;padding:10px;border-radius:0px 0px 10px 10px;" class="text-blue-400">Urgent Practical <span class="float-right">+₹200</span></li>
+</ul>
+</div>
+
+ 
+<div class="min-w-[280px] bg-slate-800 rounded-2xl p-6 border border-slate-700">
+<h3 class="text-lg font-semibold mb-4">📊 Projects / Reports</h3>
+
+<ul class="space-y-3 text-sm">
+<li style="background:#020617;padding:10px;border-radius:10px 10px 0px 0px;">Mini Project (15–25 pages)
+<span class="block text-blue-400">₹1000–₹1300</span></li>
+
+<li style="background:#020617;padding:10px;border-radius:0px 0px 0px 0px;">Major Project (40–60 pages)
+<span class="block text-blue-400">₹2000–₹2500</span></li>
+
+<li style="background:#020617;padding:10px;border-radius:0px 0px 10px 10px;">Internship / Training Report
+<span class="block text-blue-400">₹1500–₹2000</span></li>
+</ul>
+</div>
+
+</div>
+
+<p class="text-xs text-slate-400 mt-3">
+← Swipe to explore pricing
+</p>
+<div class="mt-8 bg-slate-800 p-6 rounded-xl text-slate-300 text-sm">
+<p class="mb-2">📌 <strong>Notes:</strong></p>
+<ul class="space-y-1">
+<li>• Study resources (MIQs, PYQs, notes) available inside subject sections</li>
+<li>• Practical files, projects & reports priced separately</li>
+<li>• Urgent deadlines may cost extra</li>
+<li>• Bulk pages = better pricing</li>
+<li>• Final price confirmed on call / WhatsApp</li>
+</ul>
+</div>
+
+</div>
+</section>
+ 
+ <section class="reveal">    
+<style>    
+    
+
+
+
+.container7{
+  max-width:1100px;
+  margin:auto;
+  display:grid;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:28px;
+  padding:10px;
+  padding-bottom:50px;
+  
+  
+}
+
+.section-card{
+  background:linear-gradient(145deg,#0f172a,#0f141b);
+  
+  border:1px solid #1c2633;
+  border-radius:18px;
+  padding:26px 24px;
+  margin:0px;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  
+  box-shadow:0 12px 30px rgba(0,0,0,0.55);
+  transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+  position:relative;
+  overflow:hidden;
+}
+
+.section-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at top left, rgba(56,189,248,0.18), transparent 65%);
+  opacity:0;
+  transition:opacity .35s ease;
+}
+
+.section-card:hover{
+  transform:translateY(-8px);
+  border-color:#38bdf8;
+  box-shadow:0 18px 45px rgba(14,165,233,0.25);
+}
+
+.section-card:hover::before{
+  opacity:1;
+}
+
+.section-title{
+  font-size:28px;
+  font-weight:600;
+  margin-bottom:12px;
+  color:#e6f6ff;
+  letter-spacing:.4px;
+}
+
+.section-desc{
+  font-size:15px;
+  color:#9fb3c8;
+  line-height:1.7;
+  margin-bottom:10px;
+}
+
+.section-details{
+  margin-top:14px;
+  font-size:14px;
+  color:#d6e6f2;
+  line-height:1.7;
+}
+
+.section-details ul{
+  padding-left:20px;
+  margin:10px 0 0;
+}
+
+.section-details li{
+  margin-bottom:8px;
+}
+
+.badge{
+  display:inline-block;
+  margin-top:14px;
+  padding:7px 14px;
+  font-size:12.5px;
+  border-radius:999px;
+  background:linear-gradient(90deg,#38bdf8,#0ea5e9,#0284c7);
+  color:#fff;
+  font-weight:600;
+  letter-spacing:.5px;
+  box-shadow:0 6px 18px rgba(14,165,233,0.45);
+}
+
+</style>    
+
+<div id="study-materials" class="container7 border border-slate-800">    
+   <h2 style="margin-top:40px;" class="text-4xl font-bold text-center mb-4">
+Study<span class="gradient-text"> Materials</span>
+    
+</h2>
+
+<a href="#maths">    
+  <div class="section-card">    
+    <div class="section-title">Mathematics</div>    
+    <div class="section-desc">    
+      Core subject focused on numbers, logic, and problem solving.    
+    </div>    
+    <div class="section-details">    
+      <ul>    
+        <li>Algebra and equations</li>    
+        <li>Geometry and mensuration</li>    
+        <li>Trigonometry basics</li>    
+        <li>Statistics and probability</li>    
+      </ul>    
+      <span class="badge">Mathematics Subject</span>    
+    </div>    
+  </div>    
+</a>    
+    
+<a href="#biology">    
+  <div class="section-card">    
+    <div class="section-title">Biology</div>    
+    <div class="section-desc">    
+      Study of living organisms, life processes, and human systems.    
+    </div>    
+    <div class="section-details">    
+      <ul>    
+        <li>Plant and animal biology</li>    
+        <li>Human body systems</li>    
+        <li>Cell structure and functions</li>    
+        <li>Environment and ecology</li>    
+      </ul>    
+      <span class="badge">Biology Subject</span>    
+    </div>    
+  </div>    
+</a>    
+    
+<a href="#physics">    
+  <div class="section-card">    
+    <div class="section-title">Physics</div>    
+    <div class="section-desc">    
+      Subject dealing with motion, energy, force, and natural laws.    
+    </div>    
+    <div class="section-details">    
+      <ul>    
+        <li>Motion and mechanics</li>    
+        <li>Light and sound</li>    
+        <li>Electricity and magnetism</li>    
+        <li>Energy and work</li>    
+      </ul>    
+      <span class="badge">Physics Subject</span>    
+    </div>    
+  </div>    
+</a>    
+    
+<a href="#chemistry">    
+  <div class="section-card">    
+    <div class="section-title">Chemistry</div>    
+    <div class="section-desc">    
+      Subject focused on substances, elements, and chemical reactions.    
+    </div>    
+    <div class="section-details">    
+      <ul>    
+        <li>States of matter</li>    
+        <li>Atoms and molecules</li>    
+        <li>Chemical reactions</li>    
+        <li>Acids, bases, and salts</li>    
+      </ul>    
+      <span class="badge">Chemistry Subject</span>    
+    </div>    
+  </div>    
+</a>    
+    
+</div>    
+</section>
+ 
+<style>
+.slide-section {
+  transition: all 0.5s ease;
+  transform: translateX(40px);
+  opacity: 0;
+}
+.slide-section.active {
+  transform: translateX(0);
+  opacity: 1;
+}
+.hidden {
+  display: none;
+}
+</style>
+
+ 
+<script>
+function showSection(type) {
+  const info = document.getElementById("infoSection");
+  const report = document.getElementById("reportSection");
+  const infoTab = document.getElementById("infoTab");
+  const reportTab = document.getElementById("reportTab");
+
+  if (type === "info") {
+    info.classList.remove("hidden");
+    report.classList.add("hidden");
+    info.classList.add("active");
+    report.classList.remove("active");
+    infoTab.classList.add("bg-blue-500","text-white");
+    reportTab.classList.remove("bg-blue-500","text-white");
+  } else {
+    report.classList.remove("hidden");
+    info.classList.add("hidden");
+    report.classList.add("active");
+    info.classList.remove("active");
+    reportTab.classList.add("bg-blue-500","text-white");
+    infoTab.classList.remove("bg-blue-500","text-white");
+  }
+}
+
+function toggleGenderInfo() {
+  document.getElementById("genderInfoPopup").classList.toggle("hidden");
+}
+</script>
+
+             <div>
+                    <div id="contact" style="margin:20px;" class="bg-slate-900/50 border border-slate-800 rounded-xl p-6 mb-8">
+                        <h3 class="text-2xl font-bold mb-6 text-white">Contact Information</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center text-blue-500 mr-4 mt-1">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium text-white mb-1">Email</h4>
+                                    <a href="mailto:Velostrix@gmail.com" class="text-sm text-blue-400 hover:text-blue-300">Velostrix@gmail.com</a>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center text-blue-500 mr-4 mt-1">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium text-white mb-1">Location</h4>
+                                    <p class="text-sm text-slate-300">CSN (Aurangabad), Maharashtra</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+ 
+
+ 
+
+<footer class="bg-black py-16 border-t border-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-8 md:mb-0">
+                    <div class="text-2xl font-bold tracking-wider mb-6">
+                    <div id="mn" class="py-8 text-center text-slate-500 border-t border-slate-800">
+POWERED BY DYNASTRIX
+</div>
+
+                    </div>
+                                    </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-16">
+                    <div>
+                        <h4 class="text-white text-sm uppercase tracking-wider mb-4">Velostrix</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-500 hover:text-white transition-colors">Home</a></li>
+                            <li><a href="#services" class="text-gray-500 hover:text-white transition-colors">What we Handle</a></li>
+                            <li><a href="#pricing" class="text-gray-500 hover:text-white transition-colors">Pricing</a></li>
+                            
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-white text-sm uppercase tracking-wider mb-4">INNOVATIONS</h4>
+                        <ul class="space-y-2">
+                            <li><a href="rozelai.blogspot.com" class="text-gray-500 hover:text-white transition-colors">Rozel AI ChatBot</a></li>
+                            <li><a href="#" class="text-gray-500 hover:text-white transition-colors">Leadership</a></li>
+                            <li><a href="#" class="text-gray-500 hover:text-white transition-colors">Careers</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-white text-sm uppercase tracking-wider mb-4">CONNECT</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-500 hover:text-white transition-colors">Details submition</a></li>
+                            <li><a href="#" class="text-gray-500 hover:text-white transition-colors">Contact US</a></li>
+                            <li><a href="#" class="text-gray-500 hover:text-white transition-colors">Connect with social media</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-900 mt-12 pt-12 flex flex-col md:flex-row justify-between(()) items-center">
+            <p style="padding-bottom:50px;" class="text-gray-500 text-sm max-w-xs">© 2026 Velostrix. All rights reserved.</p>
+                <div style="font-size:25px;" class="flex space-x-6 mb-6 md:mb-0">
+
+                    <a href="https://www.instagram.com/velostrix" class="text-gray-500 hover:text-white transition-colors">
+                        <span class="sr-only">Instagram</span>
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://x.com/velostrix" class="text-gray-500 hover:text-white transition-colors">
+                        <span class="sr-only">Twitter</span>
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-white transition-colors">
+                        <span class="sr-only">LinkedIn</span>
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+                
+                <div class="text-gray-500 text-sm">
+                    <a href="https://velostrix.blogspot.com/2026/01/privacy-policy.html?m=1" class="hover:text-white transition-colors">Privacy Policy</a> • 
+                    <a href="https://velostrix.blogspot.com/2026/01/terms.html?m=1" class="hover:text-white transition-colors">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+        <a href="https://wa.me/9370515750" target="_blank"
+   class="fixed bottom-6 right-6 bg-green-500 w-14 h-14 rounded-full flex items-center justify-center text-white text-2xl shadow-lg hover:scale-110 transition">
+   <i class="fab fa-whatsapp"></i>
+</a>
+
+<button id="topBtn" style="bottom:90px; border:solid grey 1px; background-color:#000;" class="fixed right-6  rounded-full text-white hidden">
+<i style="padding:12px 20px 12px 20px; font-size: 20px;" class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+const topBtn = document.getElementById("topBtn");
+
+window.addEventListener("scroll", ()=>{
+  topBtn.style.display = window.scrollY > 400 ? "flex" : "none";
+});
+
+topBtn.onclick = () => window.scrollTo({top:0, behavior:"smooth"});
+</script>
+
+           </footer>
+<div id="popupOverlay">
+  <div class="loader"></div>
+
+  <div id="popupBox">
+    <span id="closePopup">&times;</span>
+    <h2>Submission Successful!</h2>
+    <p>We've received your details<br>Our team will contact you shortly.</p>
+  </div>
+</div>
+<script>
+     
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+        
+        
+        const mobileLinks = document.querySelectorAll('#mobile-menu a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+            });
+        });
+        
+
+</script>
+<script>
+  const openBtn = document.getElementById("openPopup");
+  const closeBtn = document.getElementById("closePopup");
+  const overlay = document.getElementById("popupOverlay");
+
+  openBtn.onclick = () => {
+    overlay.classList.add("active");
+    overlay.classList.remove("showPopup");
+
+    setTimeout(() => {
+      overlay.classList.add("showPopup");
+    }, 1000);  
+  };
+
+  closeBtn.onclick = () => {
+    overlay.classList.remove("active", "showPopup");
+  };
+
+  overlay.onclick = (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove("active", "showPopup");
+    }
+  };
+</script>
+
+
+<script>
+    
+function toggleGenderInfo() {
+    const popup = document.getElementById("genderInfoPopup");
+    popup.classList.toggle("hidden");
+}
+
+ 
+document.addEventListener("click", function(e) {
+    const popup = document.getElementById("genderInfoPopup");
+    if (!e.target.closest("button") && !e.target.closest("#genderInfoPopup")) {
+        popup.classList.add("hidden");
+    }
+});
+
+</script>
+<script>
+    document.getElementById('detailsform').addEventListener('submit', function(e) {
+    e.preventDefault();   
+
+    var formData = new FormData(this); 
+    var xhr = new XMLHttpRequest();   
+    xhr.open('POST', 'https://script.google.com/macros/s/AKfycbz5Lb9obUrGDZ9rfiRYCfbk6vKZOBUlru_2h0tvc1zd-UZe0fIL4tTobdneWo0OMvIE/exec');  
+    xhr.send(formData);   
+
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            alert('Your details recived successfully ✅');
+        } else {
+            alert('There was an error. Please try again.');
+        }
+    };
+});
+  
+xhr.onerror = function () {
+  alert("Network / CORS error");
+};
+</script>
+<script>
+const reveals = document.querySelectorAll(".reveal");
+
+window.addEventListener("scroll", () => {
+  reveals.forEach(el => {
+    const windowHeight = window.innerHeight;
+    const elementTop = el.getBoundingClientRect().top;
+
+    if (elementTop < windowHeight - 80) {
+      el.classList.add("active");
+    }
+  });
+});
+</script>
+</div>
+</body>
+</html>
