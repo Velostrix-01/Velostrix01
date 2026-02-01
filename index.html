@@ -285,7 +285,7 @@ Free sample (MYQs) <i class="fa-solid fa-chevron-down"></i>
 </td>
 <td class="free">FREE</td>
 <td>
-<button class="view-btn" onclick="viewPDF(event)">View</button>
+<button class="view-btn" onclick="viewPDF(event, 'maths-sample.pdf')">View</button>
 </td>
 </tr>
 
@@ -469,9 +469,9 @@ function whatsapp(e,btn){
 }
 
 /* PDF FILE */
-function viewPDF(e){
+function viewPDF(e, file){
     e.stopPropagation();
-    window.open("sample-maths.pdf","_blank"); // PDF file same folder me upload kar
+    window.open(file, "_blank");
 }
 </script>
 
