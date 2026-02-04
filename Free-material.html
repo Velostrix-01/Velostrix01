@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Streams</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #0d1117;
+    color: #e6edf3;
+    text-align: center;
+    padding: 20px;
+}
+
+
+#path {
+    display: inline-flex;
+    align-items: center;
+    background: #30363d;
+    padding: 8px 14px;
+    border-radius: 14px;
+    border: 1px solid #30363d;
+    box-shadow: 0 0 12px rgba(0,0,0,0.6);
+    margin-bottom: 20px;
+    font-size: 14px;
+    width:90%;
+    height:20px;
+}
+
+.crumb {
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #58a6ff;
+    transition: 0.2s;
+}
+
+.crumb:hover {
+    background: #21262d;
+    color: #79c0ff;
+}
+
+.separator {
+    margin: 0 6px;
+    color: #8b949e;
+}
+
+
+.page { display: none; }
+.active { display: block; }
+
+
+.card {
+    background: #161b22;
+    margin: 8px auto;
+    padding: 12px;
+    width: 260px;
+    border-radius: 14px;
+    border: 1px solid #30363d;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    background: #21262d;
+}
+</style>
+</head>
+
+<body>
+
+<div id="path"></div>
+
+
+<div id="home" class="page active">
+    <h1>Choose Streams</h1>
+    <div class="card" onclick="goTo('science')">Science</div>
+    <div class="card" onclick="goTo('arts')">Arts</div>
+</div>
+
+
+<div id="science" class="page">
+    <h1>Science</h1>
+    <div class="card" onclick="goTo('scienceSubjects')">Subjects</div>
+    <div class="card" onclick="goTo('scienceLanguages')">Languages</div>
+</div>
+
+
+<div id="arts" class="page">
+    <h1>Arts</h1>
+    <div class="card" onclick="goTo('artsSubjects')">Subjects</div>
+    <div class="card" onclick="goTo('artsLanguages')">Languages</div>
+</div>
+
+<div id="scienceSubjects" class="page">
+    <h1>Science Subjects</h1>
+
+    <div class="card" onclick="openPDF('class 12 physics textbook.pdf')">Physics</div>
+    <div class="card" onclick="openPDF('class 12 chemistrytextbook.pdf')">Chemistry</div>
+    <div class="card" onclick="openPDF('Class 12 biology textbook.pdf')">Biology</div>
+    <div class="card" onclick="openPDF('Class 12 Maths-and-Statistics Part-1.pdf')">Maths Part 1</div>
+    <div class="card" onclick="openPDF('Class 12 Maths-and-Statistics Part-2.pdf')">Maths Part 2</div>
+    <div class="card" onclick="openPDF('class 12 Psychology textbook.pdf')">Psychology</div>
+    <div class="card" onclick="openPDF('class 12 Economics textbook.pdf')">Economics</div>
+    <div class="card" onclick="openPDF('class 12 Agriculture Science and technology textbook.pdf')">Agriculture Science and Technology</div>
+    <div class="card" onclick="openPDF('class 12 IT textbook.pdf')">IT Text Book</div>
+
+</div>
+
+
+<div id="scienceLanguages" class="page">
+    <h1>Science Languages</h1>
+    <div class="card">English</div>
+    <div class="card">Urdu</div>
+    <div class="card">Arabic</div>
+    <div class="card">Marathi</div>
+    <div class="card">Hindi</div>
+</div>
+
+
+<div id="artsSubjects" class="page">
+    <h1>Arts Subjects</h1>
+    <div class="card">History</div>
+    <div class="card">Geography</div>
+    <div class="card">Political Science</div>
+    <div class="card">Logic</div>
+    <div class="card">Psychology</div>
+    <div class="card">Economics</div>
+    <div class="card">Sociology</div>
+</div>
+
+
+<div id="artsLanguages" class="page">
+    <h1>Arts Languages</h1>
+    <div class="card">English</div>
+    <div class="card">Urdu</div>
+    <div class="card">Arabic</div>
+    <div class="card">Marathi</div>
+    <div class="card">Hindi</div>
+</div>
+
+<script>
+const paths = {
+    home: ["Home"],
+    science: ["Home","Science"],
+    scienceSubjects: ["Home","Science","Subjects"],
+    scienceLanguages: ["Home","Science","Languages"],
+    arts: ["Home","Arts"],
+    artsSubjects: ["Home","Arts","Subjects"],
+    artsLanguages: ["Home","Arts","Languages"]
+};
+
+function goTo(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+    updatePath(pageId);
+}
+
+function updatePath(pageId) {
+    const container = document.getElementById("path");
+    container.innerHTML = "";
+
+    paths[pageId].forEach((name, index) => {
+        const span = document.createElement("span");
+        span.textContent = name;
+        span.className = "crumb";
+        span.onclick = () => breadcrumbNavigate(index, pageId);
+        container.appendChild(span);
+
+        if (index < paths[pageId].length - 1) {
+            const sep = document.createElement("span");
+            sep.textContent = "›";
+            sep.className = "separator";
+            container.appendChild(sep);
+        }
+    });
+}
+
+function breadcrumbNavigate(level, currentPage) {
+    const trail = paths[currentPage];
+    const targetName = trail[level];
+
+    for (let key in paths) {
+        if (paths[key].length === level + 1 && paths[key][level] === targetName) {
+            goTo(key);
+            break;
+        }
+    }
+}
+
+function openPDF(fileName) {
+    window.open(fileName, '_blank');
+}
+
+updatePath("home");
+</script>
+
+</body>
+</html>
