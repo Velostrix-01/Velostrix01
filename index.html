@@ -273,7 +273,7 @@ function closeModal(){
 
 </div>
   
-  <div style="margin:30px;" class="div" id="maths">
+  <div style="margin:30px;" class="div" id="physics">
 <style>
 html{scroll-behavior:smooth}
 *{box-sizing:border-box;font-family:Inter,Arial,sans-serif}
@@ -487,7 +487,7 @@ function closeModal(){
 
 </div>
   
-  <div style="margin:30px;" class="div" id="maths">
+  <div style="margin:30px;" class="div" id="biology">
 <style>
 html{scroll-behavior:smooth}
 *{box-sizing:border-box;font-family:Inter,Arial,sans-serif}
@@ -1205,14 +1205,123 @@ Academic Support for <span class="gradient-text">Every Major Subject
 MIQs • PYQs • Notes • Summaries • Assignments • More Coming Soon
     
 </p>
-<button class="pulse-btn"
-  onclick="window.location.href='#services'" class="button">
-Explore Services
-</button>
-  <button style="border-radius:0px 20px 20px 0px;" class="pulse-btn"
-  onclick="window.location.href='#study-materials'" class="button">
-Explore Materials
+<style>
+.button {
+  position: relative;
+  cursor: pointer;
+  padding: 8px 26px;
+  min-height: 3em;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  color: white;
+  background: rgba(15,15,18,0.92);
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+
+
+.button.left {
+  --accent: 190 95% 55%;
+  border-radius: 14px 0 0 14px;
+}
+
+.button.left::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: inherit;
+  background: linear-gradient(
+    to right,
+    hsl(var(--accent)),
+    transparent 70%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+}
+
+/* RIGHT ACCENT BUTTON */
+.button.right {
+  --accent: 280 90% 60%;
+  border-radius: 0 14px 14px 0;
+}
+
+.button.right::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: inherit;
+  background: linear-gradient(
+    to left,
+    hsl(var(--accent)),
+    transparent 70%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+}
+
+/* glow aura */
+.button::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: inherit;
+  filter: blur(14px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.button.left::after {
+  background: hsl(190 95% 55% / 0.25);
+}
+
+.button.right::after {
+  background: hsl(280 90% 60% / 0.25);
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button:hover::after {
+  opacity: 1;
+}
+
+.button:active {
+  transform: scale(0.96);
+}
+
+.button svg {
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+}
+
+.btn-group {
+  display: inline-flex;
+}
+</style>
+
+<div class="btn-group">
+  <button class="button left" onclick="window.location.href='#services'">
+    <svg viewBox="0 0 16 16" fill="currentColor">
+      <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/>
+    </svg>
+    Explore Services
   </button>
+
+  <button class="button right" onclick="window.location.href='#study-materials'">
+    Explore Materials
+  </button>
+</div>
 </div>
 
 
