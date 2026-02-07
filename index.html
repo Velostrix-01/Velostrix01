@@ -79,6 +79,51 @@ body{
   z-index: 1;
 }
       
+
+
+#mobile-menu.open{
+  transform: translateX(0);
+}
+      
+#mobile-menu::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: radial-gradient(circle at top right, rgba(56,189,248,0.08), transparent 60%);
+  pointer-events:none;
+}
+      
+#mobile-menu a{
+  display:block;
+  padding:14px 18px;
+  border-radius:10px;
+  color:#e2e8f0;
+  font-size:18px;
+  transition:all .25s ease;
+}
+
+#mobile-menu a:hover{
+  background: rgba(56,189,248,0.12);
+  color:#38bdf8;
+  transform: translateX(6px);
+}
+      
+      #mobile-menu a.active{
+  background: rgba(56,189,248,0.18);
+  color:#38bdf8;
+  box-shadow: inset 3px 0 0 #38bdf8;
+}
+      
+#mobile-menu::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:1px;
+  background:linear-gradient(90deg, transparent, #38bdf8, transparent);
+}
+      
 .section-card, .card, .assign-table {
   background: linear-gradient(145deg, rgba(15,23,42,0.75), rgba(15,23,42,0.55));
   backdrop-filter: blur(14px);
@@ -216,7 +261,7 @@ body{
   </div>
   <div class="card-title">Most Important Questions</div>
   <div class="card-sub">High scoring concepts</div>
-  <div class="price"><span class="old">₹250</span> ₹99</div>
+  <div class="price"><span class="old">₹250</span> ₹149</div>
   <button class="btn unlock" onclick="whatsapp(event,this)">Unlock via WhatsApp</button>
 </div>
 
@@ -419,7 +464,7 @@ body{
   </div>
   <div class="card-title">Most Important Questions</div>
   <div class="card-sub">High scoring concepts</div>
-  <div class="price"><span class="old">₹250</span> ₹99</div>
+  <div class="price"><span class="old">₹250</span> ₹149</div>
   <button class="btn unlock" onclick="whatsapp(event,this)">Unlock via WhatsApp</button>
 </div>
 
@@ -620,7 +665,7 @@ body{
   </div>
   <div class="card-title">Most Important Questions</div>
   <div class="card-sub">High scoring concepts</div>
-  <div class="price"><span class="old">₹250</span> ₹99</div>
+  <div class="price"><span class="old">₹250</span> ₹149</div>
   <button class="btn unlock" onclick="whatsapp(event,this)">Unlock via WhatsApp</button>
 </div>
 
@@ -822,7 +867,7 @@ body{
   </div>
   <div class="card-title">Most Important Questions</div>
   <div class="card-sub">High scoring concepts</div>
-  <div class="price"><span class="old">₹200</span> ₹99</div>
+  <div class="price"><span class="old">₹200</span> ₹149</div>
   <button class="btn unlock" onclick="whatsapp(event,this)">Unlock via WhatsApp</button>
 </div>
 
@@ -1020,7 +1065,7 @@ body{
   <div class="card-title">Free MYQs Sample</div>
   <div class="card-sub">Try before you buy</div>
   <div class="price free">FREE</div>
-  <button class="btn view-btn" onclick="viewPDF(event,'sample-english.pdf')">View PDF</button>
+  <button class="btn view-btn" onclick="viewPDF(event,'English imp Question pdf sample.pdf')">View PDF</button>
 </div>
 
 <div class="card" data-subject="MIQs of Mathematics">
@@ -1029,7 +1074,7 @@ body{
   </div>
   <div class="card-title">Most Important Questions</div>
   <div class="card-sub">High scoring concepts</div>
-  <div class="price"><span class="old">₹250</span> ₹99</div>
+  <div class="price"><span class="old">₹250</span> ₹149</div>
   <button class="btn unlock" onclick="whatsapp(event,this)">Unlock via WhatsApp</button>
 </div>
 
@@ -1096,7 +1141,10 @@ function whatsapp(e,btn){
 <div class="div" id="main">
 <style>
 
-
+#home{
+  position: relative;
+  overflow: hidden;
+}
 .gradient-text {
     background: linear-gradient(90deg,#38bdf8,#0ea5e9,#0284c7);
     -webkit-background-clip:text;
@@ -1266,22 +1314,20 @@ function whatsapp(e,btn){
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
- .energy-wave {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            overflow: hidden;
-            line-height: 0;
-            transform: rotate(180deg);
-        }
-        
-        .energy-wave svg {
-            position: relative;
-            display: block;
-            width: calc(100% + 1.0px);
-            height: 30px;
-        }
+ .energy-wave{
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  line-height: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+       .energy-wave svg{
+  display: block;
+  width: 100%;
+  height: 70px;
+}
         
         .energy-wave .shape-fill {
             fill: rgba(30, 64, 175, 0.5);
@@ -1306,8 +1352,19 @@ function whatsapp(e,btn){
   overflow: hidden;
 }
     
-
-</style>
+.sidebar-actions a{
+  display:block;
+    width:70%;
+  margin-top:12px;
+  padding:12px;
+  border-radius:10px;
+    border:1px solid skyblue;
+  background:#000;
+  color:#000;
+  text-align:center;
+  font-weight:600;
+}
+  </style>
 
 
 
@@ -1323,14 +1380,15 @@ function whatsapp(e,btn){
             <div class="hidden md:flex space-x-8">
                 <a href="#home" class="nav-link text-white hover:text-blue-400">Home</a>
                 <a href="#services" class="nav-link text-white hover:text-blue-400">What We Handle</a>
-                <a href="#Pricing" class="nav-link text-white hover:text-blue-400">Pricing</a>
+                
                 <a href="#study-materials" class="nav-link text-white hover:text-blue-400">Study Materials</a>
+                <a href="#assignment" class="nav-link text-white hover:text-blue-400">Assignment</a>
                 <a href="#contact" class="nav-link text-white hover:text-blue-400">Contact</a>
             </div>
             
             <button id="mobile-menu-button" class="md:hidden text-white">
-                <i class="fas fa-bars text-2xl"></i>
-            </button>
+    <i id="menu-icon" class="fas fa-bars text-2xl"></i>
+</button>
         </div>
     </nav>
 
@@ -1339,13 +1397,15 @@ function whatsapp(e,btn){
         <div style="text-align:left;" class="flex flex-col space-y-6 text-center">
             <a href="#home" class="text-white text-2xl py-2">Home</a>
             <a href="#services" class="text-white text-2xl py-2">What We Handle</a>
-            <a href="#Pricing" class="text-white text-2xl py-2">Pricing</a>
+            
             <a href="#study-materials" class="text-white text-2xl py-2">Study Materials</a>
+            <a href="#assignment" class="text-white text-2xl py-2">Assignment</a>
             <a href="#contact" class="text-white text-2xl py-2">Contact</a>
         </div>
+       
     </div>
 
-
+   
 
 <style>
 .pulse-btn {
@@ -1436,8 +1496,9 @@ MIQs • PYQs • Notes • Summaries • Assignments • More Coming Soon
 
 /* RIGHT ACCENT BUTTON */
 .button.right {
-  --accent: #0284c7;
-  border-radius: 0 14px 14px 0px;
+  --accent: 190 95% 55%; /* same blue glow tone */
+  border-radius: 14px 0px 0px 14px;
+    
 }
 
 .button.right::before {
@@ -1446,14 +1507,27 @@ MIQs • PYQs • Notes • Summaries • Assignments • More Coming Soon
   inset: 0;
   padding: 2px;
   border-radius: inherit;
+    
   background: linear-gradient(
-    to left,
-    var(--accent),
+    to right,
+    hsl(var(--accent)),
     transparent 70%
   );
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
           mask-composite: exclude;
+}
+
+.button.right::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: inherit;
+  filter: blur(14px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+  background: hsl(190 95% 55% / 0.25);
 }
 
 /* glow aura */
@@ -1518,12 +1592,13 @@ MIQs • PYQs • Notes • Summaries • Assignments • More Coming Soon
 <img src="hero.png" class="rounded-xl shadow-xl">
 </div>
 </div>
-</section>
- <div class="energy-wave">
+    <div class="energy-wave">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                 <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
             </svg>
         </div>
+</section>
+ 
 
 
 <section id="services" class="py-20 bg-slate-900 reveal">
@@ -1562,7 +1637,7 @@ What <span class="gradient-text">We Handle</span>
 </div>
 </section>
  
- <section class="reveal">    
+ <section id="study-materials" class="reveal">    
 <style>    
     
 
@@ -1660,24 +1735,33 @@ What <span class="gradient-text">We Handle</span>
 }
 
 </style>    
-
-<div id="study-materials" class="container7 border border-slate-800">    
+     
+        
+<div class="container7 border border-slate-800">    
    <h2 style="margin-top:40px;" class="text-4xl font-bold text-center mb-4">
 Study<span class="gradient-text"> Materials</span>
     
 </h2>
- <!-- EDITED BY TAKLA RAZI -->
 
-  <a href="#english">    
+<a href="#maths">    
   <div class="section-card">    
-    <div class="section-title">English</div>    
+    <div class="section-title">Mathematics</div>    
     <div class="section-desc">    
-      English is the key to unlocking new worlds through literature and enhancing communication skills.    
+      Core subject focused on numbers, logic, and problem solving.    
+    </div>    
+     
+  </div>    
+</a>    
+    
+<a href="#biology">    
+  <div class="section-card">    
+    <div class="section-title">Biology</div>    
+    <div class="section-desc">    
+      Study of living organisms, life processes, and human systems.    
     </div>    
     
   </div>    
-  </a>
-
+</a>    
     
 <a href="#physics">    
   <div class="section-card">    
@@ -1699,26 +1783,17 @@ Study<span class="gradient-text"> Materials</span>
   </div>    
 </a>    
 
- <a href="#maths">    
-  <div class="section-card">    
-    <div class="section-title">Mathematics</div>    
-    <div class="section-desc">    
-      Core subject focused on numbers, logic, and problem solving.    
-    </div>    
-     
-  </div>    
-</a>    
-    
-<a href="#biology">    
-  <div class="section-card">    
-    <div class="section-title">Biology</div>    
-    <div class="section-desc">    
-      Study of living organisms, life processes, and human systems.    
-    </div>    
-    
-  </div>    
-</a>    
+  <!-- EDITED BY TAKLA RAZI -->
 
+  <a href="#english">    
+  <div class="section-card">    
+    <div class="section-title">English</div>    
+    <div class="section-desc">    
+      English is the key to unlocking new worlds through literature and enhancing communication skills.    
+    </div>    
+    
+  </div>    
+  </a>
   
     <a href="Free-material.html">    
   <div class="section-card">    
@@ -1729,7 +1804,9 @@ Study<span class="gradient-text"> Materials</span>
     
   </div>    
 </a>    
+    
 </div>    
+     
 </section>
  <style>
     html, body {
@@ -2001,7 +2078,7 @@ Study<span class="gradient-text"> Materials</span>
 </style>
 
 
-<section id="assignments" class="py-24 bg-slate-950 reveal">
+<section id="assignment" class="py-24 bg-slate-950 reveal">
   <div class="max-w-7xl mx-auto px-6">
 
     <h2 class="text-4xl font-bold text-center mb-16">
@@ -2100,32 +2177,144 @@ function showSection(type) {
 function toggleGenderInfo() {
   document.getElementById("genderInfoPopup").classList.toggle("hidden");
 }
+    
+    
+ 
 </script>
+    <style>
+    .contact-section{
+  padding: 120px 20px;
+  background: linear-gradient(180deg,#06090f,#0b1120);
+  position: relative;
+}
 
-             <div>
-                    <div id="contact" style="margin:20px;" class="bg-slate-900/50 border border-slate-800 rounded-xl p-6 mb-8">
-                        <h3 class="text-2xl font-bold mb-6 text-white">Contact Information</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-start">
-                                <div class="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center text-blue-500 mr-4 mt-1">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-lg font-medium text-white mb-1">Email</h4>
-                                    <a href="mailto:Velostrix@gmail.com" class="text-sm text-blue-400 hover:text-blue-300">Velostrix@gmail.com</a>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center text-blue-500 mr-4 mt-1">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-lg font-medium text-white mb-1">Location</h4>
-                                    <p class="text-sm text-slate-300">CSN (Aurangabad), Maharashtra</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+.contact-card{
+  max-width: 1000px;
+  margin: auto;
+  padding: 50px;
+  border-radius: 22px;
+  background: linear-gradient(145deg,#0f172a,#0b1220);
+  border: 1px solid rgba(56,189,248,0.15);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+}
+
+.contact-card h2{
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.contact-card h2 span{
+  color:#38bdf8;
+}
+
+.contact-sub{
+  text-align:center;
+  color:#94a3b8;
+  margin-bottom:40px;
+}
+
+.contact-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap:25px;
+}
+
+.contact-item{
+  display:flex;
+  gap:15px;
+  align-items:flex-start;
+  padding:18px;
+  border-radius:14px;
+  background: rgba(15,23,42,0.6);
+  border:1px solid rgba(56,189,248,0.08);
+  transition:.3s;
+}
+
+.contact-item:hover{
+  transform:translateY(-6px);
+  border-color:#38bdf8;
+  box-shadow:0 10px 25px rgba(56,189,248,0.15);
+}
+
+.contact-item .icon{
+  width:42px;
+  height:42px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(56,189,248,0.15);
+  color:#38bdf8;
+  font-size:18px;
+}
+
+.contact-item h4{
+  margin:0;
+  font-size:16px;
+  color:#e2e8f0;
+}
+
+.contact-item a{
+  color:#38bdf8;
+  text-decoration:none;
+  font-size:14px;
+}
+
+.contact-item p{
+  margin:0;
+  font-size:14px;
+  color:#94a3b8;
+}
+    </style>
+             <section id="contact" class="contact-section">
+  <div class="contact-card">
+
+    <h2>Get In <span>Touch</span></h2>
+    <p class="contact-sub">Have questions or need academic help? We’re just one message away.</p>
+
+    <div class="contact-grid">
+
+      <!-- Email -->
+      <div class="contact-item" onclick="window.location.href='mailto:Velostrix@gmail.com'">
+        <div class="icon"><i class="fas fa-envelope"></i></div>
+        <div>
+          <h4>Email</h4>
+          <p>Velostrix@gmail.com</p>
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div class="contact-item" onclick="window.location.href='tel:+917745057895'">
+        <div class="icon"><i class="fas fa-phone"></i></div>
+        <div>
+          <h4>Phone</h4>
+          <p>+91 77450 57895</p>
+        </div>
+      </div>
+
+      <!-- WhatsApp -->
+      <div class="contact-item" onclick="window.open('https://wa.me/917745057895','_blank')">
+        <div class="icon"><i class="fab fa-whatsapp"></i></div>
+        <div>
+          <h4>WhatsApp</h4>
+          <p>Chat Instantly</p>
+        </div>
+      </div>
+
+      <!-- Location -->
+      <div class="contact-item" onclick="window.open('https://maps.google.com/?q=Aurangabad,Maharashtra','_blank')">
+        <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+        <div>
+          <h4>Location</h4>
+          <p>Aurangabad, Maharashtra</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
                     
  
 
@@ -2198,12 +2387,10 @@ POWERED BY DYNASTRIX
                 </div>
             </div>
         </div>
-        <a href="https://wa.me/7745057895" target="_blank"
-   class="fixed bottom-6 right-6 bg-green-500 w-14 h-14 rounded-full flex items-center justify-center text-white text-2xl shadow-lg hover:scale-110 transition">
-   <i class="fab fa-whatsapp"></i>
+      
 </a>
 
-<button id="topBtn" style="bottom:90px; border:solid grey 1px; background-color:#000;" class="fixed right-6  rounded-full text-white hidden">
+<button id="topBtn" style="bottom:70px; border:solid grey 1px; background-color:#000;" class="fixed right-6  rounded-full text-white hidden">
 <i style="padding:12px 20px 12px 20px; font-size: 20px;" class="fas fa-arrow-up"></i>
 </button>
 
@@ -2234,11 +2421,28 @@ topBtn.onclick = () => window.scrollTo({top:0, behavior:"smooth"});
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('open');
-        });
+        const menuIcon = document.getElementById("menu-icon");
+
+mobileMenuButton.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+
+    if(mobileMenu.classList.contains("open")){
+        menuIcon.classList.remove("fa-bars");
+        menuIcon.classList.add("fa-xmark");
+    } else {
+        menuIcon.classList.remove("fa-xmark");
+        menuIcon.classList.add("fa-bars");
+    }
+});
         
-        
+        mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        menuIcon.classList.remove("fa-xmark");
+        menuIcon.classList.add("fa-bars");
+    });
+});
+                 
         const mobileLinks = document.querySelectorAll('#mobile-menu a');
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -2325,6 +2529,37 @@ window.addEventListener("scroll", () => {
     }
   });
 });
+                 
+ const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll("#mobile-menu a");
+
+window.addEventListener("scroll", () => {
+  let current = "";
+  sections.forEach(sec => {
+    const top = sec.offsetTop - 120;
+    if (pageYOffset >= top) current = sec.getAttribute("id");
+  });
+
+  navLinks.forEach(a => {
+    a.classList.remove("active");
+    if (a.getAttribute("href") === "#" + current) {
+      a.classList.add("active");
+    }
+  });
+});
+                 
+let startX = 0;
+
+mobileMenu.addEventListener("touchstart", e=>{
+  startX = e.touches[0].clientX;
+});
+
+mobileMenu.addEventListener("touchmove", e=>{
+  let diff = e.touches[0].clientX - startX;
+  if(diff > 80){
+    mobileMenu.classList.remove("open");
+  }
+});
 </script>
 </div>
                   <div class="modal" id="previewModal">
@@ -2351,6 +2586,10 @@ function closeModal(){
  document.getElementById("previewModal").style.display = "none";
  document.getElementById("pdfFrame").src = "";
 }
+                 
+ window.addEventListener("offline", ()=>{
+  alert("You're offline. Some content may not load.");
+});
 </script>
 </body>
 </html>
