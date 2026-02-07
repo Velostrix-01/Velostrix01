@@ -57,7 +57,12 @@ body {
 }
 </style>
 </head>
-
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/sw.js")
+    .then(() => console.log("Service Worker Registered"));
+}
+</script>
 <body>
   <div style="margin:30px;" class="div" id="maths">
 <style>
