@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms & Conditions | Velostrix</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-black text-slate-300">
+
+<section class="max-w-4xl mx-auto px-6 py-20">
+
+<h1 class="text-4xl font-bold mb-8 text-white">
+Terms & <span class="text-blue-400">Conditions</span>
+</h1>
+
+<p class="mb-6">
+Effective Date: January 2026  
+By accessing or using Velostrix, you agree to comply with the following terms.
+</p>
+
+<h2 class="text-xl font-semibold text-white mt-8 mb-3">1. Service Scope</h2>
+<p>
+Velostrix provides digital academic resources including notes, MIQs, PYQs, revision sheets, summaries, assignments, and project assistance strictly for educational support.
+</p>
+
+<h2 class="text-xl font-semibold text-white mt-8 mb-3">2. Digital Product Policy</h2>
+<p>
+All materials are delivered digitally. Once shared or accessed, digital products are considered delivered and are generally non-refundable unless technical failure occurs.
+</p>
+
+<h2 class="text-xl font-semibold text-white mt-8 mb-3">3. Intellectual Property</h2>
+<p>
+All study materials are owned by Velostrix. Unauthorized reproduction, resale, distribution, or public sharing is strictly prohibited.
+</p>
+
+<h2 class="text-xl font-semibold text-white mt-8 mb-3">4. Payment Terms</h2>
+<p>
+Payments are processed via agreed communication channels. Access is granted after payment confirmation.
+</p>
+
+<h2 class="text-xl font-semibold text-white mt-8 mb-3">5. Academic Disclaimer</h2>
+<p>
+Velostrix provides support material. We do not guarantee specific exam scores or academic outcomes.
+</p>
+
+<h2 class="text-xl font-semibold text-white mt-8 mb-3">6. User Responsibility</h2>
+<p>
+Users are responsible for ensuring the material is used ethically and within academic guidelines.
+</p>
+
+<h2 class="text-xl font-semibold text-white mt-8 mb-3">7. Limitation of Liability</h2>
+<p>
+Velostrix shall not be held liable for indirect losses, exam results, or misuse of materials.
+</p>
+
+<h2 class="text-xl font-semibold text-white mt-8 mb-3">8. Governing Law</h2>
+<p>
+These terms are governed by the laws of India. Any disputes shall fall under jurisdiction of Maharashtra, India.
+</p>
+
+<h2 class="text-xl font-semibold text-white mt-8 mb-3">9. Modifications</h2>
+<p>
+We reserve the right to update these Terms at any time.
+</p>
+
+<div class="mt-12">
+<a href="index.html" class="text-blue-400 hover:underline">← Back to Home</a>
+</div>
+
+</section>
+</body>
+</html>
