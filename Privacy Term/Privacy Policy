@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy | Velostrix</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-black text-slate-300">
+
+<section class="max-w-4xl mx-auto px-6 py-20">
+
+<h1 class="text-4xl font-bold mb-8 text-white">
+Privacy <span class="text-blue-400">Policy</span>
+</h1>
+
+<p class="mb-6">
+Effective Date: January 2026  
+Velostrix (“we”, “our”, “us”) respects your privacy and is committed to protecting your personal information.
+</p>
+
+<h2 class="text-xl font-semibold text-white mt-8 mb-3">1. Information We Collect</h2>
+<p>We may collect the following types of information:</p>
+<ul class="list-disc pl-6 space-y-2 mt-3">
+<li>Name, email address, and phone number</li>
+<li>Academic preferences (subjects, class level)</li>
+<li>Messages sent via WhatsApp or contact forms</li>
+<li>Technical data such as browser type and device information</li>
+<li>Basic analytics data through third-party tools (e.g., Google Analytics)</li>
+</ul>
+
+<h2 class="text-xl font-semibold text-white mt-8 mb-3">2. How We Use Your Information</h2>
+<ul class="list-disc pl-6 space-y-2">
+<li>To deliver study materials and academic services</li>
+<li>To respond to your inquiries</li>
+<li>To process requests and confirmations</li>
+<li>To improve user experience and platform performance</li></ul>
+
+<h2 class="text-xl font-semibold text-white mt-8 mb-3">3. Cookies & Analytics</h2>
+<p>
+Our website may use cookies and analytics tools to understand user behavior and improve functionality. These tools collect non-sensitive technical information and do not access personal files on your device.
+</p>
+
+<h2 class="text-xl font-semibold text-white mt-8 mb-3">4. Data Sharing</h2>
+<p>
+We do not sell or rent your personal information. Your data may only be shared with service providers strictly for operational purposes (e.g., communication platforms).
+</p>
+
+<h2 class="text-xl font-semibold text-white mt-8 mb-3">5. Data Security</h2>
+<p>
+We implement reasonable technical and administrative safeguards to protect your data. However, no digital transmission method guarantees absolute security.
+</p>
+
+<h2 class="text-xl font-semibold text-white mt-8 mb-3">6. Data Retention</h2>
+<p>
+We retain personal information only for as long as necessary to fulfill the purposes outlined in this policy.
+</p>
+
+<h2 class="text-xl font-semibold text-white mt-8 mb-3">7. Your Rights</h2>
+<p>
+You may request access, correction, or deletion of your personal data by contacting us directly.
+</p>
+
+<h2 class="text-xl font-semibold text-white mt-8 mb-3">8. Third-Party Links</h2>
+<p>
+Our platform may contain links to external websites. We are not responsible for their content or privacy practices.
+</p>
+
+<h2 class="text-xl font-semibold text-white mt-8 mb-3">9. Policy Updates</h2>
+<p>
+We may update this Privacy Policy at any time. Continued use of the website implies acceptance of changes.
+</p>
+
+<h2 class="text-xl font-semibold text-white mt-8 mb-3">10. Contact Information</h2>
+<p>
+Velostrix<br>
+Email: Velostrix@gmail.com<br>
+Location: Aurangabad, Maharashtra, India
+</p>
+
+<div class="mt-12">
+<a href="index.html" class="text-blue-400 hover:underline">← Back to Home</a>
+</div>
+
+</section>
+</body>
+</html>
