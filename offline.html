@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Offline | Velostrix</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
 <style>
 body{
   margin:0;
@@ -11,39 +14,75 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  background:#0b1120;
-  color:#fff;
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color:#e2e8f0;
   font-family:Poppins, sans-serif;
   text-align:center;
 }
+
 .box{
-  max-width:400px;
+  max-width:420px;
+  padding:40px;
+  border-radius:16px;
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
 }
+
 h1{
-  font-size:28px;
+  font-size:30px;
   margin-bottom:10px;
   color:#38bdf8;
+  letter-spacing:0.5px;
 }
+
 p{
-  opacity:.7;
-  margin-bottom:20px;
+  opacity:.65;
+  margin-bottom:25px;
+  line-height:1.5;
 }
+
 button{
-  padding:12px 22px;
+  padding:12px 26px;
   border:none;
-  border-radius:8px;
-  background:#38bdf8;
-  color:#000;
+  border-radius:10px;
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+  color:#020617;
   font-weight:600;
   cursor:pointer;
+  transition: all .25s ease;
+}
+
+button:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(56,189,248,0.4);
+}
+
+.status{
+  font-size:12px;
+  opacity:.4;
+  margin-top:15px;
 }
 </style>
 </head>
+
 <body>
+
 <div class="box">
-  <h1>No Internet Connection</h1>
-  <p>Lagta hai internet break pe hai. Connection aate hi page reload ho jayega.</p>
-  <button onclick="location.reload()">Retry</button>
+  <h1>You're Offline</h1>
+  <p>Your connection seems to be unavailable right now.  
+  We’ll automatically reconnect once you're back online.</p>
+
+  <button onclick="location.reload()">Reconnect</button>
+
+  <div class="status">Velostrix System Status</div>
 </div>
+
+<script>
+window.addEventListener('online', () => {
+  location.reload();
+});
+</script>
+
 </body>
 </html>
