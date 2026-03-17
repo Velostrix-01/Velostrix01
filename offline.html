@@ -1,88 +1,492 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Offline | Velostrix</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Velostrix - Offline Study Kit</title>
+  <link rel="manifest" href="/manifest.json" />
+  <style>
+    :root{
+      --bg:#070816;
+      --card:#07122a;
+      --accent:#8a1e49; /* Rozel-ish */
+      --muted:#b8c0cc;
+      --glass: rgba(255,255,255,0.03);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: radial-gradient(circle at 10% 10%, #081023, #02040a);
+      color:#e6eef8;
+      font-family: Inter, Poppins, system-ui, sans-serif;
+      padding:20px;
+    }
+    .shell{
+      width:100%;
+      max-width:980px;
+      border-radius:14px;
+      padding:22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:18px;
+    }
+    header{grid-column:1 / -1; display:flex; align-items:center; justify-content:space-between; gap:12px}
+    .brand{display:flex; align-items:center; gap:12px}
+    .logo{
+      width:60px; height:60px; border-radius:12px;
+      background: linear-gradient(135deg,#8a1e49,#220021);
+      display:flex; align-items:center; justify-content:center; font-weight:700;
+      box-shadow: 0 6px 18px rgba(138,30,73,0.25);
+    }
+    h1{font-size:18px; margin:0}
+    p.lead{margin:0; color:var(--muted); font-size:13px}
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    .main{
+      display:flex; flex-direction:column; gap:12px;
+    }
+    .card{
+      background:var(--card);
+      padding:14px;
+      border-radius:12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    }
+    .tools{display:flex; gap:10px; flex-wrap:wrap}
+    button, .btn{
+      border:0; background:var(--accent); color:#fff; padding:10px 12px; border-radius:10px; cursor:pointer;
+      font-weight:600; letter-spacing:0.2px;
+    }
+    .muted{color:var(--muted); font-size:13px}
+    .right{
+      display:flex; flex-direction:column; gap:12px;
+      align-items:stretch;
+    }
 
-<style>
-body{
-  margin:0;
-  height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background: radial-gradient(circle at top, #0f172a, #020617);
-  color:#e2e8f0;
-  font-family:Poppins, sans-serif;
-  text-align:center;
-}
+    /* Flashcards/Quiz UI */
+    .flash{display:flex; flex-direction:column; gap:8px; align-items:flex-start}
+    .flash .q{font-weight:700}
+    .controls{display:flex; gap:8px; margin-top:6px}
 
-.box{
-  max-width:420px;
-  padding:40px;
-  border-radius:16px;
-  background: rgba(255,255,255,0.03);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-}
+    /* simple inputs */
+    input, textarea, select{width:100%; padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.03); background:transparent; color:inherit}
+    textarea{min-height:80px; resize:vertical}
+    footer{grid-column:1 / -1; display:flex; gap:8px; align-items:center; justify-content:space-between; margin-top:4px; color:var(--muted); font-size:13px}
+    .status{font-size:12px; opacity:0.8}
 
-h1{
-  font-size:30px;
-  margin-bottom:10px;
-  color:#38bdf8;
-  letter-spacing:0.5px;
-}
-
-p{
-  opacity:.65;
-  margin-bottom:25px;
-  line-height:1.5;
-}
-
-button{
-  padding:12px 26px;
-  border:none;
-  border-radius:10px;
-  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-  color:#020617;
-  font-weight:600;
-  cursor:pointer;
-  transition: all .25s ease;
-}
-
-button:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(56,189,248,0.4);
-}
-
-.status{
-  font-size:12px;
-  opacity:.4;
-  margin-top:15px;
-}
-</style>
+    @media (max-width:900px){
+      .shell{grid-template-columns: 1fr; padding:14px}
+      .right{order:2}
+    }
+  </style>
 </head>
-
 <body>
+  <div class="shell">
+    <header>
+      <div class="brand">
+        <div class="logo">V</div>
+        <div>
+          <h1>Velostrix - Offline Study Kit</h1>
+          <p class="lead">No net? No waste. Study, practice, and build muscle memory offline.</p>
+        </div>
+      </div>
 
-<div class="box">
-  <h1>You're Offline</h1>
-  <p>Your connection seems to be unavailable right now.  
-  We’ll automatically reconnect once you're back online.</p>
+      <div class="status" id="conn">Status: <strong id="onlineState">Offline</strong></div>
+    </header>
 
-  <button onclick="location.reload()">Reconnect</button>
+    <main class="main">
+      <!-- 1. Quick Actions -->
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center">
+          <div>
+            <div class="muted">Quick Actions</div>
+            <div style="font-weight:700">Stay productive without internet</div>
+          </div>
+          <div style="text-align:right">
+            <button id="reconnectBtn" class="btn">Try Reconnect</button>
+          </div>
+        </div>
 
-  <div class="status">Velostrix System Status</div>
-</div>
+        <div style="margin-top:12px" class="tools">
+          <button id="openFlash">Flashcards</button>
+          <button id="openQuiz">Mini Quiz</button>
+          <button id="openTimer">Pomodoro</button>
+          <button id="openNotes">Notes</button>
+          <button id="openTools">Calculator</button>
+          <button id="motivate">Motivate Me</button>
+        </div>
+      </div>
+
+      <!-- 2. Flashcards / Quiz / Timer area -->
+      <div class="card" id="workspace">
+        <div id="workspaceInner">
+          <div class="muted">Pick a tool from Quick Actions</div>
+        </div>
+      </div>
+
+      <!-- 3. Seeded Micro-lessons -->
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center">
+          <div>
+            <div class="muted">Micro-lessons</div>
+            <div style="font-weight:700">Short lessons preloaded for offline</div>
+          </div>
+          <div style="text-align:right">
+            <small class="muted">Tap to open</small>
+          </div>
+        </div>
+
+        <div id="lessonsList" style="margin-top:12px; display:flex; gap:8px; flex-direction:column"></div>
+      </div>
+
+    </main>
+
+    <aside class="right">
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center">
+          <div>
+            <div class="muted">Pomodoro</div>
+            <div style="font-weight:700">Focus timer</div>
+          </div>
+          <div id="miniTimer">25:00</div>
+        </div>
+        <div style="margin-top:10px; display:flex; gap:8px;">
+          <button id="startPom">Start</button>
+          <button id="pausePom" style="background:#506070">Pause</button>
+          <button id="resetPom" style="background:#2b2b33">Reset</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="muted">Quick Tools</div>
+        <div style="margin-top:8px; display:flex; gap:8px; flex-direction:column">
+          <button id="openCalc">Calculator</button>
+          <button id="openConv">Unit Convert</button>
+          <button id="openTTS">Read Quote</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="muted">Storage</div>
+        <div style="margin-top:8px; display:flex; gap:8px; flex-direction:column">
+          <button id="exportNotes">Export Notes</button>
+          <button id="clearAll" style="background:#881e3d">Clear Data</button>
+        </div>
+      </div>
+    </aside>
+
+    <footer>
+      <div class="muted">Velostrix offline suite - built for students & makers</div>
+      <div class="muted">Version 1.0 • Local-first</div>
+    </footer>
+  </div>
 
 <script>
-window.addEventListener('online', () => {
-  location.reload();
-});
-</script>
+/* -------------------------
+   Simple client-side data
+   Prepopulated content that will be cached by service worker
+   ------------------------- */
+const seed = {
+  flashcards: [
+    {id:1, q:"What is Newton's first law?", a:"Object in motion stays in motion unless acted upon by net force."},
+    {id:2, q:"HTML stands for?", a:"HyperText Markup Language."},
+    {id:3, q:"Define 'Polymorphism' in OOP", a:"Ability of objects to take multiple forms — methods behave differently."}
+  ],
+  lessons: [
+    {id:'l1', title:"5-minute Memory Hack", body:"Use spaced recall: study 5 mins, recall after 10 mins, then after 1 hour. Repeat."},
+    {id:'l2', title:"Crash Course: Git Commands", body:"git init, git add ., git commit -m 'msg', git push origin main."},
+    {id:'l3', title:"Quick Formula: Area circle", body:"Area = πr²"}
+  ],
+  quiz: [
+    {q:"2 + 2 * 3 = ?", choices:["8","12","10","6"], ans: "8"},
+    {q:"Which tag for paragraph in HTML?", choices:["<p>","<para>","<div>","<text>"], ans:"<p>"}
+  ],
+  quotes: [
+    "Start small. Start now.",
+    "Discipline beats motivation every time.",
+    "Progress, not perfection."
+  ]
+};
 
+/* -------------------------
+   Local storage wrappers
+   ------------------------- */
+const DB = {
+  notesKey: 'velostrix_notes_v1',
+  saveNote(text){
+    const arr = JSON.parse(localStorage.getItem(this.notesKey) || "[]");
+    arr.push({id:Date.now(), text});
+    localStorage.setItem(this.notesKey, JSON.stringify(arr));
+    return arr;
+  },
+  getNotes(){
+    return JSON.parse(localStorage.getItem(this.notesKey) || "[]");
+  },
+  clearAll(){
+    localStorage.removeItem(this.notesKey);
+  }
+}
+
+/* -------------------------
+   UI logic: workspace rendering
+   ------------------------- */
+const workspace = document.getElementById('workspaceInner');
+const lessonsList = document.getElementById('lessonsList');
+
+function renderLessons(){
+  lessonsList.innerHTML = '';
+  seed.lessons.forEach(l=>{
+    const div = document.createElement('div');
+    div.style.padding='10px';
+    div.style.borderRadius='8px';
+    div.style.background='linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02))';
+    div.style.cursor='pointer';
+    div.innerHTML = `<div style="font-weight:700">${l.title}</div><div class="muted" style="font-size:13px">${l.body.slice(0,80)}...</div>`;
+    div.onclick = () => openLesson(l);
+    lessonsList.appendChild(div);
+  })
+}
+renderLessons();
+
+function openLesson(l){
+  workspace.innerHTML = `
+    <div style="display:flex; flex-direction:column; gap:10px">
+      <div style="font-weight:800">${l.title}</div>
+      <div class="muted">${l.body}</div>
+      <div style="display:flex; gap:8px">
+        <button id="ttsLesson">Listen</button>
+        <button id="saveNoteFromLesson">Save Note</button>
+      </div>
+    </div>
+  `;
+  document.getElementById('ttsLesson').onclick = ()=> speakText(l.title + ". " + l.body);
+  document.getElementById('saveNoteFromLesson').onclick = ()=>{
+    DB.saveNote(l.title + " - " + l.body);
+    alert('Saved to notes');
+  }
+}
+
+/* Flashcards */
+document.getElementById('openFlash').onclick = ()=>{
+  let idx=0;
+  workspace.innerHTML = `
+    <div class="flash">
+      <div class="q" id="fcQ"></div>
+      <div class="muted" id="fcA" style="display:none"></div>
+      <div class="controls">
+        <button id="showA">Show Answer</button>
+        <button id="nextF">Next</button>
+        <button id="saveF">Save to Notes</button>
+      </div>
+    </div>
+  `;
+  const fcQ = document.getElementById('fcQ'), fcA = document.getElementById('fcA');
+  function show(){
+    const f = seed.flashcards[idx % seed.flashcards.length];
+    fcQ.textContent = f.q;
+    fcA.textContent = f.a;
+    fcA.style.display='none';
+  }
+  show();
+  document.getElementById('showA').onclick = ()=> fcA.style.display='block';
+  document.getElementById('nextF').onclick = ()=> { idx++; show(); }
+  document.getElementById('saveF').onclick = ()=> {
+    const cur = seed.flashcards[idx % seed.flashcards.length];
+    DB.saveNote(cur.q + " - " + cur.a);
+    alert('Saved flashcard to notes');
+  }
+}
+
+/* Mini Quiz */
+document.getElementById('openQuiz').onclick = ()=>{
+  let i=0, score=0;
+  function renderQ(){
+    const q = seed.quiz[i];
+    workspace.innerHTML = `
+      <div>
+        <div style="font-weight:800">Q${i+1}. ${q.q}</div>
+        <div style="margin-top:10px; display:flex; gap:8px; flex-direction:column">
+          ${q.choices.map((c,idx)=>`<button class="choice" data-val="${c}">${c}</button>`).join('')}
+        </div>
+        <div style="margin-top:12px" id="qstat"></div>
+      </div>
+    `;
+    document.querySelectorAll('.choice').forEach(btn=>{
+      btn.onclick = e=>{
+        const val = e.target.dataset.val;
+        const ok = val === q.ans;
+        if(ok) score++;
+        document.getElementById('qstat').textContent = ok ? 'Correct!' : ('Wrong. Answer: ' + q.ans);
+        setTimeout(()=>{ i++; if(i<seed.quiz.length) renderQ(); else finish(); }, 800);
+      }
+    })
+  }
+  function finish(){ workspace.innerHTML = `<div style="font-weight:800">Done. Score ${score} / ${seed.quiz.length}</div>`; }
+  renderQ();
+}
+
+/* Pomodoro */
+let pomTimer = {timer:null, total:25*60, left:25*60, running:false};
+const miniTimer = document.getElementById('miniTimer');
+function formatTime(s){ const m = Math.floor(s/60); const sec = s%60; return `${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}` }
+function tickPom(){
+  if(!pomTimer.running) return;
+  pomTimer.left--;
+  miniTimer.textContent = formatTime(pomTimer.left);
+  if(pomTimer.left<=0){ clearInterval(pomTimer.timer); pomTimer.running=false; speakText('Pomodoro complete. Take a break'); }
+}
+document.getElementById('startPom').onclick = ()=>{
+  if(pomTimer.running) return;
+  pomTimer.running=true;
+  pomTimer.timer = setInterval(tickPom,1000);
+}
+document.getElementById('pausePom').onclick = ()=> {
+  if(pomTimer.running){ clearInterval(pomTimer.timer); pomTimer.running=false; }
+}
+document.getElementById('resetPom').onclick = ()=> {
+  clearInterval(pomTimer.timer); pomTimer.running=false; pomTimer.left=pomTimer.total; miniTimer.textContent = formatTime(pomTimer.left);
+}
+
+/* Notes */
+document.getElementById('openNotes').onclick = ()=>{
+  const notes = DB.getNotes();
+  workspace.innerHTML = `
+    <div style="display:flex; flex-direction:column; gap:8px">
+      <div style="font-weight:800">Notes</div>
+      <textarea id="noteText" placeholder="Write a quick note..."></textarea>
+      <div style="display:flex; gap:8px">
+        <button id="saveNoteBtn">Save</button>
+        <button id="clearNotesBtn" style="background:#88314f">Clear All Notes</button>
+      </div>
+      <div style="margin-top:8px">
+        <div style="font-weight:700">Saved</div>
+        <div id="notesList" style="display:flex; flex-direction:column; gap:6px; margin-top:8px"></div>
+      </div>
+    </div>
+  `;
+  function render(){
+    const list = document.getElementById('notesList');
+    list.innerHTML = '';
+    DB.getNotes().slice().reverse().forEach(n=>{
+      const d = document.createElement('div');
+      d.style.padding='8px'; d.style.borderRadius='8px'; d.style.background='rgba(255,255,255,0.02)';
+      d.textContent = n.text;
+      list.appendChild(d);
+    })
+  }
+  render();
+  document.getElementById('saveNoteBtn').onclick = ()=>{
+    const t = document.getElementById('noteText').value.trim();
+    if(!t) return alert('Write something');
+    DB.saveNote(t);
+    document.getElementById('noteText').value='';
+    render();
+  }
+  document.getElementById('clearNotesBtn').onclick = ()=>{
+    if(confirm('Clear all notes?')){ DB.clearAll(); render(); }
+  }
+}
+
+/* Calculator (simple) */
+document.getElementById('openCalc').onclick = ()=>{
+  workspace.innerHTML = `
+    <div style="display:flex; gap:8px; flex-direction:column">
+      <div style="font-weight:800">Calculator</div>
+      <input id="calcIn" placeholder="Type expression e.g. 23*4 + (2/3)" />
+      <div style="display:flex; gap:8px">
+        <button id="calcEval">Compute</button>
+        <button id="calcClear" style="background:#2b2b33">Clear</button>
+      </div>
+      <div id="calcOut" style="margin-top:8px; font-weight:700"></div>
+    </div>
+  `;
+  document.getElementById('calcEval').onclick = ()=>{
+    const v = document.getElementById('calcIn').value;
+    try{
+      // simple safe eval using Function
+      const res = Function('"use strict";return ('+v+')')();
+      document.getElementById('calcOut').textContent = String(res);
+    }catch(e){ document.getElementById('calcOut').textContent = 'Invalid expression'; }
+  }
+  document.getElementById('calcClear').onclick = ()=>{ document.getElementById('calcIn').value=''; document.getElementById('calcOut').textContent=''; }
+}
+
+/* Unit Convert - simple */
+document.getElementById('openConv').onclick = ()=>{
+  workspace.innerHTML = `
+    <div style="display:flex; flex-direction:column; gap:8px">
+      <div style="font-weight:800">Unit Convert - km <-> miles</div>
+      <input id="convIn" placeholder="Value in km" />
+      <div style="display:flex; gap:8px">
+        <button id="k2m">km -> miles</button>
+        <button id="m2k">miles -> km</button>
+      </div>
+      <div id="convOut" style="margin-top:8px; font-weight:700"></div>
+    </div>
+  `;
+  document.getElementById('k2m').onclick = ()=>{
+    const v = parseFloat(document.getElementById('convIn').value||0);
+    document.getElementById('convOut').textContent = (v * 0.621371).toFixed(4) + ' miles';
+  }
+  document.getElementById('m2k').onclick = ()=>{
+    const v = parseFloat(document.getElementById('convIn').value||0);
+    document.getElementById('convOut').textContent = (v / 0.621371).toFixed(4) + ' km';
+  }
+}
+
+/* Motivate - TTS + quotes */
+document.getElementById('motivate').onclick = ()=> speakText(seed.quotes[Math.floor(Math.random()*seed.quotes.length)]);
+
+/* TTS wrapper */
+function speakText(text){
+  if('speechSynthesis' in window){
+    const ut = new SpeechSynthesisUtterance(text);
+    ut.rate = 1;
+    speechSynthesis.cancel();
+    speechSynthesis.speak(ut);
+  } else {
+    alert(text);
+  }
+}
+document.getElementById('openTTS').onclick = ()=> speakText(seed.quotes[Math.floor(Math.random()*seed.quotes.length)]);
+
+/* Export / Clear */
+document.getElementById('exportNotes').onclick = ()=>{
+  const data = JSON.stringify(DB.getNotes(), null, 2);
+  const blob = new Blob([data], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'velostrix-notes.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+document.getElementById('clearAll').onclick = ()=>{
+  if(confirm('Clear all local data?')){ DB.clearAll(); alert('Cleared'); }
+}
+
+/* Reconnect */
+document.getElementById('reconnectBtn').onclick = ()=> location.reload();
+
+/* Update network status */
+function updateOnlineStatus(){
+  const s = navigator.onLine ? 'Online' : 'Offline';
+  document.getElementById('onlineState').textContent = s;
+}
+window.addEventListener('online', updateOnlineStatus);
+window.addEventListener('offline', updateOnlineStatus);
+updateOnlineStatus();
+
+/* Prefill workspace with a starter lesson */
+openLesson(seed.lessons[0]);
+
+/* Register service worker */
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('/sw.js').then(()=> console.log('sw registered')).catch(e=> console.warn('sw fail', e));
+}
+</script>
 </body>
 </html>
