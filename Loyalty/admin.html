@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0d10">
+  <title>Staff Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-page">
+  <div class="page-noise"></div>
+  <header class="site-header">
+    <a class="brand" href="index.html">LOYALTY OS</a>
+    <div class="admin-user">
+      <span id="staffHotelName">Staff</span>
+      <button class="btn btn-small btn-ghost" id="logoutBtn">Sign out</button>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <section class="admin-hero">
+      <div>
+        <span class="eyebrow">Staff dashboard</span>
+        <h1>Guest loyalty,<br><em>without the paperwork.</em></h1>
+        <p>Search a member, mark an eligible visit, and redeem unlocked rewards.</p>
+      </div>
+      <button class="btn btn-primary" id="openCreateCustomer">+ New member</button>
+    </section>
+
+    <section class="stats-grid">
+      <article class="stat-card"><span>Total members</span><strong id="statCustomers">—</strong></article>
+      <article class="stat-card"><span>Visits this month</span><strong id="statVisits">—</strong></article>
+      <article class="stat-card"><span>Active rewards</span><strong id="statRewards">—</strong></article>
+      <article class="stat-card"><span>Redeemed rewards</span><strong id="statRedeemed">—</strong></article>
+    </section>
+
+    <section class="admin-content">
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <span class="eyebrow">Members</span>
+            <h2>Guest loyalty cards</h2>
+          </div>
+          <input id="searchInput" class="search" type="search" placeholder="Search name or phone">
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Guest</th>
+                <th>Visits</th>
+                <th>Reward</th>
+                <th>Card link</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="customerRows">
+              <tr><td colspan="5" class="empty-cell">Loading members…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="customerDialog" class="modal">
+    <form method="dialog" class="modal-card" id="customerForm">
+      <button type="button" class="modal-close" id="closeCreateCustomer">×</button>
+      <span class="eyebrow">Create member</span>
+      <h2>Issue a loyalty card</h2>
+      <p class="muted">Create the card once, then send the generated private link to the guest.</p>
+      <label>Name<input name="name" id="customerNameInput" required maxlength="100" placeholder="Guest name"></label>
+      <label>Phone<input name="phone" id="customerPhoneInput" required maxlength="30" placeholder="+91 98xxxxxx"></label>
+      <label>Email <span class="optional">optional</span><input name="email" id="customerEmailInput" maxlength="150" placeholder="guest@example.com"></label>
+      <div class="form-actions">
+        <button class="btn btn-primary" type="submit">Create card</button>
+      </div>
+      <div id="createdCardBox" class="created-card-box" hidden></div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

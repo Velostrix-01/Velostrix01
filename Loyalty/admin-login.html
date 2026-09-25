@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0d10">
+  <title>Staff Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-page login-page">
+  <div class="page-noise"></div>
+  <main class="login-wrap">
+    <div class="login-card">
+      <span class="eyebrow">Staff access</span>
+      <h1>Welcome back.</h1>
+      <p class="muted">Sign in to manage guest loyalty cards.</p>
+
+      <form id="loginForm">
+        <label>Email<input id="email" type="email" autocomplete="username" required placeholder="staff@hotel.com"></label>
+        <label>Password<input id="password" type="password" autocomplete="current-password" required placeholder="••••••••"></label>
+        <button class="btn btn-primary btn-full" type="submit">Sign in</button>
+      </form>
+
+      <p class="login-error" id="loginError"></p>
+      <a class="back-link" href="index.html">← Back to hotel site</a>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script>
+    const { createClient } = window.supabase;
+    const cfg = window.APP_CONFIG;
+    const client = createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY);
+
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const errorEl = document.getElementById("loginError");
+      errorEl.textContent = "";
+
+      const { error } = await client.auth.signInWithPassword({
+        email: document.getElementById("email").value.trim(),
+        password: document.getElementById("password").value
+      });
+
+      if (error) {
+        errorEl.textContent = error.message;
+        return;
+      }
+      window.location.href = "admin.html";
+    });
+  </script>
+</body>
+</html>
