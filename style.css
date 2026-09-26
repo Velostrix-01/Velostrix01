@@ -366,6 +366,12 @@ body.app-page {
   padding-top: 80px;
 }
 
+@media (max-width: 768px) {
+  body.app-page {
+    padding-top: 84px;
+  }
+}
+
 /* Mobile adjustments */
 
 @media (max-width: 760px) {
