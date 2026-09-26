@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0d10">
+  <title>Staff Dashboard — LOYALTY OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-page">
+  <div class="page-noise"></div>
+  <header class="site-header">
+    <a class="brand" href="index.html">LOYALTY OS</a>
+    <div class="admin-user">
+      <div><span class="admin-user-label">Staff venue</span><strong id="staffVenueName">Loading…</strong></div>
+      <button class="btn btn-small btn-ghost" id="logoutBtn">Sign out</button>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <section class="admin-hero">
+      <div>
+        <span class="eyebrow">Venue dashboard</span>
+        <h1>Find a guest.<br><em>Keep them coming back.</em></h1>
+        <p>Search by username, add your venue to the customer's account, then mark verified visits from the same membership.</p>
+      </div>
+      <button class="btn btn-primary" id="openSearchCustomer">+ Add loyalty</button>
+    </section>
+
+    <section class="stats-grid">
+      <article class="stat-card"><span>Members</span><strong id="statMembers">—</strong></article>
+      <article class="stat-card"><span>Visits this month</span><strong id="statVisits">—</strong></article>
+      <article class="stat-card"><span>Active rewards</span><strong id="statRewards">—</strong></article>
+      <article class="stat-card"><span>Redeemed rewards</span><strong id="statRedeemed">—</strong></article>
+    </section>
+
+    <section class="admin-content">
+      <div class="panel">
+        <div class="panel-head">
+          <div><span class="eyebrow">Loyalty members</span><h2>Customer memberships</h2></div>
+          <input id="searchInput" class="search" type="search" placeholder="Search name or username">
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Customer</th><th>Visits</th><th>Reward</th><th>Joined</th><th>Actions</th></tr></thead>
+            <tbody id="memberRows"><tr><td colspan="5" class="empty-cell">Loading members…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section admin-note-section">
+      <div class="state-panel">
+        <strong>Customer identity rule</strong>
+        <p>Staff search is username-based. Customers cannot create or add their own visits; only authenticated staff assigned to this venue can change loyalty progress.</p>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="customerSearchDialog" class="modal">
+    <form method="dialog" class="modal-card" id="customerSearchForm">
+      <button type="button" class="modal-close" id="closeSearchCustomer">×</button>
+      <span class="eyebrow">Add loyalty</span>
+      <h2>Find the customer.</h2>
+      <p class="muted">Enter their exact username. Their account stays global; this only creates a membership for your venue.</p>
+      <label>Username<input id="customerUsername" required maxlength="30" pattern="[a-z0-9]+" placeholder="username123" autocapitalize="none"></label>
+      <div class="form-actions"><button class="btn btn-primary btn-full" type="submit">Search customer</button></div>
+      <div id="customerSearchResult" hidden></div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
