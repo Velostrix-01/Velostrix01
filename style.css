@@ -427,7 +427,7 @@ body.app-page {
     translate3d(-50%, var(--header-y), 0)
     scale3d(var(--header-scale-x), var(--header-scale-y), 1);
 
-  transform-origin: center center;
+  transform-origin: top center;
 
   will-change: transform, background, border-color, box-shadow;
 
