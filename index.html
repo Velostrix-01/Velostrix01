@@ -254,44 +254,89 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="config.js"></script>
   <script src="app.js"></script>
-  <script>
+<script>
 (() => {
   const header = document.querySelector(".site-header");
+
   if (!header) return;
 
   let lastScrollY = window.scrollY;
-  let ticking = false;
+  let scrollTimer = null;
+  let releaseTimer = null;
 
-  const TOP_THRESHOLD = 30;
-  const SCROLL_THRESHOLD = 8;
+  const TOP_THRESHOLD = 10;
+  const DIRECTION_THRESHOLD = 2;
+  const RELEASE_DELAY = 130;
 
-  function updateHeader() {
-    const currentScrollY = window.scrollY;
-    const difference = currentScrollY - lastScrollY;
+  function resetHeader() {
+    header.classList.remove(
+      "header-stretch",
+      "header-compress",
+      "header-elastic-release",
+      "header-scrolled"
+    );
+  }
 
-    
+  function handleScroll() {
+    const currentScrollY = Math.max(0, window.scrollY);
+    const delta = currentScrollY - lastScrollY;
+
+    // Clear previous timers
+    clearTimeout(scrollTimer);
+    clearTimeout(releaseTimer);
+
+    header.classList.remove("header-elastic-release");
+
+    // At the very top: transparent header
     if (currentScrollY <= TOP_THRESHOLD) {
-      header.classList.remove("header-hidden");
+      resetHeader();
+      lastScrollY = currentScrollY;
+      return;
     }
-    
-    else if (difference > SCROLL_THRESHOLD) {
-      header.classList.add("header-hidden");
+
+    // Enable glass background
+    header.classList.add("header-scrolled");
+
+    // Scrolling down: stretch upward
+    if (delta > DIRECTION_THRESHOLD) {
+      header.classList.remove("header-compress");
+      header.classList.add("header-stretch");
     }
-    
-    else if (difference < -SCROLL_THRESHOLD) {
-      header.classList.remove("header-hidden");
+
+    // Scrolling up: compress downward
+    else if (delta < -DIRECTION_THRESHOLD) {
+      header.classList.remove("header-stretch");
+      header.classList.add("header-compress");
     }
 
     lastScrollY = currentScrollY;
-    ticking = false;
+
+    // Release with a spring-like effect when scrolling stops
+    scrollTimer = setTimeout(() => {
+      header.classList.remove(
+        "header-stretch",
+        "header-compress"
+      );
+
+      void header.offsetHeight;
+
+      header.classList.add("header-elastic-release");
+
+      releaseTimer = setTimeout(() => {
+        header.classList.remove("header-elastic-release");
+      }, 700);
+
+    }, RELEASE_DELAY);
   }
 
-  window.addEventListener("scroll", () => {
-    if (!ticking) {
-      window.requestAnimationFrame(updateHeader);
-      ticking = true;
-    }
-  }, { passive: true });
+  window.addEventListener("scroll", handleScroll, {
+    passive: true
+  });
+
+  // Initialize correctly if the page opens mid-scroll
+  if (window.scrollY > TOP_THRESHOLD) {
+    header.classList.add("header-scrolled");
+  }
 })();
 </script>
 </body>
