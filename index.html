@@ -255,61 +255,44 @@
   <script src="config.js"></script>
   <script src="app.js"></script>
   <script>
-
-
 (() => {
   const header = document.querySelector(".site-header");
-
   if (!header) return;
 
-  let scrollTimer;
   let lastScrollY = window.scrollY;
+  let ticking = false;
 
-  const SCROLL_THRESHOLD = 30;
-  const RELEASE_DELAY = 140;
+  const TOP_THRESHOLD = 30;
+  const SCROLL_THRESHOLD = 8;
 
-  function handleScroll() {
+  function updateHeader() {
     const currentScrollY = window.scrollY;
+    const difference = currentScrollY - lastScrollY;
 
     
-    header.classList.remove("header-release");
-
-    if (currentScrollY > SCROLL_THRESHOLD) {
-      
-      header.classList.add("header-squished");
-    } else {
-      
-      header.classList.remove("header-squished");
+    if (currentScrollY <= TOP_THRESHOLD) {
+      header.classList.remove("header-hidden");
+    }
+    
+    else if (difference > SCROLL_THRESHOLD) {
+      header.classList.add("header-hidden");
+    }
+    
+    else if (difference < -SCROLL_THRESHOLD) {
+      header.classList.remove("header-hidden");
     }
 
     lastScrollY = currentScrollY;
-
-    
-    clearTimeout(scrollTimer);
-
-    scrollTimer = setTimeout(() => {
-      header.classList.remove("header-squished");
-
-      
-      header.classList.remove("header-release");
-
-      void header.offsetHeight;
-
-      header.classList.add("header-release");
-
-      
-      setTimeout(() => {
-        header.classList.remove("header-release");
-      }, 600);
-
-    }, RELEASE_DELAY);
+    ticking = false;
   }
 
-  window.addEventListener("scroll", handleScroll, {
-    passive: true
-  });
-
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateHeader);
+      ticking = true;
+    }
+  }, { passive: true });
 })();
-  </script>
+</script>
 </body>
 </html>
