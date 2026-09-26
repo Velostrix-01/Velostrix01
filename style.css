@@ -13,3 +13,86 @@ body{
 @media (max-width:680px){.site-header{padding:18px}.main-nav{display:none}.section,.admin-main{padding-left:18px;padding-right:18px}.home-hero{padding-top:32px;padding-bottom:65px}.hero-actions{flex-direction:column;align-items:flex-start}.hero-card-grid{grid-template-columns:1fr}.hero-orbit-card{min-height:290px}.venue-grid,.offer-grid{grid-template-columns:1fr}.filter-row{flex-direction:column;align-items:stretch}.select{width:100%}.auth-prompt,.admin-hero{flex-direction:column;align-items:flex-start}.auth-choice-grid,.venue-detail-grid{grid-template-columns:1fr}.detail-block-full{grid-column:auto}.photo-strip{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr}.stats-grid .stat-card strong{font-size:30px}.panel-head{align-items:flex-start;flex-direction:column}.site-footer{padding:22px 18px;gap:12px;flex-direction:column}.action-cell{display:flex}.modal-card{padding:24px}.modal-card h2{font-size:36px}.hero-copy h1{font-size:50px}}
 
 .forgot-password-btn{display:block;margin:14px auto 0}.forgot-password-info{margin-top:16px;padding:16px;border:1px solid var(--line);border-radius:16px;background:rgba(216,179,106,.06);font-size:13px;line-height:1.6}.forgot-password-info p{color:var(--muted);margin:7px 0}.forgot-password-info[hidden]{display:none}
+
+/* ==================================
+   GLOBAL MODAL TEXT COLOR FIX
+   ================================== */
+
+/* Modal headings */
+.modal-card h1,
+.modal-card h2,
+.modal-card h3,
+.modal-card h4 {
+    color: #f5f5f5 !important;
+}
+
+/* Modal paragraphs and general text */
+.modal-card p,
+.modal-card label,
+.modal-card strong,
+.modal-card span {
+    color: #b6bdc5;
+}
+
+/* Important headings and labels */
+.modal-card .eyebrow,
+.modal-card .card-kicker {
+    color: #d8b36a;
+}
+
+/* Input fields */
+.modal-card input,
+.modal-card textarea,
+.modal-card select {
+    background: #0d1014;
+    color: #f5f5f5 !important;
+    border: 1px solid #303640;
+}
+
+/* Input placeholder */
+.modal-card input::placeholder,
+.modal-card textarea::placeholder {
+    color: #7d8793 !important;
+    opacity: 1;
+}
+
+/* Buttons */
+.modal-card button {
+    color: #f5f5f5;
+}
+
+/* Primary buttons */
+.modal-card .btn-primary {
+    color: #101216;
+}
+
+/* Auth options */
+.auth-choice strong {
+    color: #f5f5f5 !important;
+}
+
+.auth-choice span {
+    color: #b6bdc5 !important;
+}
+
+/* Add loyalty customer search result */
+.search-result h3 {
+    color: #f5f5f5;
+}
+
+.search-result p {
+    color: #b6bdc5;
+}
+
+/* Venue details modal */
+.venue-modal-tagline,
+.detail-block p,
+.hours-row span,
+.detail-offer p {
+    color: #b6bdc5;
+}
+
+.hours-row strong,
+.detail-offer strong {
+    color: #f5f5f5 !important;
+}
