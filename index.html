@@ -254,5 +254,62 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="config.js"></script>
   <script src="app.js"></script>
+  <script>
+
+
+(() => {
+  const header = document.querySelector(".site-header");
+
+  if (!header) return;
+
+  let scrollTimer;
+  let lastScrollY = window.scrollY;
+
+  const SCROLL_THRESHOLD = 30;
+  const RELEASE_DELAY = 140;
+
+  function handleScroll() {
+    const currentScrollY = window.scrollY;
+
+    
+    header.classList.remove("header-release");
+
+    if (currentScrollY > SCROLL_THRESHOLD) {
+      
+      header.classList.add("header-squished");
+    } else {
+      
+      header.classList.remove("header-squished");
+    }
+
+    lastScrollY = currentScrollY;
+
+    
+    clearTimeout(scrollTimer);
+
+    scrollTimer = setTimeout(() => {
+      header.classList.remove("header-squished");
+
+      
+      header.classList.remove("header-release");
+
+      void header.offsetHeight;
+
+      header.classList.add("header-release");
+
+      
+      setTimeout(() => {
+        header.classList.remove("header-release");
+      }, 600);
+
+    }, RELEASE_DELAY);
+  }
+
+  window.addEventListener("scroll", handleScroll, {
+    passive: true
+  });
+
+})();
+  </script>
 </body>
 </html>
