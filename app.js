@@ -312,3 +312,68 @@ supabaseClient.auth.onAuthStateChange(() => {
     toast(err.message || "Could not load the app.", "error");
   }
 })();
+
+
+
+/* ======================================
+   LOYALTY OS — MOBILE MENU FUNCTIONALITY
+   ====================================== */
+
+(() => {
+  const menuToggle = document.getElementById("menuToggle");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const menuClose = document.getElementById("menuClose");
+
+  if (!menuToggle || !mobileMenu || !menuClose) return;
+
+  function openMenu() {
+    mobileMenu.hidden = false;
+    menuToggle.classList.add("active");
+
+    menuToggle.setAttribute("aria-expanded", "true");
+    menuToggle.setAttribute("aria-label", "Close navigation menu");
+  }
+
+  function closeMenu() {
+    mobileMenu.hidden = true;
+    menuToggle.classList.remove("active");
+
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Open navigation menu");
+  }
+
+  menuToggle.addEventListener("click", () => {
+    if (mobileMenu.hidden) {
+      openMenu();
+    } else {
+      closeMenu();
+    }
+  });
+
+  menuClose.addEventListener("click", closeMenu);
+
+  // Close after selecting a menu link
+  mobileMenu.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  // Close when clicking outside the menu
+  document.addEventListener("click", (event) => {
+    if (
+      !mobileMenu.hidden &&
+      !mobileMenu.contains(event.target) &&
+      !menuToggle.contains(event.target)
+    ) {
+      closeMenu();
+    }
+  });
+
+  // Close with Escape key
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !mobileMenu.hidden) {
+      closeMenu();
+    }
+  });
+})();
+
+
