@@ -19,6 +19,9 @@
   <a class="brand" href="#home">VELOSTRIX OS</a>
 
   <!-- Desktop Navigation -->
+  <header class="site-header" id="mainHeader">
+  <a class="brand" href="#home">LOYALTY OS</a>
+
   <nav class="main-nav" aria-label="Primary navigation">
     <a href="#home">Home</a>
     <a href="#explore">Explore</a>
@@ -26,6 +29,21 @@
     <a href="#offers">Offers</a>
     <a href="#profile">Profile</a>
   </nav>
+
+  <div class="header-actions">
+    <a
+      class="business-portal"
+      href="admin-login.html"
+      aria-label="Business Portal"
+    >
+      BUSINESS PORTAL
+    </a>
+
+    <button class="btn btn-small btn-ghost" id="authBtn">
+      Sign in
+    </button>
+  </div>
+</header>
 
   <!-- Header Actions -->
   <div class="header-actions">
@@ -256,87 +274,251 @@
   <script src="app.js"></script>
 <script>
 (() => {
-  const header = document.querySelector(".site-header");
+  const header = document.getElementById("mainHeader");
 
   if (!header) return;
 
+  /* ==========================================
+     PHYSICS SETTINGS
+  ========================================== */
+
+  const TOP_ZONE = 2;
+
+  /*
+     Higher number = stronger reaction to fast scrolling
+  */
+  const FORCE = 0.85;
+
+  /*
+     Maximum vertical displacement
+  */
+  const MAX_PULL = 22;
+
+  /*
+     Maximum stretch/compression
+  */
+  const MAX_STRETCH = 0.16;
+
+  /*
+     Spring physics
+  */
+  const SPRING = 0.14;
+  const DAMPING = 0.78;
+
+  /*
+     How quickly scroll force settles
+  */
+  const FORCE_DECAY = 0.82;
+
+
+  /* ==========================================
+     STATE
+  ========================================== */
+
+  let currentY = 0;
+  let targetY = 0;
+
+  let currentScaleY = 1;
+  let targetScaleY = 1;
+
+  let velocity = 0;
+
   let lastScrollY = window.scrollY;
-  let scrollTimer = null;
-  let releaseTimer = null;
+  let lastTime = performance.now();
 
-  const TOP_THRESHOLD = 10;
-  const DIRECTION_THRESHOLD = 2;
-  const RELEASE_DELAY = 130;
+  let animationFrame = null;
 
-  function resetHeader() {
-    header.classList.remove(
-      "header-stretch",
-      "header-compress",
-      "header-elastic-release",
-      "header-scrolled"
+
+  /* ==========================================
+     HELPERS
+  ========================================== */
+
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+  }
+
+
+  /* ==========================================
+     UPDATE HEADER
+  ========================================== */
+
+  function updateHeader(scrollY, now) {
+
+    const deltaTime = Math.max(
+      8,
+      Math.min(40, now - lastTime)
     );
-  }
 
-  function handleScroll() {
-    const currentScrollY = Math.max(0, window.scrollY);
-    const delta = currentScrollY - lastScrollY;
+    const deltaScroll = scrollY - lastScrollY;
 
-    // Clear previous timers
-    clearTimeout(scrollTimer);
-    clearTimeout(releaseTimer);
+    /*
+       px per ~frame.
+       Fast swipe = bigger force.
+    */
+    const scrollVelocity =
+      deltaScroll / deltaTime;
 
-    header.classList.remove("header-elastic-release");
 
-    // At the very top: transparent header
-    if (currentScrollY <= TOP_THRESHOLD) {
-      resetHeader();
-      lastScrollY = currentScrollY;
-      return;
+    /* ========================================
+       ABSOLUTE TOP
+    ======================================== */
+
+    if (scrollY <= TOP_ZONE) {
+
+      header.classList.remove("header-scrolled");
+
+      targetY = 0;
+      targetScaleY = 1;
+
+      /*
+         Kill residual force at very top
+      */
+      velocity *= 0.65;
+
+    } else {
+
+      header.classList.add("header-scrolled");
+
+
+      /* ======================================
+         SCROLL DOWN
+         Pull header upward + stretch
+      ====================================== */
+
+      if (deltaScroll > 0) {
+
+        const power = clamp(
+          deltaScroll * FORCE,
+          0,
+          MAX_PULL
+        );
+
+        const stretch = clamp(
+          deltaScroll * 0.010,
+          0,
+          MAX_STRETCH
+        );
+
+        targetY = -power;
+        targetScaleY = 1 + stretch;
+      }
+
+
+      /* ======================================
+         SCROLL UP
+         Pull header downward + compress
+      ====================================== */
+
+      else if (deltaScroll < 0) {
+
+        const power = clamp(
+          Math.abs(deltaScroll) * FORCE,
+          0,
+          MAX_PULL
+        );
+
+        const compression = clamp(
+          Math.abs(deltaScroll) * 0.010,
+          0,
+          MAX_STRETCH
+        );
+
+        targetY = power;
+        targetScaleY = 1 - compression;
+      }
+
     }
 
-    // Enable glass background
-    header.classList.add("header-scrolled");
 
-    // Scrolling down: stretch upward
-    if (delta > DIRECTION_THRESHOLD) {
-      header.classList.remove("header-compress");
-      header.classList.add("header-stretch");
+    /* ========================================
+       SPRING PHYSICS
+    ======================================== */
+
+    currentY += (targetY - currentY) * SPRING;
+
+    currentScaleY +=
+      (targetScaleY - currentScaleY) * SPRING;
+
+
+    /* ========================================
+       NATURAL RELEASE
+    ======================================== */
+
+    if (Math.abs(deltaScroll) < 0.5) {
+
+      targetY *= FORCE_DECAY;
+
+      targetScaleY =
+        1 + (targetScaleY - 1) * FORCE_DECAY;
     }
 
-    // Scrolling up: compress downward
-    else if (delta < -DIRECTION_THRESHOLD) {
-      header.classList.remove("header-stretch");
-      header.classList.add("header-compress");
-    }
 
-    lastScrollY = currentScrollY;
+    /* ========================================
+       EXTRA RUBBER VELOCITY
+    ======================================== */
 
-    // Release with a spring-like effect when scrolling stops
-    scrollTimer = setTimeout(() => {
-      header.classList.remove(
-        "header-stretch",
-        "header-compress"
+    velocity +=
+      (targetY - currentY) * 0.018;
+
+    velocity *= DAMPING;
+
+    currentY += velocity;
+
+
+    /* Prevent excessive movement */
+
+    currentY = clamp(
+      currentY,
+      -MAX_PULL - 3,
+      MAX_PULL + 3
+    );
+
+
+    currentScaleY = clamp(
+      currentScaleY,
+      1 - MAX_STRETCH - 0.02,
+      1 + MAX_STRETCH + 0.02
+    );
+
+
+    /* ========================================
+       APPLY
+    ======================================== */
+
+    header.style.setProperty(
+      "--header-y",
+      `${currentY.toFixed(2)}px`
+    );
+
+    header.style.setProperty(
+      "--header-scale-y",
+      currentScaleY.toFixed(4)
+    );
+
+
+    lastScrollY = scrollY;
+    lastTime = now;
+
+    animationFrame =
+      requestAnimationFrame(() =>
+        updateHeader(window.scrollY, performance.now())
       );
-
-      void header.offsetHeight;
-
-      header.classList.add("header-elastic-release");
-
-      releaseTimer = setTimeout(() => {
-        header.classList.remove("header-elastic-release");
-      }, 700);
-
-    }, RELEASE_DELAY);
   }
 
-  window.addEventListener("scroll", handleScroll, {
-    passive: true
-  });
 
-  // Initialize correctly if the page opens mid-scroll
-  if (window.scrollY > TOP_THRESHOLD) {
-    header.classList.add("header-scrolled");
+  /* ==========================================
+     START
+  ========================================== */
+
+  if (animationFrame) {
+    cancelAnimationFrame(animationFrame);
   }
+
+  animationFrame =
+    requestAnimationFrame(() =>
+      updateHeader(window.scrollY, performance.now())
+    );
+
 })();
 </script>
 </body>
