@@ -203,6 +203,16 @@ async function loadCustomerState() {
 }
 
 function renderProfile(errorMessage = "") {
+  const businessPortal = $("businessPortal");
+const mobileBusinessPortal = $("mobileBusinessPortal");
+
+if (businessPortal) {
+  businessPortal.style.display = currentProfile ? "none" : "";
+}
+
+if (mobileBusinessPortal) {
+  mobileBusinessPortal.style.display = "none";
+}
   if (!currentProfile) {
     $("profileMeta").innerHTML = `<div class="profile-row"><span>Status</span><strong>${escapeHtml(errorMessage || "Not signed in")}</strong></div><div class="profile-row"><span>City</span><strong>${escapeHtml(cfg.CITY_SHORT)}</strong></div>`;
     $("profileActions").innerHTML = `<button class="btn btn-primary" id="profileAuthBtn">Create account</button>`;
