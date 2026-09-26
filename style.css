@@ -615,3 +615,12 @@ body.app-page {
   }
 
 }
+
+
+/* Business Portal: mobile par hamesha hidden */
+@media (max-width: 680px) {
+  #businessPortal,
+  #mobileBusinessPortal {
+    display: none !important;
+  }
+}
