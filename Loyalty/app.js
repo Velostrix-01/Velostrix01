@@ -255,7 +255,7 @@ async function signOut() {
   toast("Signed out.");
 }
 
-$("authBtn").addEventListener("click", () => $("authDialog").showModal());
+$("authBtn").addEventListener("click", () => {   if (currentProfile) {     document.querySelector("#profile").scrollIntoView({       behavior: "smooth"     });   } else {     showAuthChoice();     $("authDialog").showModal();   } });
 $("heroAuthBtn").addEventListener("click", () => $("authDialog").showModal());
 $("loyaltyAuthBtn")?.addEventListener("click", () => $("authDialog").showModal());
 $("profileAuthBtn")?.addEventListener("click", () => $("authDialog").showModal());
