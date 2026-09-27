@@ -436,11 +436,11 @@ body.app-page {
     backdrop-filter 260ms ease;
 
   
-  background: rgba(255, 255, 255, 0.12);
+  background: transparent;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0);
+  border-radius: 30px;
   
 }
 
@@ -450,7 +450,7 @@ body.app-page {
 ========================================================= */
 
 .site-header.header-scrolled {
-  background: rgba(11, 13, 16, 0.82);
+  background: rgba(255, 255, 255, 0.12);
 
   border-color: rgba(255, 255, 255, 0.10);
 
