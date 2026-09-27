@@ -270,7 +270,7 @@
   <script src="config.js"></script>
   <script src="app.js"></script>
 <script>
-(() => {
+  (() => {
   const header = document.getElementById("mainHeader");
 
   if (!header) return;
@@ -379,7 +379,7 @@
 
       /* ======================================
          SCROLL DOWN
-         Pull header upward + stretch
+         Compress header
       ====================================== */
 
       if (deltaScroll > 0) {
@@ -390,20 +390,20 @@
           MAX_PULL
         );
 
-        const stretch = clamp(
+        const compression = clamp(
           deltaScroll * 0.010,
           0,
           MAX_STRETCH
         );
 
         targetY = -power;
-        targetScaleY = 1 + stretch;
+        targetScaleY = 1 - compression;
       }
 
 
       /* ======================================
          SCROLL UP
-         Pull header downward + compress
+         Stretch header
       ====================================== */
 
       else if (deltaScroll < 0) {
@@ -414,14 +414,14 @@
           MAX_PULL
         );
 
-        const compression = clamp(
+        const stretch = clamp(
           Math.abs(deltaScroll) * 0.010,
           0,
           MAX_STRETCH
         );
 
         targetY = power;
-        targetScaleY = 1 - compression;
+        targetScaleY = 1 + stretch;
       }
 
     }
