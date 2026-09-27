@@ -416,13 +416,11 @@ body.app-page {
 
   border-radius: 999px;
 
-  background: transparent;
-  border: 1px solid transparent;
+  
+  
   box-shadow: none;
 
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-
+  
   transform:
     translate3d(-50%, var(--header-y), 0)
     scale3d(var(--header-scale-x), var(--header-scale-y), 1);
@@ -436,6 +434,14 @@ body.app-page {
     border-color 260ms ease,
     box-shadow 260ms ease,
     backdrop-filter 260ms ease;
+
+  
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  
 }
 
 
