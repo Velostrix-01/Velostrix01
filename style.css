@@ -630,3 +630,100 @@ body.app-page {
     display: none !important;
   }
 }
+
+
+
+/* =========================================
+   LIQUID GLASS HEADER — ROZEL STYLE
+   ========================================= */
+
+.site-header {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.14),
+      rgba(255, 255, 255, 0.025) 45%,
+      rgba(216, 179, 106, 0.08)
+    ),
+    rgba(17, 20, 26, 0.42) !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+
+  box-shadow:
+    0 12px 38px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Glass reflection */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+
+  background:
+    linear-gradient(
+      115deg,
+      rgba(255, 255, 255, 0.2),
+      transparent 30%,
+      transparent 72%,
+      rgba(255, 255, 255, 0.08)
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.12),
+      transparent 40%
+    );
+}
+
+/* Keep header content above reflection */
+.site-header > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Scrolled header */
+.site-header.header-scrolled {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.16),
+      rgba(255, 255, 255, 0.04) 48%,
+      rgba(216, 179, 106, 0.09)
+    ),
+    rgba(11, 13, 16, 0.48) !important;
+
+  border-color: rgba(255, 255, 255, 0.22) !important;
+
+  backdrop-filter: blur(30px) saturate(190%);
+  -webkit-backdrop-filter: blur(30px) saturate(190%);
+
+  box-shadow:
+    0 16px 44px rgba(0, 0, 0, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Mobile */
+@media (max-width: 760px) {
+  .site-header {
+    backdrop-filter: blur(24px) saturate(175%);
+    -webkit-backdrop-filter: blur(24px) saturate(175%);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .site-header {
+    transition: none;
+  }
+}
