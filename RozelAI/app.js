@@ -114,10 +114,12 @@ authForm.addEventListener("submit", async (event) => {
                     email: email,
                     password: password,
                     options: {
-                        data: {
-                            display_name: fullName
-                        }
-                    }
+    data: {
+        display_name: fullName
+    },
+    emailRedirectTo:
+        "https://velostrix.com/RozelAI/index.html"
+}
                 });
 
             if (error) throw error;
