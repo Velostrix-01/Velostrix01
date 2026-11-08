@@ -251,11 +251,47 @@
                 </form>
             </section>
 
-            <section class="page placeholder-page" id="chat">
-                <h2>Chat</h2>
-                <p>Your conversations will appear here.</p>
-            </section>
+            <section class="page chat-page" id="chat">
 
+    <div class="chat-heading">
+        <div>
+            <div class="eyebrow">PRIVATE CONVERSATION</div>
+            <h2 id="chat-character-name">Your Character</h2>
+            <p>Talk with her and get to know her world.</p>
+        </div>
+        <span class="chat-status">
+            <span class="status-dot"></span> Online
+        </span>
+    </div>
+
+    <div id="chat-messages" class="chat-messages" aria-live="polite">
+        <div class="chat-empty" id="chat-empty">
+            <div class="chat-empty-icon">✧</div>
+            <h3>Your conversation starts here.</h3>
+            <p>Send her a message to begin.</p>
+        </div>
+    </div>
+
+    <form id="chat-form" class="chat-input-area">
+        <textarea
+            id="chat-input"
+            rows="1"
+            maxlength="4000"
+            placeholder="Write a message..."
+            aria-label="Your message"
+            required
+        ></textarea>
+
+        <button id="chat-send-btn" type="submit" aria-label="Send message">
+            Send →
+        </button>
+    </form>
+
+    <p class="chat-disclaimer">
+        This is an AI-generated fictional character.
+    </p>
+
+</section>
             <section class="page placeholder-page" id="life">
                 <h2>Her Life</h2>
                 <p>Explore her independent digital life.</p>
