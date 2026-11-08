@@ -510,3 +510,183 @@ startButton.addEventListener("click", () => {
 initializeApp();
 
 console.log("Virtual Human initialized.");
+
+
+// =====================================
+// GROQ CHARACTER CHAT
+// =====================================
+
+const chatForm = document.getElementById("chat-form");
+const chatInput = document.getElementById("chat-input");
+const chatMessages = document.getElementById("chat-messages");
+const chatSendButton = document.getElementById("chat-send-btn");
+const chatCharacterName = document.getElementById("chat-character-name");
+const chatEmpty = document.getElementById("chat-empty");
+
+let chatHistory = [];
+let isChatSending = false;
+
+function addChatMessage(role, content, isTyping = false) {
+    const message = document.createElement("div");
+    message.className = `chat-message ${role}`;
+
+    if (isTyping) {
+        message.classList.add("typing");
+    }
+
+    const label = document.createElement("span");
+    label.className = "chat-message-label";
+    label.textContent = role === "user" ? "YOU" : chatCharacterName.textContent;
+
+    const text = document.createElement("div");
+    text.textContent = content;
+
+    message.appendChild(label);
+    message.appendChild(text);
+
+    if (chatEmpty) {
+        chatEmpty.hidden = true;
+    }
+
+    chatMessages.appendChild(message);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    return message;
+}
+
+function setChatLoading(loading) {
+    isChatSending = loading;
+    chatSendButton.disabled = loading;
+    chatInput.disabled = loading;
+    chatSendButton.textContent = loading ? "..." : "Send →";
+}
+
+chatForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (isChatSending) return;
+
+    const message = chatInput.value.trim();
+
+    if (!message) return;
+
+    if (!activeUserId) {
+        addChatMessage(
+            "assistant",
+            "Your session has expired. Please sign in again."
+        );
+        return;
+    }
+
+    if (!characterRecord) {
+        addChatMessage(
+            "assistant",
+            "Create your character first before starting a conversation."
+        );
+        return;
+    }
+
+    // Display user's message
+    addChatMessage("user", message);
+
+    // Clear input
+    chatInput.value = "";
+
+    setChatLoading(true);
+
+    const typingMessage = addChatMessage(
+        "assistant",
+        "Thinking...",
+        true
+    );
+
+    try {
+        const updatedHistory = [
+            ...chatHistory,
+            { role: "user", content: message }
+        ];
+
+        // Call the secure Supabase Edge Function.
+        // Supabase automatically attaches the current session token.
+        const { data, error } = await supabaseClient.functions.invoke(
+            "character-chat",
+            {
+                body: {
+                    messages: updatedHistory
+                }
+            }
+        );
+
+        if (error) {
+            let details = error.message;
+
+            try {
+                const response = error.context;
+
+                if (response && typeof response.json === "function") {
+                    const body = await response.json();
+                    details = body.error || details;
+                }
+            } catch (_) {
+                // Keep the original error message.
+            }
+
+            throw new Error(details || "Unable to contact the AI.");
+        }
+
+        if (!data || !data.reply) {
+            throw new Error(data?.error || "The AI returned no response.");
+        }
+
+        // Save successful conversation turns in browser memory.
+        chatHistory = [
+            ...updatedHistory,
+            { role: "assistant", content: data.reply }
+        ];
+
+        typingMessage.remove();
+
+        addChatMessage("assistant", data.reply);
+
+    } catch (error) {
+        typingMessage.remove();
+
+        addChatMessage(
+            "assistant",
+            "Sorry, I couldn't respond right now. " +
+            (error.message || "Please try again.")
+        );
+
+    } finally {
+        setChatLoading(false);
+        chatInput.focus();
+    }
+});
+
+// Update chat heading when character loads.
+const originalUpdateCharacterLabels = updateCharacterLabels;
+
+updateCharacterLabels = function () {
+    originalUpdateCharacterLabels();
+
+    if (characterRecord) {
+        chatCharacterName.textContent = characterRecord.name;
+    } else {
+        chatCharacterName.textContent = "Your Character";
+    }
+};
+
+// Clear conversation when user logs out.
+supabaseClient.auth.onAuthStateChange((event) => {
+    if (event === "SIGNED_OUT") {
+        chatHistory = [];
+        chatMessages.replaceChildren();
+
+        if (chatEmpty) {
+            chatEmpty.hidden = false;
+            chatMessages.appendChild(chatEmpty);
+        }
+
+        chatCharacterName.textContent = "Your Character";
+    }
+});
