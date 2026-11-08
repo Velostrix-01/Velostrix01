@@ -1,1 +1,282 @@
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #09090f;
+    --sidebar: #0e0e16;
+    --card: #13131e;
+    --border: #252535;
+    --text: #f4f2fa;
+    --muted: #88889c;
+    --accent: #a78bfa;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Inter, Arial, sans-serif;
+}
+
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 245px;
+    background: var(--sidebar);
+    border-right: 1px solid var(--border);
+    padding: 28px 18px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: 800;
+    margin: 0 0 55px 12px;
+    letter-spacing: -2px;
+}
+
+.logo span {
+    color: var(--accent);
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.nav-item {
+    background: transparent;
+    color: var(--muted);
+    border: none;
+    border-radius: 10px;
+    padding: 13px 15px;
+    text-align: left;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.nav-item span {
+    margin-right: 12px;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    background: #211b32;
+    color: #c4b5fd;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+}
+
+.version {
+    color: #55556a;
+    font-size: 11px;
+    padding: 20px 12px 0;
+}
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+    padding: 0 55px;
+}
+
+.topbar {
+    height: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-bottom: 1px solid var(--border);
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: #4ade80;
+    border-radius: 50%;
+}
+
+.mobile-logo {
+    display: none;
+}
+
+.hero {
+    padding: 100px 0 75px;
+    max-width: 750px;
+}
+
+.eyebrow {
+    color: var(--accent);
+    letter-spacing: 3px;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-size: clamp(40px, 6vw, 70px);
+    line-height: 1.12;
+    letter-spacing: -3px;
+}
+
+.hero h1 span {
+    color: var(--accent);
+}
+
+.hero p {
+    max-width: 520px;
+    color: var(--muted);
+    line-height: 1.8;
+    font-size: 15px;
+    margin: 25px 0 30px;
+}
+
+.primary-btn {
+    background: var(--accent);
+    color: #100d19;
+    border: none;
+    padding: 15px 23px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+    background: #c4b5fd;
+}
+
+.primary-btn span {
+    margin-left: 15px;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 17px;
+    margin-bottom: 65px;
+}
+
+.feature-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 27px;
+    transition: 0.2s;
+}
+
+.feature-card:hover {
+    border-color: #63538e;
+    transform: translateY(-3px);
+}
+
+.feature-icon {
+    color: var(--accent);
+    font-size: 25px;
+    margin-bottom: 18px;
+}
+
+.feature-card h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.feature-card p,
+.placeholder-page p {
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 13px;
+}
+
+footer {
+    color: #56566b;
+    font-size: 10px;
+    letter-spacing: 2px;
+    padding-bottom: 30px;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.placeholder-page {
+    padding-top: 75px;
+}
+
+.placeholder-page h2 {
+    margin-bottom: 12px;
+    font-size: 30px;
+}
+
+@media (max-width: 750px) {
+    .sidebar {
+        width: 75px;
+        padding: 22px 8px;
+    }
+
+    .logo {
+        text-align: center;
+        margin: 0 0 40px;
+        font-size: 25px;
+    }
+
+    .nav-item {
+        font-size: 0;
+        text-align: center;
+        padding: 15px 5px;
+    }
+
+    .nav-item span {
+        font-size: 20px;
+        margin: 0;
+    }
+
+    .version {
+        display: none;
+    }
+
+    .main-content {
+        padding: 0 20px;
+    }
+
+    .topbar {
+        height: 70px;
+    }
+
+    .hero {
+        padding: 70px 0 50px;
+    }
+
+    .hero h1 {
+        letter-spacing: -2px;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
