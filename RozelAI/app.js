@@ -1,9 +1,10 @@
 
 /* =====================================
-   VIRTUAL HUMAN - AUTH + CHARACTER PROFILE
+   VIRTUAL HUMAN
+   AUTH + CHARACTER + MULTIPLE CHATS
 ===================================== */
 
-// Supabase project configuration.
+// SUPABASE CONFIGURATION
 
 const SUPABASE_URL = "https://vjqipmeuflpbihgvuwqq.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_FBAnKsj2USSBd3UZbjORpA__eOoMvs5";
@@ -17,7 +18,11 @@ const supabaseClient = window.supabase.createClient(
     SUPABASE_PUBLISHABLE_KEY
 );
 
-// Authentication elements
+
+// =====================================
+// AUTHENTICATION ELEMENTS
+// =====================================
+
 const authScreen = document.getElementById("auth-screen");
 const mainApp = document.getElementById("main-app");
 const authForm = document.getElementById("auth-form");
@@ -33,7 +38,11 @@ const switchText = document.getElementById("switch-text");
 const switchButton = document.getElementById("auth-switch-btn");
 const logoutButton = document.getElementById("logout-btn");
 
-// Character form elements
+
+// =====================================
+// CHARACTER FORM ELEMENTS
+// =====================================
+
 const characterForm = document.getElementById("character-form");
 const characterHeadingTitle = document.getElementById("character-heading-title");
 const characterSaveButton = document.getElementById("character-save-btn");
@@ -53,10 +62,22 @@ const characterInputs = {
     communication_frequency: document.getElementById("character-frequency")
 };
 
+
+// =====================================
+// GLOBAL STATE
+// =====================================
+
 let isSignupMode = false;
 let activeUserId = null;
 let characterRecord = null;
 let characterLoadSequence = 0;
+
+let chatHistory = [];
+let conversations = [];
+let activeConversationId = null;
+let isChatSending = false;
+let conversationLoadSequence = 0;
+
 
 // =====================================
 // AUTHENTICATION
@@ -88,26 +109,27 @@ function updateAuthMode() {
 
 switchButton.addEventListener("click", updateAuthMode);
 
+
 function showAuthMessage(message, type = "info") {
     authMessage.textContent = message;
-    authMessage.style.color = type === "error"
-        ? "#f87171"
-        : type === "success"
-            ? "#4ade80"
-            : "#fbbf24";
+
+    authMessage.style.color =
+        type === "error" ? "#f87171" :
+        type === "success" ? "#4ade80" :
+        "#fbbf24";
 }
+
 
 function setAuthLoading(loading) {
     authSubmit.disabled = loading;
 
-    if (loading) {
-        authSubmit.textContent = "Please wait...";
-    } else {
-        authSubmit.textContent = isSignupMode
+    authSubmit.textContent = loading
+        ? "Please wait..."
+        : isSignupMode
             ? "Create Account →"
             : "Sign In →";
-    }
 }
+
 
 authForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -140,6 +162,7 @@ authForm.addEventListener("submit", async (event) => {
                     "success"
                 );
             }
+
         } else {
             const { error } = await supabaseClient.auth.signInWithPassword({
                 email,
@@ -150,15 +173,18 @@ authForm.addEventListener("submit", async (event) => {
 
             showAuthMessage("Login successful!", "success");
         }
+
     } catch (error) {
         showAuthMessage(
             error.message || "Authentication failed. Please try again.",
             "error"
         );
+
     } finally {
         setAuthLoading(false);
     }
 });
+
 
 function updateAppScreen(session) {
     const isLoggedIn = Boolean(session?.user);
@@ -176,6 +202,7 @@ function updateAppScreen(session) {
     }
 }
 
+
 // =====================================
 // CHARACTER PROFILE
 // =====================================
@@ -188,6 +215,7 @@ function showCharacterMessage(message, type = "info") {
         characterMessage.classList.add(type);
     }
 }
+
 
 function updateCharacterLabels() {
     const hasCharacter = Boolean(characterRecord);
@@ -203,7 +231,16 @@ function updateCharacterLabels() {
     startButton.innerHTML = hasCharacter
         ? 'Edit Your Character <span>→</span>'
         : 'Create Your Character <span>→</span>';
+
+    const chatCharacterName = document.getElementById("chat-character-name");
+
+    if (chatCharacterName) {
+        chatCharacterName.textContent = characterRecord
+            ? characterRecord.name
+            : "Your Character";
+    }
 }
+
 
 function fillCharacterForm(character) {
     characterInputs.name.value = character.name || "";
@@ -225,12 +262,348 @@ function fillCharacterForm(character) {
         character.communication_frequency || "frequent";
 }
 
+
 function resetCharacterForm() {
     characterForm.reset();
 
     characterInputs.autonomy_level.value = "medium";
     characterInputs.communication_frequency.value = "frequent";
 }
+
+
+// =====================================
+// CHAT ELEMENTS
+// =====================================
+
+const chatForm = document.getElementById("chat-form");
+const chatInput = document.getElementById("chat-input");
+const chatMessages = document.getElementById("chat-messages");
+const chatSendButton = document.getElementById("chat-send-btn");
+const chatCharacterName = document.getElementById("chat-character-name");
+const chatEmpty = document.getElementById("chat-empty");
+
+const newChatButton = document.getElementById("new-chat-btn");
+const conversationList = document.getElementById("conversation-list");
+const activeConversationTitle = document.getElementById("active-conversation-title");
+
+
+// =====================================
+// CHAT DISPLAY FUNCTIONS
+// =====================================
+
+function showChatEmpty(message = "Send her a message to begin.") {
+    chatMessages.replaceChildren();
+
+    if (chatEmpty) {
+        chatEmpty.hidden = false;
+
+        const description = chatEmpty.querySelector("p");
+
+        if (description) {
+            description.textContent = message;
+        }
+
+        chatMessages.appendChild(chatEmpty);
+    }
+}
+
+
+function resetChatView() {
+    chatHistory = [];
+    activeConversationId = null;
+
+    if (activeConversationTitle) {
+        activeConversationTitle.textContent = "New conversation";
+    }
+
+    showChatEmpty("Send her a message to begin.");
+    renderConversationList();
+}
+
+
+function addChatMessage(role, content, isTyping = false) {
+    const message = document.createElement("div");
+    message.className = `chat-message ${role}`;
+
+    if (isTyping) {
+        message.classList.add("typing");
+    }
+
+    const label = document.createElement("span");
+    label.className = "chat-message-label";
+
+    label.textContent = role === "user"
+        ? "YOU"
+        : chatCharacterName.textContent;
+
+    const text = document.createElement("div");
+
+    // Plain text only. No Markdown or HTML rendering.
+    text.textContent = content;
+
+    message.appendChild(label);
+    message.appendChild(text);
+
+    if (chatEmpty) {
+        chatEmpty.hidden = true;
+    }
+
+    chatMessages.appendChild(message);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    return message;
+}
+
+
+function setChatLoading(loading) {
+    isChatSending = loading;
+
+    chatSendButton.disabled = loading;
+    chatInput.disabled = loading;
+
+    if (newChatButton) {
+        newChatButton.disabled = loading;
+    }
+
+    chatSendButton.textContent = loading ? "..." : "Send →";
+}
+
+
+function formatConversationDate(value) {
+    if (!value) return "";
+
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) {
+        return "";
+    }
+
+    return date.toLocaleDateString([], {
+        day: "numeric",
+        month: "short"
+    });
+}
+
+
+// =====================================
+// CONVERSATION LIST
+// =====================================
+
+function renderConversationList() {
+    if (!conversationList) return;
+
+    conversationList.replaceChildren();
+
+    if (conversations.length === 0) {
+        const empty = document.createElement("p");
+
+        empty.className = "conversation-list-empty";
+        empty.textContent = "No conversations yet";
+
+        conversationList.appendChild(empty);
+        return;
+    }
+
+    conversations.forEach((conversation) => {
+        const button = document.createElement("button");
+
+        button.type = "button";
+        button.className = "conversation-item";
+
+        if (conversation.id === activeConversationId) {
+            button.classList.add("active");
+        }
+
+        const title = document.createElement("span");
+
+        title.className = "conversation-item-title";
+        title.textContent = conversation.title || "New Conversation";
+
+        const date = document.createElement("span");
+
+        date.className = "conversation-item-date";
+
+        date.textContent = formatConversationDate(
+            conversation.last_message_at ||
+            conversation.updated_at ||
+            conversation.created_at
+        );
+
+        button.append(title, date);
+
+        button.addEventListener("click", () => {
+            if (!isChatSending) {
+                loadConversation(conversation.id);
+            }
+        });
+
+        conversationList.appendChild(button);
+    });
+}
+
+
+// =====================================
+// LOAD CONVERSATIONS
+// =====================================
+
+async function loadConversationList(selectMostRecent = false) {
+    if (!activeUserId || !characterRecord) return;
+
+    const userAtStart = activeUserId;
+    const characterIdAtStart = characterRecord.id;
+
+    const { data, error } = await supabaseClient
+        .from("character_conversations")
+        .select("id, title, created_at, updated_at, last_message_at")
+        .eq("user_id", userAtStart)
+        .eq("character_id", characterIdAtStart)
+        .order("last_message_at", {
+            ascending: false,
+            nullsFirst: false
+        })
+        .order("created_at", {
+            ascending: false
+        });
+
+    if (error) {
+        console.error("Could not load conversations:", error.message);
+        return;
+    }
+
+    if (
+        activeUserId !== userAtStart ||
+        !characterRecord ||
+        characterRecord.id !== characterIdAtStart
+    ) {
+        return;
+    }
+
+    conversations = data || [];
+
+    renderConversationList();
+
+    if (selectMostRecent && conversations.length > 0) {
+        await loadConversation(conversations[0].id);
+
+    } else if (activeConversationId) {
+        const stillExists = conversations.some(
+            (item) => item.id === activeConversationId
+        );
+
+        if (!stillExists) {
+            resetChatView();
+        } else {
+            renderConversationList();
+        }
+    }
+}
+
+
+// =====================================
+// LOAD SELECTED CONVERSATION MESSAGES
+// =====================================
+
+async function loadConversation(conversationId) {
+    if (!activeUserId || !characterRecord || !conversationId) {
+        return;
+    }
+
+    const requestNumber = ++conversationLoadSequence;
+    const userAtStart = activeUserId;
+    const characterIdAtStart = characterRecord.id;
+
+    const selectedConversation = conversations.find(
+        (item) => item.id === conversationId
+    );
+
+    if (activeConversationTitle) {
+        activeConversationTitle.textContent =
+            selectedConversation?.title || "Conversation";
+    }
+
+    activeConversationId = conversationId;
+    chatHistory = [];
+
+    showChatEmpty("Loading conversation...");
+    renderConversationList();
+
+    const { data, error } = await supabaseClient
+        .from("character_messages")
+        .select("id, role, content, created_at")
+        .eq("conversation_id", conversationId)
+        .eq("user_id", userAtStart)
+        .order("created_at", { ascending: true });
+
+    if (
+        requestNumber !== conversationLoadSequence ||
+        activeUserId !== userAtStart ||
+        !characterRecord ||
+        characterRecord.id !== characterIdAtStart ||
+        activeConversationId !== conversationId
+    ) {
+        return;
+    }
+
+    if (error) {
+        console.error("Could not load conversation messages:", error.message);
+
+        showChatEmpty("Couldn't load this conversation. Please try again.");
+        return;
+    }
+
+    chatMessages.replaceChildren();
+
+    chatHistory = (data || []).map((item) => ({
+        role: item.role,
+        content: item.content
+    }));
+
+    if (chatHistory.length === 0) {
+        showChatEmpty("Send her a message to begin.");
+        return;
+    }
+
+    chatHistory.forEach((item) => {
+        addChatMessage(item.role, item.content);
+    });
+
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+
+// =====================================
+// CREATE NEW CONVERSATION
+// =====================================
+
+function startNewConversation() {
+    if (isChatSending) return;
+
+    ++conversationLoadSequence;
+
+    activeConversationId = null;
+    chatHistory = [];
+
+    if (activeConversationTitle) {
+        activeConversationTitle.textContent = "New conversation";
+    }
+
+    showChatEmpty(
+        "This is a new conversation. Send her a message to begin."
+    );
+
+    renderConversationList();
+    chatInput.focus();
+}
+
+
+if (newChatButton) {
+    newChatButton.addEventListener("click", startNewConversation);
+}
+
+
+// =====================================
+// LOAD CHARACTER
+// =====================================
 
 async function loadCharacter(userId) {
     const requestNumber = ++characterLoadSequence;
@@ -244,7 +617,6 @@ async function loadCharacter(userId) {
             .eq("user_id", userId)
             .maybeSingle();
 
-        // Ignore delayed responses if account changed or user logged out.
         if (
             requestNumber !== characterLoadSequence ||
             activeUserId !== userId
@@ -263,6 +635,7 @@ async function loadCharacter(userId) {
                 "Your character profile is loaded. You can edit it and save changes.",
                 "success"
             );
+
         } else {
             resetCharacterForm();
 
@@ -272,6 +645,13 @@ async function loadCharacter(userId) {
         }
 
         updateCharacterLabels();
+
+        if (data) {
+            await loadConversationList(true);
+        } else {
+            conversations = [];
+            resetChatView();
+        }
 
     } catch (error) {
         if (
@@ -289,7 +669,11 @@ async function loadCharacter(userId) {
     }
 }
 
-// Save or update character
+
+// =====================================
+// SAVE CHARACTER
+// =====================================
+
 characterForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -298,6 +682,7 @@ characterForm.addEventListener("submit", async (event) => {
     const name = characterInputs.name.value.trim();
     const personality = characterInputs.personality.value.trim();
     const ageText = characterInputs.age.value.trim();
+
     const age = ageText === "" ? null : Number(ageText);
 
     if (!name || !personality) {
@@ -356,10 +741,11 @@ characterForm.addEventListener("submit", async (event) => {
             updated_at: new Date().toISOString()
         };
 
-        // Create the first profile or update the existing profile.
         const { data, error } = await supabaseClient
             .from("characters")
-            .upsert(characterData, { onConflict: "user_id" })
+            .upsert(characterData, {
+                onConflict: "user_id"
+            })
             .select()
             .single();
 
@@ -375,6 +761,8 @@ characterForm.addEventListener("submit", async (event) => {
             "success"
         );
 
+        await loadConversationList(true);
+
     } catch (error) {
         showCharacterMessage(
             "Could not save your character: " +
@@ -387,6 +775,124 @@ characterForm.addEventListener("submit", async (event) => {
         updateCharacterLabels();
     }
 });
+
+
+// =====================================
+// SEND MESSAGE
+// =====================================
+
+chatForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (isChatSending) return;
+
+    const message = chatInput.value.trim();
+
+    if (!message) return;
+
+    if (!activeUserId) {
+        addChatMessage(
+            "assistant",
+            "Your session has expired. Please sign in again."
+        );
+        return;
+    }
+
+    if (!characterRecord) {
+        addChatMessage(
+            "assistant",
+            "Create your character first before starting a conversation."
+        );
+        return;
+    }
+
+    // Display user message immediately.
+    addChatMessage("user", message);
+
+    chatInput.value = "";
+    setChatLoading(true);
+
+    const typingMessage = addChatMessage(
+        "assistant",
+        "Thinking...",
+        true
+    );
+
+    try {
+        const requestBody = {
+            messages: [
+                { role: "user", content: message }
+            ],
+            conversation_id: activeConversationId
+        };
+
+        const { data, error } = await supabaseClient.functions.invoke(
+            "character-chat",
+            {
+                body: requestBody
+            }
+        );
+
+        if (error) {
+            let details = error.message;
+
+            try {
+                const response = error.context;
+
+                if (response && typeof response.json === "function") {
+                    const responseBody = await response.json();
+                    details = responseBody.error || details;
+                }
+            } catch (_) {
+                // Keep original error.
+            }
+
+            throw new Error(details || "Unable to contact the AI.");
+        }
+
+        if (!data || !data.reply || !data.conversation_id) {
+            throw new Error(
+                data?.error || "The AI returned an incomplete response."
+            );
+        }
+
+        activeConversationId = data.conversation_id;
+
+        chatHistory.push(
+            { role: "user", content: message },
+            { role: "assistant", content: data.reply }
+        );
+
+        typingMessage.remove();
+
+        addChatMessage("assistant", data.reply);
+
+        await loadConversationList(false);
+
+        const activeItem = conversations.find(
+            (item) => item.id === activeConversationId
+        );
+
+        if (activeConversationTitle && activeItem) {
+            activeConversationTitle.textContent =
+                activeItem.title || "Conversation";
+        }
+
+    } catch (error) {
+        typingMessage.remove();
+
+        addChatMessage(
+            "assistant",
+            "Sorry, I couldn't respond right now. " +
+            (error.message || "Please try again.")
+        );
+
+    } finally {
+        setChatLoading(false);
+        chatInput.focus();
+    }
+});
+
 
 // =====================================
 // SESSION HANDLING
@@ -405,16 +911,20 @@ function handleSession(session) {
         if (userId) {
             updateCharacterLabels();
             loadCharacter(userId);
+
         } else {
             resetCharacterForm();
             showCharacterMessage("");
             updateCharacterLabels();
+
+            conversations = [];
+            resetChatView();
         }
     }
 }
 
-// Keep Supabase requests out of the auth callback
-// to avoid auth-lock deadlocks.
+
+// Keep database requests outside the auth callback.
 supabaseClient.auth.onAuthStateChange((_event, session) => {
     updateAppScreen(session);
 
@@ -438,9 +948,13 @@ supabaseClient.auth.onAuthStateChange((_event, session) => {
             resetCharacterForm();
             showCharacterMessage("");
             updateCharacterLabels();
+
+            conversations = [];
+            resetChatView();
         }
     }
 });
+
 
 async function initializeApp() {
     try {
@@ -459,7 +973,11 @@ async function initializeApp() {
     }
 }
 
-// Logout
+
+// =====================================
+// LOGOUT
+// =====================================
+
 logoutButton.addEventListener("click", async () => {
     logoutButton.disabled = true;
 
@@ -475,6 +993,7 @@ logoutButton.addEventListener("click", async () => {
         logoutButton.disabled = false;
     }
 });
+
 
 // =====================================
 // WEBSITE NAVIGATION
@@ -506,186 +1025,33 @@ startButton.addEventListener("click", () => {
     showPage("character");
 });
 
-// Initialize existing login session.
+
+// =====================================
+// INITIALIZE WEBSITE
+// =====================================
+
 initializeApp();
 
 console.log("Virtual Human initialized.");
 
 
 // =====================================
-// GROQ CHARACTER CHAT
+// CLEAR CHAT STATE ON SIGN OUT
 // =====================================
 
-const chatForm = document.getElementById("chat-form");
-const chatInput = document.getElementById("chat-input");
-const chatMessages = document.getElementById("chat-messages");
-const chatSendButton = document.getElementById("chat-send-btn");
-const chatCharacterName = document.getElementById("chat-character-name");
-const chatEmpty = document.getElementById("chat-empty");
-
-let chatHistory = [];
-let isChatSending = false;
-
-function addChatMessage(role, content, isTyping = false) {
-    const message = document.createElement("div");
-    message.className = `chat-message ${role}`;
-
-    if (isTyping) {
-        message.classList.add("typing");
-    }
-
-    const label = document.createElement("span");
-    label.className = "chat-message-label";
-    label.textContent = role === "user" ? "YOU" : chatCharacterName.textContent;
-
-    const text = document.createElement("div");
-    text.textContent = content;
-
-    message.appendChild(label);
-    message.appendChild(text);
-
-    if (chatEmpty) {
-        chatEmpty.hidden = true;
-    }
-
-    chatMessages.appendChild(message);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-
-    return message;
-}
-
-function setChatLoading(loading) {
-    isChatSending = loading;
-    chatSendButton.disabled = loading;
-    chatInput.disabled = loading;
-    chatSendButton.textContent = loading ? "..." : "Send →";
-}
-
-chatForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    if (isChatSending) return;
-
-    const message = chatInput.value.trim();
-
-    if (!message) return;
-
-    if (!activeUserId) {
-        addChatMessage(
-            "assistant",
-            "Your session has expired. Please sign in again."
-        );
-        return;
-    }
-
-    if (!characterRecord) {
-        addChatMessage(
-            "assistant",
-            "Create your character first before starting a conversation."
-        );
-        return;
-    }
-
-    // Display user's message
-    addChatMessage("user", message);
-
-    // Clear input
-    chatInput.value = "";
-
-    setChatLoading(true);
-
-    const typingMessage = addChatMessage(
-        "assistant",
-        "Thinking...",
-        true
-    );
-
-    try {
-        const updatedHistory = [
-            ...chatHistory,
-            { role: "user", content: message }
-        ];
-
-        // Call the secure Supabase Edge Function.
-        // Supabase automatically attaches the current session token.
-        const { data, error } = await supabaseClient.functions.invoke(
-            "character-chat",
-            {
-                body: {
-                    messages: updatedHistory
-                }
-            }
-        );
-
-        if (error) {
-            let details = error.message;
-
-            try {
-                const response = error.context;
-
-                if (response && typeof response.json === "function") {
-                    const body = await response.json();
-                    details = body.error || details;
-                }
-            } catch (_) {
-                // Keep the original error message.
-            }
-
-            throw new Error(details || "Unable to contact the AI.");
-        }
-
-        if (!data || !data.reply) {
-            throw new Error(data?.error || "The AI returned no response.");
-        }
-
-        // Save successful conversation turns in browser memory.
-        chatHistory = [
-            ...updatedHistory,
-            { role: "assistant", content: data.reply }
-        ];
-
-        typingMessage.remove();
-
-        addChatMessage("assistant", data.reply);
-
-    } catch (error) {
-        typingMessage.remove();
-
-        addChatMessage(
-            "assistant",
-            "Sorry, I couldn't respond right now. " +
-            (error.message || "Please try again.")
-        );
-
-    } finally {
-        setChatLoading(false);
-        chatInput.focus();
-    }
-});
-
-// Update chat heading when character loads.
-const originalUpdateCharacterLabels = updateCharacterLabels;
-
-updateCharacterLabels = function () {
-    originalUpdateCharacterLabels();
-
-    if (characterRecord) {
-        chatCharacterName.textContent = characterRecord.name;
-    } else {
-        chatCharacterName.textContent = "Your Character";
-    }
-};
-
-// Clear conversation when user logs out.
 supabaseClient.auth.onAuthStateChange((event) => {
     if (event === "SIGNED_OUT") {
-        chatHistory = [];
-        chatMessages.replaceChildren();
+        ++conversationLoadSequence;
 
-        if (chatEmpty) {
-            chatEmpty.hidden = false;
-            chatMessages.appendChild(chatEmpty);
+        chatHistory = [];
+        conversations = [];
+        activeConversationId = null;
+
+        if (conversationList) {
+            conversationList.replaceChildren();
         }
+
+        resetChatView();
 
         chatCharacterName.textContent = "Your Character";
     }
