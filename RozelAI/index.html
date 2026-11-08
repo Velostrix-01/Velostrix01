@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,6 +70,9 @@
                 <button class="nav-item active" data-page="home">
                     <span>⌂</span> Home
                 </button>
+                <button class="nav-item" data-page="character">
+                    <span>◈</span> My Character
+                </button>
                 <button class="nav-item" data-page="chat">
                     <span>▤</span> Chat
                 </button>
@@ -114,7 +116,7 @@
                         Create a unique AI character with her own
                         personality, memories, social life and independent world.
                     </p>
-                    <button class="primary-btn" id="start-btn">
+                    <button class="primary-btn" id="start-btn" type="button">
                         Create Your Character <span>→</span>
                     </button>
                 </div>
@@ -143,6 +145,110 @@
                 </div>
 
                 <footer>AN EXPERIMENT IN ARTIFICIAL INTELLIGENCE</footer>
+            </section>
+
+            <!-- CHARACTER CREATION -->
+            <section class="page character-page" id="character">
+                <div class="character-heading">
+                    <div class="eyebrow">CHARACTER IDENTITY</div>
+                    <h2 id="character-heading-title">Create your character.</h2>
+                    <p>
+                        Define who she is, what matters to her, and how
+                        independently she behaves in her digital world.
+                    </p>
+                </div>
+
+                <form id="character-form" class="character-form">
+                    <div class="character-form-grid">
+
+                        <div class="character-field">
+                            <label for="character-name">Character name <span>*</span></label>
+                            <input id="character-name" name="name" type="text"
+                                maxlength="80" placeholder="e.g. Aanya" required>
+                        </div>
+
+                        <div class="character-field">
+                            <label for="character-age">Age</label>
+                            <input id="character-age" name="age" type="number"
+                                min="1" max="120" step="1" placeholder="e.g. 24">
+                        </div>
+
+                        <div class="character-field">
+                            <label for="character-nationality">Nationality</label>
+                            <input id="character-nationality" name="nationality"
+                                type="text" maxlength="80" placeholder="e.g. Indian">
+                        </div>
+
+                        <div class="character-field">
+                            <label for="character-city">City</label>
+                            <input id="character-city" name="city" type="text"
+                                maxlength="100" placeholder="e.g. Mumbai">
+                        </div>
+
+                        <div class="character-field character-field-full">
+                            <label for="character-background">Background and life story</label>
+                            <textarea id="character-background" name="background"
+                                rows="4" maxlength="3000"
+                                placeholder="Her upbringing, family, education, work, important life experiences..."></textarea>
+                            <small>Give her a believable background. You can add more details later.</small>
+                        </div>
+
+                        <div class="character-field character-field-full">
+                            <label for="character-personality">Personality <span>*</span></label>
+                            <textarea id="character-personality" name="personality"
+                                rows="4" maxlength="2000"
+                                placeholder="Describe her nature, values, strengths, flaws, sense of humour, communication style and opinions..."
+                                required></textarea>
+                        </div>
+
+                        <div class="character-field character-field-full">
+                            <label for="character-relationship">Relationship with you</label>
+                            <input id="character-relationship" name="relationship_type"
+                                type="text" maxlength="100"
+                                placeholder="e.g. Close friend, romantic partner, companion">
+                        </div>
+
+                        <div class="character-field character-field-full">
+                            <label for="character-interests">Interests and hobbies</label>
+                            <textarea id="character-interests" name="interests"
+                                rows="3" maxlength="1000"
+                                placeholder="Music, books, travelling, photography, cooking... (separate with commas)"></textarea>
+                            <small>Enter interests separated by commas.</small>
+                        </div>
+
+                        <div class="character-field">
+                            <label for="character-autonomy">Autonomy level</label>
+                            <select id="character-autonomy" name="autonomy_level">
+                                <option value="low">Low — mostly follows your lead</option>
+                                <option value="medium" selected>Medium — makes some independent decisions</option>
+                                <option value="high">High — makes more independent decisions</option>
+                            </select>
+                        </div>
+
+                        <div class="character-field">
+                            <label for="character-frequency">Communication frequency</label>
+                            <select id="character-frequency" name="communication_frequency">
+                                <option value="occasional">Occasional — messages rarely</option>
+                                <option value="frequent" selected>Frequent — messages sometimes</option>
+                                <option value="very_frequent">Very frequent — messages often</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <p id="character-message" class="character-message"
+                        role="status" aria-live="polite"></p>
+
+                    <div class="character-form-actions">
+                        <button type="submit" class="primary-btn"
+                            id="character-save-btn">
+                            Save Character <span>→</span>
+                        </button>
+                        <span class="character-privacy-note">
+                            Your character profile is private to your account.
+                        </span>
+                    </div>
+                </form>
             </section>
 
             <section class="page placeholder-page" id="chat">
