@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -108,6 +109,7 @@
                 </div>
             </header>
 
+            <!-- HOME -->
             <section class="page active" id="home">
                 <div class="hero">
                     <div class="eyebrow">YOUR OWN DIGITAL WORLD</div>
@@ -127,16 +129,19 @@
                         <h3>Unique Personality</h3>
                         <p>A character with her own opinions, emotions and behaviour.</p>
                     </div>
+
                     <div class="feature-card">
                         <div class="feature-icon">◷</div>
                         <h3>Independent Life</h3>
                         <p>A simulated daily life that continues beyond conversations.</p>
                     </div>
+
                     <div class="feature-card">
                         <div class="feature-icon">♡</div>
                         <h3>Real Memories</h3>
                         <p>Persistent memories and evolving relationship history.</p>
                     </div>
+
                     <div class="feature-card">
                         <div class="feature-icon">⌘</div>
                         <h3>Social World</h3>
@@ -244,6 +249,7 @@
                             id="character-save-btn">
                             Save Character <span>→</span>
                         </button>
+
                         <span class="character-privacy-note">
                             Your character profile is private to your account.
                         </span>
@@ -251,47 +257,82 @@
                 </form>
             </section>
 
+            <!-- CHAT -->
             <section class="page chat-page" id="chat">
 
-    <div class="chat-heading">
-        <div>
-            <div class="eyebrow">PRIVATE CONVERSATION</div>
-            <h2 id="chat-character-name">Your Character</h2>
-            <p>Talk with her and get to know her world.</p>
-        </div>
-        <span class="chat-status">
-            <span class="status-dot"></span> Online
-        </span>
-    </div>
+                <div class="chat-heading">
+                    <div>
+                        <div class="eyebrow">PRIVATE CONVERSATION</div>
+                        <h2 id="chat-character-name">Your Character</h2>
+                        <p>Talk with her and get to know her world.</p>
+                    </div>
 
-    <div id="chat-messages" class="chat-messages" aria-live="polite">
-        <div class="chat-empty" id="chat-empty">
-            <div class="chat-empty-icon">✧</div>
-            <h3>Your conversation starts here.</h3>
-            <p>Send her a message to begin.</p>
-        </div>
-    </div>
+                    <span class="chat-status">
+                        <span class="status-dot"></span> Online
+                    </span>
+                </div>
 
-    <form id="chat-form" class="chat-input-area">
-        <textarea
-            id="chat-input"
-            rows="1"
-            maxlength="4000"
-            placeholder="Write a message..."
-            aria-label="Your message"
-            required
-        ></textarea>
+                <!-- CONVERSATION TOOLBAR -->
+                <div class="conversation-toolbar">
+                    <div>
+                        <strong id="active-conversation-title">
+                            New conversation
+                        </strong>
+                        <div class="conversation-toolbar-label">
+                            Your conversations
+                        </div>
+                    </div>
 
-        <button id="chat-send-btn" type="submit" aria-label="Send message">
-            Send →
-        </button>
-    </form>
+                    <button type="button" id="new-chat-btn"
+                        class="new-chat-btn">
+                        + New chat
+                    </button>
+                </div>
 
-    <p class="chat-disclaimer">
-        This is an AI-generated fictional character.
-    </p>
+                <!-- CONVERSATION LIST -->
+                <div id="conversation-list"
+                    class="conversation-list"
+                    aria-label="Your conversations">
+                </div>
 
-</section>
+                <!-- MESSAGES -->
+                <div id="chat-messages"
+                    class="chat-messages"
+                    aria-live="polite">
+
+                    <div class="chat-empty" id="chat-empty">
+                        <div class="chat-empty-icon">✧</div>
+                        <h3>Your conversation starts here.</h3>
+                        <p>Send her a message to begin.</p>
+                    </div>
+
+                </div>
+
+                <!-- MESSAGE INPUT -->
+                <form id="chat-form" class="chat-input-area">
+                    <textarea
+                        id="chat-input"
+                        rows="1"
+                        maxlength="4000"
+                        placeholder="Write a message..."
+                        aria-label="Your message"
+                        required
+                    ></textarea>
+
+                    <button id="chat-send-btn"
+                        type="submit"
+                        aria-label="Send message">
+                        Send →
+                    </button>
+                </form>
+
+                <p class="chat-disclaimer">
+                    This is an AI-generated fictional character.
+                </p>
+
+            </section>
+
+            <!-- OTHER PAGES -->
             <section class="page placeholder-page" id="life">
                 <h2>Her Life</h2>
                 <p>Explore her independent digital life.</p>
