@@ -1,1 +1,127 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#09090f">
+    <title>Virtual Human — Your Digital World</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app">
+
+        <aside class="sidebar">
+            <div class="logo">V<span>H</span></div>
+
+            <div class="sidebar-nav">
+                <button class="nav-item active" data-page="home">
+                    <span>⌂</span> Home
+                </button>
+                <button class="nav-item" data-page="chat">
+                    <span>▤</span> Chat
+                </button>
+                <button class="nav-item" data-page="life">
+                    <span>◷</span> Her Life
+                </button>
+                <button class="nav-item" data-page="social">
+                    <span>♧</span> Social Life
+                </button>
+                <button class="nav-item" data-page="memories">
+                    <span>♡</span> Memories
+                </button>
+            </div>
+
+            <div class="sidebar-bottom">
+                <button class="nav-item" data-page="settings">
+                    <span>⚙</span> Settings
+                </button>
+                <div class="version">Virtual Human v1.0</div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+
+            <header class="topbar">
+                <div class="mobile-logo">VH.</div>
+                <div class="topbar-right">
+                    <span class="status-dot"></span>
+                    <span class="status-text">System Ready</span>
+                </div>
+            </header>
+
+            <section class="page active" id="home">
+                <div class="hero">
+                    <div class="eyebrow">YOUR OWN DIGITAL WORLD</div>
+                    <h1>Someone who has<br><span>a life of her own.</span></h1>
+                    <p>
+                        Create a unique AI character with her own
+                        personality, memories, social life and independent world.
+                    </p>
+                    <button class="primary-btn" id="start-btn">
+                        Create Your Character <span>→</span>
+                    </button>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">◈</div>
+                        <h3>Unique Personality</h3>
+                        <p>A character with her own opinions, emotions and behaviour.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">◷</div>
+                        <h3>Independent Life</h3>
+                        <p>A simulated daily life that continues beyond conversations.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">♡</div>
+                        <h3>Real Memories</h3>
+                        <p>Persistent memories and evolving relationship history.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">⌘</div>
+                        <h3>Social World</h3>
+                        <p>Fictional friends, activities, stories and events.</p>
+                    </div>
+                </div>
+
+                <footer>AN EXPERIMENT IN ARTIFICIAL INTELLIGENCE</footer>
+            </section>
+
+            <section class="page placeholder-page" id="chat">
+                <h2>Chat</h2>
+                <p>Your conversations will appear here.</p>
+            </section>
+
+            <section class="page placeholder-page" id="life">
+                <h2>Her Life</h2>
+                <p>Explore her independent digital life.</p>
+            </section>
+
+            <section class="page placeholder-page" id="social">
+                <h2>Social Life</h2>
+                <p>Her fictional friends, stories and events.</p>
+            </section>
+
+            <section class="page placeholder-page" id="memories">
+                <h2>Memories</h2>
+                <p>Memories will be stored here.</p>
+            </section>
+
+            <section class="page placeholder-page" id="settings">
+                <h2>Settings</h2>
+                <p>Manage your character and preferences.</p>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
